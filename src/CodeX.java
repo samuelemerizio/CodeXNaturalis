@@ -1,5 +1,5 @@
-public class App {
+public class CodeX {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        
     }
 }
