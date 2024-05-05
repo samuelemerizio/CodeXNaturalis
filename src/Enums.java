@@ -95,6 +95,9 @@ public class Enums {
         VIOLA_CAVALLO;
     }
 
+    /**
+     * Identifica il colore della pedina del giocatore
+     */
     public enum eColoreGiocatore{
         ROSSO,
         VERDE,

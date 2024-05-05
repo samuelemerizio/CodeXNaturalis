@@ -1,4 +1,6 @@
-
+/**
+ * Rappresenta una carta obiettivo
+ */
 public class Carta_Obiettivo {
     
     /**

@@ -1,5 +1,7 @@
 
-
+/**
+ * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
+ */
 public class Carta_Gioco {
     
     /**
@@ -91,11 +93,5 @@ public class Carta_Gioco {
             Funzioni.mostraMessaggioErrore("Attenzione: il costruttore carta gioco ha sollevato un eccezione: " +
                                             e.getMessage());
         }
-        
-
     }
-
-
-
-
 }
