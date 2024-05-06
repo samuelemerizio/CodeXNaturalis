@@ -1,0 +1,26 @@
+Il file per le carte Risorsa è: "CarteRisorsa.csv"
+Il file per le carte Oro è: "CarteOro.csv"
+Il file per le carte Iniziale è: "CarteIniziale.csv"
+Questi 3 files devono essere posti nella cartella "assets"
+I file immagini carte (per la parte grafica) sono posti nelle seguenti cartelle: 
+"assets/CarteIniziale", "assets/CarteRisorsa", "assets/CarteOro", "assets/CarteObiettivo"
+
+
+Il file che contiene la definizione delle carte utilizza il formato .csv con separatore di campo ";".
+Le colonne di questo file sono in ordine: 
+- ID: numero progressivo da 0 a 39 che identifica in maniera univoca la carta
+- tipo: identifica la carta come Risorsa, Oro o Iniziale (0, 1, 2 come definito in "Enums.eTipoCarta")
+- simboloAngoloNO: identifica il simbolo nell'angolo NO della carta (come definito in "Enums.eSimbolo")
+- simboloAngoloNE: identifica il simbolo nell'angolo NE della carta (come definito in "Enums.eSimbolo")
+- simboloAngoloSE: identifica il simbolo nell'angolo SE della carta (come definito in "Enums.eSimbolo")
+- simboloAngoloSO: identifica il simbolo nell'angolo SO della carta (come definito in "Enums.eSimbolo")
+- simboloCartaRetro0: identifica il primo simbolo contenuto sul retro della carta (come definito in "Enums.eSimbolo")
+- simboloCartaRetro1: identifica il secondo simbolo contenuto sul retro della carta (come definito in "Enums.eSimbolo"). Nel caso di un solo simbolo questo deve essere NULLO
+- simboloCartaRetro2: identifica il terzo simbolo contenuto sul retro della carta (come definito in "Enums.eSimbolo"). Nel caso di uno o due simboli questo deve essere NULLO
+- simboliXPosizionamento0: identifica il primo simbolo necessario al posizionamento di una carta oro (come definito in "Enums.eSimbolo")(vedi commento Carta_Gioco.simboliXPosizionamento[])
+- simboliXPosizionamento1: identifica il secondo simbolo necessario al posizionamento di una carta oro (come definito in "Enums.eSimbolo")(vedi commento Carta_Gioco.simboliXPosizionamento[])
+- simboliXPosizionamentoQuantita0: indica quanti simboliXPosizionamento0 occorrono per poter posizionare la carta 
+- simboliXPosizionamentoQuantita1: indica quanti simboliXPosizionamento1 occorrono per poter posizionare la carta 
+- valorePunti: punti assegnati dal posizionamentodella carta (verranno moltiplicati per moltiplicatorePunti)
+- moltiplicatorePunti: condizione per la moltiplicazione dei punti (Enums.eMoltiplicatorePunti)
+

@@ -1,0 +1,2 @@
+ID;tipo;simboloAngoloNO;simboloAngoloNE;simboloAngoloSE;simboloAngoloSO;simboloRetro0;simboloRetro1;simboloRetro2;simboliXPosizionamento0;simboliXPosizionamento1;simboliXPosizionamentoQuantita0;simboliXPosizionamentoQuantita1;valorePunti;moltiplicatorePunti
+0;1;8;1;0;1;0;0;0;2;2;5;2;1;1;3
