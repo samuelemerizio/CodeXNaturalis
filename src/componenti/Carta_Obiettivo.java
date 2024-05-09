@@ -1,7 +1,8 @@
+package componenti;
 /**
  * Rappresenta una carta obiettivo
  */
-public class Carta_Obiettivo {
+public class Carta_Obiettivo implements Carte{
     
     /**
     * Identifica in modo univoco la carta in funzione del tipo
@@ -17,5 +18,11 @@ public class Carta_Obiettivo {
      * Condizioni per ottenere il moltiplicatore dei punti obiettivo
      */
     Enums.eCondizioneObiettivi condizioneObiettivi;
+
+	@Override
+	public void controllaCondizione() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

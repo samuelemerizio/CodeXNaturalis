@@ -1,3 +1,4 @@
+package componenti;
 /**
  * Funzioni utili nel programma
  */

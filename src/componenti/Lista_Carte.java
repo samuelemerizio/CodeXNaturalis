@@ -1,3 +1,4 @@
+package componenti;
 /**
  * Rappresenta una carta gioco nel manoscritto includendo la riga e la colonna su cui è posizionata
  */

@@ -1,8 +1,10 @@
+package componenti;
+import java.util.ArrayList;
 
 /**
  * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
  */
-public class Carta_Gioco {
+public class Carta_Gioco implements Carte {
     
     /**
     * Identifica in modo univoco la carta in funzione del tipo
@@ -94,4 +96,10 @@ public class Carta_Gioco {
                                             e.getMessage());
         }
     }
+
+	@Override
+	public void controllaCondizione() {
+		// TODO Auto-generated method stub
+		
+	}
 }
