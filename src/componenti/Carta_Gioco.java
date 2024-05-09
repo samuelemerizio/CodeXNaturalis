@@ -98,8 +98,20 @@ public class Carta_Gioco implements Carte {
     }
 
 	@Override
-	public void controllaCondizione() {
+	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	//questo metodo scansiona il secondo parametro di entrambi i file per vedere se la carta è oro o risorsa
+	@Override
+	public String cercaCarta(int ID) {
+		if() {
+			return "Risorsa";
+		}else {
+			return "Oro";
+		}
 		
+		//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
 	}
 }

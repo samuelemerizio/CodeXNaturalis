@@ -39,5 +39,27 @@ public class Manoscritto {
         angoli = new Enums.eSimbolo[81][81][3];
         numeroCarteSuAngolo = new int[81][81];
     }
+    
+    /**
+     * Questo metodo seleziona una carta presente sul manoscritto
+     * @param ID ID della carta che si vuole selezionare
+     */
+    public void selezionaCarta(int ID) {
+    	
+    }
+
+	public boolean angoloSceltoLibero() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Questo metodo mette la carta nel manoscritto
+	 * @param selezione la carta che viene inserita nel manoscritto
+	 */
+	public void posiziona(int selezione) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
