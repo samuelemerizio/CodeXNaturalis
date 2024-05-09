@@ -105,5 +105,27 @@ public class Enums {
         BLU,
         GIALLO;
     }
+
+    /**
+     * Identifica i quattro angoli in senso orario
+     */
+    public enum eAngolo{
+        NO,
+        NE,
+        SE,
+        SO;
+    }
+
+    /**
+     * Identifica la pagina visualizzata
+     */
+    public enum eElencoSchermi{
+        SPLASHSCREEN,
+        INIZIALE,
+        NUOVAPARTITA,
+        NUOVOGIOCATORE,
+        GIOCO,
+        PUNTEGGIO;
+    }
 }
 
