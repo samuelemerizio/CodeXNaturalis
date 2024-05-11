@@ -8,6 +8,7 @@ public class Funzioni {
     public static void mostraMessaggioErrore(String messaggio){
         System.out.println(messaggio);
     }
+
     
     /**
      * Questo metodo scansiona un numero intero
@@ -17,4 +18,5 @@ public class Funzioni {
     	Scanner sc=new Scanner(System.in);
 		return Integer.decode(sc.nextLine());
     }
+
 }

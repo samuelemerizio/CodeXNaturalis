@@ -96,6 +96,7 @@ public class Carta_Gioco {
     }
 
 
+
 	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
 		return true;
@@ -105,5 +106,6 @@ public class Carta_Gioco {
 	public String cercaCarta(int ID) {
 		return null;
 	}
+
 
 }
