@@ -1,4 +1,3 @@
-package componenti;
 /**
  * Rappresenta il giocatore con le sue proprietà, il suo manoscritto ed il suo obiettivo
  */
@@ -42,9 +41,6 @@ public class Giocatore {
      * Oggetto rappresentante il tabellone di gioco del giocatore
      */
     Manoscritto manoscritto = new Manoscritto();
-    
-    int[] conteggioSimboliPiazzati=new int[7]; //serve per tenere il conto dei simboli piazzati durante la partita
-    											//segue l'ordine di dichiarazione esimboli in enums
 
     
     /**

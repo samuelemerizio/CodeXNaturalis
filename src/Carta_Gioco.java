@@ -1,10 +1,8 @@
-package componenti;
-import java.util.ArrayList;
 
 /**
  * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
  */
-public class Carta_Gioco implements Carte {
+public class Carta_Gioco {
     
     /**
     * Identifica in modo univoco la carta in funzione del tipo
@@ -97,21 +95,15 @@ public class Carta_Gioco implements Carte {
         }
     }
 
-	@Override
+
 	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	
-	//questo metodo scansiona il secondo parametro di entrambi i file per vedere se la carta è oro o risorsa
-	@Override
+	//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
 	public String cercaCarta(int ID) {
-		if() {
-			return "Risorsa";
-		}else {
-			return "Oro";
-		}
-		
-		//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
+		return null;
 	}
+
 }

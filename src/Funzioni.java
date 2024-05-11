@@ -1,5 +1,3 @@
-package componenti;
-
 import java.util.Scanner;
 
 /**

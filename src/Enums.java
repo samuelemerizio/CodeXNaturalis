@@ -1,4 +1,3 @@
-package componenti;
 public class Enums {
 
     /**
@@ -21,7 +20,7 @@ public class Enums {
             } else return null;
         }
     }
-    
+
     /**
      * Rappresenta in modo univoco i simboli disponibili sulle carte
      */

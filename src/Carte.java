@@ -1,4 +1,3 @@
-package componenti;
 
 public interface Carte {
 	

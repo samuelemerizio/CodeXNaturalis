@@ -1,4 +1,3 @@
-package componenti;
 import java.util.ArrayList;
 import java.util.List;
 
