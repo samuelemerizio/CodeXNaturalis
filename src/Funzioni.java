@@ -18,5 +18,7 @@ public class Funzioni {
     	Scanner sc=new Scanner(System.in);
 		return Integer.decode(sc.nextLine());
     }
+    
+    
 
 }
