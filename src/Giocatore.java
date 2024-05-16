@@ -10,7 +10,7 @@ public class Giocatore {
     /**
      * Nome del giocatore
      */
-    String nome;
+    String nome = "";
 
     /**
      * Colore pedina scelta dal giocatore
@@ -42,4 +42,9 @@ public class Giocatore {
      */
     Manoscritto manoscritto = new Manoscritto();
 
+    int[] ID_carteObiettivoDaScegliere = new int[2];	//Contiene ID delle 2 carte che giocatore deve scegliere all'avvio partita
+
+    boolean fronte = true;          // Determina se è stata selezionata la carta iniziale fronte o retro durante la creazione giocatore
+
+    boolean ob1 = true;             // Determina se è stata selezionata la carta obiettivo 1 o obiettivo 2 durante la creazione giocatore
 }

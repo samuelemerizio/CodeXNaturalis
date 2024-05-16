@@ -88,6 +88,7 @@ public class Carta_Gioco {
             this.simboliXPosizionamentoQuantita[1] = Integer.valueOf(parametri[12]);
             this.valorePunti = Integer.valueOf(parametri[13]);
             this.moltiplicatorePunti = Enums.eMoltiplicatorePunti.getMoltiplicatorePunti(Integer.valueOf(parametri[14]));
+            this.fronte = true;
         }
         catch(Exception e){
             Funzioni.mostraMessaggioErrore("Attenzione: il costruttore carta gioco ha sollevato un eccezione: " +

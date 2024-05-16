@@ -84,13 +84,13 @@ public class Enums {
         ROSSO_FUNGHI,
         ROSSO_DIAGONALE,
         ROSSO_CAVALLO,
-        VERDE_FUNGHI,
+        VERDE_FOGLIE,
         VERDE_DIAGONALE,
         VERDE_CAVALLO,
-        BLU_FUNGHI,
+        BLU_LUPO,
         BLU_DIAGONALE,
         BLU_CAVALLO,
-        VIOLA_FUNGHI,
+        VIOLA_FARFALLA,
         VIOLA_DIAGONALE,
         VIOLA_CAVALLO;
     }
@@ -123,6 +123,8 @@ public class Enums {
         INIZIALE,
         NUOVAPARTITA,
         NUOVOGIOCATORE,
+        SCELTACARTAINIZIALE,
+        SCELTACARTAOBIETTIVO,
         GIOCO,
         PUNTEGGIO;
     }

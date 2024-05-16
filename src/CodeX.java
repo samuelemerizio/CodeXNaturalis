@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.Graphics;
@@ -5,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 import java.awt.Canvas;
 import java.awt.Color;
 
@@ -19,12 +21,19 @@ public class CodeX extends Canvas{
 
     }
     public CodeX(){
+        // Inizializzo le schermate
         Variabili.schermoSplashScreen = new Schermo_SplashScreen();
         Variabili.schermoIniziale = new Schermo_Iniziale();
+        Variabili.schermoNuovaPartita = new Schermo_NuovaPartita();
+        Variabili.schermoMercato = new Schermo_Mercato();
+        Variabili.schermoNuovoGiocatore = new Schermo_NuovoGiocatore();
+        Variabili.schermoSceltaCartaIniziale = new Schermo_SceltaCartaIniziale();
+        Variabili.schermoSceltaCartaObiettivo = new Schermo_SceltaCartaObiettivo();
+
 
 
         //Impostazioni proprietà JFrame
-        tela.setUndecorated(false);
+        tela.setUndecorated(true);
         tela.add(this);
         tela.setLocation(0, 0);
         tela.setSize(Variabili.dxMonitor, Variabili.dyMonitor);
@@ -38,8 +47,80 @@ public class CodeX extends Canvas{
         Variabili.immagineBack = createImage(Variabili.dxMonitor, Variabili.dyMonitor);
         Variabili.immagineBackGraphics = (Graphics2D)Variabili.immagineBack.getGraphics();
     
+        caricaFileImmagini();
     }
 
+    public void caricaFileImmagini(){
+
+        try{
+            Variabili.bkIniziale = ImageIO.read(ClassLoader.getSystemResource("assets/MainBig.png"));
+            repaint();
+            Variabili.bkMain = ImageIO.read(ClassLoader.getSystemResource("assets/Main.png"));
+            Variabili.schermoSplashScreen.messaggioCaricamento = "Caricamento immagini in corso";
+            repaint();
+            Variabili.imgTavolo = ImageIO.read(ClassLoader.getSystemResource("assets/Tavolo.png"));
+            Variabili.imgTavolo2 = ImageIO.read(ClassLoader.getSystemResource("assets/Tavolo2.png"));
+            Variabili.imgZoom0 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom1.png"));
+            Variabili.imgZoom1 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom2.png"));
+            Variabili.imgZoom2 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom4.png"));
+            
+            Variabili.imgSfondoMercato = ImageIO.read(ClassLoader.getSystemResource("assets/SfondoMercato.png"));
+            Variabili.imgTracciatoSegnapunti = ImageIO.read(ClassLoader.getSystemResource("assets/TracciatoSegnapunti.png"));
+            
+            Variabili.imgCartaRisorsaRossaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroRosso.png"));
+            Variabili.imgCartaRisorsaVerdeRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroVerde.png"));
+            Variabili.imgCartaRisorsaBluRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroBlu.png"));
+            Variabili.imgCartaRisorsaViolaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroViola.png"));
+
+            Variabili.imgCartaOroRossaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroRosso.png"));
+            Variabili.imgCartaOroVerdeRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroVerde.png"));
+            Variabili.imgCartaOroBluRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroBlu.png"));
+            Variabili.imgCartaOroViolaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroViola.png"));
+
+            Variabili.imgCartaObiettivoRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteObiettivo/obiettivoRetro.png"));
+
+            Variabili.imgPedine[0] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/rossa.png"));
+            Variabili.imgPedine[1] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/verde.png"));
+            Variabili.imgPedine[2] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/blu.png"));
+            Variabili.imgPedine[3] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/gialla.png"));
+
+            String indice;
+            String nomeFile;
+            //Carico immagine delle carte risorse
+            for (int i= 0; i < Variabili.imgCarteRisorse.length; i++)
+            {
+                indice = String.format("%02d", i);
+                nomeFile = "risorsa" + indice + ".png";
+                Variabili.imgCarteRisorse[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/" + nomeFile));
+            }
+            //Carico immagine delle carte oro
+            for (int i= 0; i < Variabili.imgCarteOro.length; i++)
+            {
+                indice = String.format("%02d", i);
+                nomeFile = "oro" + indice + ".png";
+                Variabili.imgCarteOro[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/" + nomeFile));
+            }
+            //Carico immagine delle carte obiettivo
+            for (int i= 0; i < Variabili.imgCarteObiettivi.length; i++)
+            {
+                indice = String.format("%02d", i);
+                nomeFile = "obiettivo" + indice + ".png";
+                Variabili.imgCarteObiettivi[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteObiettivo/" + nomeFile));
+            }
+            //Carico immagine delle carte iniziali
+            for (int i= 0; i < Variabili.imgCarteIniziali.length; i++)
+            {
+                indice = String.format("%02d", i);
+                nomeFile = "iniziale" + indice + ".png";
+                Variabili.imgCarteIniziali[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteIniziale/" + nomeFile));
+            }
+            Variabili.schermoSplashScreen.messaggioCaricamento = "Caricamento immagini terminato";
+            repaint();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void paint(Graphics g){
 
@@ -65,6 +146,22 @@ public class CodeX extends Canvas{
                 case INIZIALE:
                     Variabili.schermoIniziale.paint(Variabili.immagineBackGraphics);
                     break;
+                case NUOVAPARTITA:
+                    Variabili.schermoNuovaPartita.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
+                case NUOVOGIOCATORE:
+                    Variabili.schermoNuovoGiocatore.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
+                case SCELTACARTAINIZIALE:
+                    Variabili.schermoSceltaCartaIniziale.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
+                case SCELTACARTAOBIETTIVO:
+                    Variabili.schermoSceltaCartaObiettivo.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
                 default:
                     break;
             }
@@ -82,7 +179,7 @@ public class CodeX extends Canvas{
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println(String.format("Hai cliccato: %d, %d", e.getX(), e.getY()));
+           // System.out.println(String.format("Hai cliccato: %d, %d", e.getX(), e.getY()));
             // Determino quale classe grafica richiamare in funzione dello schermo attivo
             switch (Variabili.schermoAttivo) {
                 case SPLASHSCREEN:
@@ -90,6 +187,22 @@ public class CodeX extends Canvas{
                     break;
                 case INIZIALE:
                     Variabili.schermoIniziale.mousePressed(e);
+                    break;
+                case NUOVAPARTITA:
+                    Variabili.schermoNuovaPartita.mousePressed(e);
+                    Variabili.schermoMercato.mousePressed(e);
+                    break;
+                case NUOVOGIOCATORE:
+                    Variabili.schermoNuovoGiocatore.mousePressed(e);
+                    Variabili.schermoMercato.mousePressed(e);
+                    break;
+                case SCELTACARTAINIZIALE:
+                    Variabili.schermoSceltaCartaIniziale.mousePressed(e);
+                    Variabili.schermoMercato.mousePressed(e);
+                    break;
+                case SCELTACARTAOBIETTIVO:
+                    Variabili.schermoSceltaCartaObiettivo.mousePressed(e);
+                    Variabili.schermoMercato.mousePressed(e);
                     break;
                 default:
                     break;

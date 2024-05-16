@@ -18,4 +18,13 @@ public class Carta_Obiettivo {
      */
     Enums.eCondizioneObiettivi condizioneObiettivi;
 
+    int cartaDisponibile = -1;
+
+    public Carta_Obiettivo(int ID, int valorePunti, Enums.eCondizioneObiettivi condizioneObiettivi, int cartaDisponibile){
+        this.ID = ID;
+        this.valorePunti = valorePunti;
+        this.condizioneObiettivi = condizioneObiettivi;
+        this.cartaDisponibile = cartaDisponibile;
+    }
+
 }
