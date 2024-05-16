@@ -47,4 +47,65 @@ public class Giocatore {
     boolean fronte = true;          // Determina se è stata selezionata la carta iniziale fronte o retro durante la creazione giocatore
 
     boolean ob1 = true;             // Determina se è stata selezionata la carta obiettivo 1 o obiettivo 2 durante la creazione giocatore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Questo metodo mostra le carte che sono nella mano del giocatore
+     * @param carteInMano array di carte che ha il giocatore a disposizione da giocare
+     */
+    public void mostraCarte(Carta_Gioco[] carteInMano) {
+    	for(int i=0; i<3; i++) {
+    		System.out.println("Carte in mano: "+ carteInMano[i] + ", ");
+    	}
+    	
+    }
+    
+    public void piazzaCarta() {
+    	mostraCarte(carteInMano);
+    	System.out.println("Scegliere quale carta piazzare indicandola con un numero" +
+    						"da 0 (per la prima) a 2 (per la terza)");
+    	Funzioni f = null;
+    	int numeroCarta = f.ScansionaNumero();
+    	for(int i=0; i<3; i++) {
+    		if(i==numeroCarta) {
+    			
+    			if(cartaIniziale.cercaCarta(numeroCarta).equals("Risorsa")) {
+    				System.out.println("Seleziona dove vuoi piazzare la carta");
+    			}else { //la carta è oro
+    				if(cartaIniziale.controllaCondizione(numeroCarta)== true) { //come parametro ci deve essere id carta per capire che condizione deve essere verificata
+    					System.out.println("Selezione dove vuoi piazzare la carta");
+    					int selezione=f.ScansionaNumero();
+    					manoscritto.selezionaCarta(selezione);
+    					while(manoscritto.angoloSceltoLibero()!= true) {
+    						System.out.println("Angolo occupato, scegline un altro!");
+    						manoscritto.posiziona(selezione);
+    					}
+    				}
+    			}
+    		}else {
+    			System.out.println("La carta non è in mano");
+    		}
+    	}
+    }
+    
+    public void contaSimboliPiazzati() {
+    	
+    }
+
+    
 }

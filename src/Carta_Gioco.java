@@ -95,4 +95,18 @@ public class Carta_Gioco {
                                             e.getMessage());
         }
     }
+
+
+
+	public boolean controllaCondizione(int ID) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
+	public String cercaCarta(int ID) {
+		return null;
+	}
+
+
 }

@@ -18,8 +18,9 @@ public class CodeX extends Canvas{
     JFrame tela = new JFrame();
     public static void main(String[] args) throws Exception {
         new CodeX();
-
     }
+    
+    
     public CodeX(){
         // Inizializzo le schermate
         Variabili.schermoSplashScreen = new Schermo_SplashScreen();
@@ -243,7 +244,7 @@ public class CodeX extends Canvas{
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            
+         
         }
         
     }
