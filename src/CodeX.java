@@ -16,6 +16,8 @@ public class CodeX extends Canvas{
     JFrame tela = new JFrame();
     public static void main(String[] args) throws Exception {
         new CodeX();
+        Funzioni f=new Funzioni();
+        f.initTutteCarte();
     }
     
     

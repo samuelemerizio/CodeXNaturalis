@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
@@ -54,6 +56,8 @@ public class Carta_Gioco {
      * Moltiplicatore punti carta (vedi variabile valorePunti)
      */
     Enums.eMoltiplicatorePunti moltiplicatorePunti;
+    
+   
 
     /**
      * Il costruttore inizializza le variabili della classe a partire dall'array di stringhe parametri

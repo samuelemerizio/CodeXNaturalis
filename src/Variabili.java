@@ -52,9 +52,21 @@ public final class Variabili {
 
 
 
-
+    //costruttore
     public Variabili(){
         
+    }
+    public void arrayCarteOro() {
+    	List<Carta_Gioco> mazzoCarteOroOriginali = new ArrayList<Carta_Gioco>(); 
+    	LetturaFile lettura=new LetturaFile("CarteOro.csv");
+    	if(lettura.exists()== true) {
+    		System.out.println("True");
+    		
+    	}else {
+    		System.out.println("False");
+    	}
+    	System.out.println(lettura.getAbsolutePath());
+    	
     }
 
 }
