@@ -21,6 +21,9 @@ public class Funzioni {
         System.out.println(messaggio);
     }
 
+
+
+    //NON ABBIAMO LA TASTIERA, SIAMO IN MODALITA' GRAFICA
     
     /**
      * Questo metodo scansiona un numero intero
@@ -77,5 +80,7 @@ public class Funzioni {
     	 return mazzoCarteRisorsa;
     }
     
+
+
 
 }
