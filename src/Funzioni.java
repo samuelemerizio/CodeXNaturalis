@@ -8,6 +8,7 @@ import java.util.Scanner;
  */
 public class Funzioni {
 	//Contatore per forzare il termine della sequenza di aggiunta delle carte all'arrayList
+	private static int CONTATORE0=0;
 	private static int CONTATORE1=0;
 	private static int CONTATORE2=0;
 	private List<Carta_Gioco> mazzoCarteOro=new ArrayList<Carta_Gioco>();
@@ -29,31 +30,51 @@ public class Funzioni {
     	Scanner sc=new Scanner(System.in);
 		return Integer.decode(sc.nextLine());
     }
-    
-    /**
-     * Questo metodo inizializza tutte le carte del gioco nelle rispettive ArrayList
-     * @throws IOException 
-     */
-    public void initTutteCarte() throws IOException {
+    public Carta_Obiettivo[] initArray() {
+    	for(int i=0; i<16; i++) {
+    		mazzoCarteObiettivo[i] = new Carta_Obiettivo(null);
+    	}
+		return mazzoCarteObiettivo;
+    }
+    public List<Carta_Gioco> initCarteIniziali() throws IOException{
+    	LetturaFile lettura=new LetturaFile("");
+    	while(CONTATORE0 != 12) {
+        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteIniziali.csv", CONTATORE0));
+        	mazzoCarteIniziali.add(g0);
+            CONTATORE0+=1;
+         }
+   	 System.out.println("Carte INIZIALI inizializzate con successo");
+    	return mazzoCarteIniziali;
+    }
+    public Carta_Obiettivo[] initCarteObiettivo() throws IOException{
+    	LetturaFile lettura=new LetturaFile("");
+    	initArray(); //inizializza array carte obiettivo
+    	for(int i=0; i<16; i++) {
+    		mazzoCarteObiettivo[i]=new Carta_Obiettivo(lettura.scansioneRiga("CarteObiettivo.csv", i));
+    	}
+       	System.out.println("Carte OBIETTIVO inizializzate con successo");
+    	return mazzoCarteObiettivo;
+    	
+    }
+    public List<Carta_Gioco> initCarteOro() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	while(CONTATORE1 != 40) {
-        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("/assets/CarteOro.csv", CONTATORE1));
+        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteOro.csv", CONTATORE1));
             mazzoCarteOro.add(g0);
             CONTATORE1+=1;
          }
-    	 
-    	 
+   	 	System.out.println("Carte ORO inizializzate con successo");
+    	return mazzoCarteOro;
+    }
+    public List<Carta_Gioco> initCarteRisorsa() throws IOException{
+    	LetturaFile lettura=new LetturaFile("");
     	 while(CONTATORE2 != 40) {
-          	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("/assets/CarteRisorsa.csv", CONTATORE2));
-          	mazzoCarteRisorsa.add(g0);
-              CONTATORE2+=1;
-          }
-    	 System.out.println("Carte inizializzate con successo");
-     	 
-        
-    	
-    	
-    	
+           	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteRisorsa.csv", CONTATORE2));
+           	mazzoCarteRisorsa.add(g0);
+               CONTATORE2+=1;
+           }
+    	 System.out.println("Carte RISORSA inizializzate con successo");
+    	 return mazzoCarteRisorsa;
     }
     
 
