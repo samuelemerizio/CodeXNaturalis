@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Identifica quanto chiamato mercato nel gioco.
@@ -67,6 +68,57 @@ public class Mercato {
     	}
     }
 
+	public void stampaMercato(Carta_Gioco[] carteRisorsa, Carta_Gioco[] carteOro) {
+		for(int i=0;i<2;i++){
+			System.out.println(carteRisorsa[i]+",");
+		}
+		for(int i=0;i<2;i++){
+			System.out.println(carteOro[i]+",");
+		}
+	}
+
+	public void pescaMercato(Carta_Gioco[] carteRisorsa, Carta_Gioco[] carteOro, Carta_Gioco[] carteInMano){
+		System.out.println("Vuoi pescare dal mercato (1) o dal mazzo(2)?");
+		Scanner scanner=new Scanner();
+		Integer pesca = scanner.nextInt();
+		if(pesca.equals(1)){
+			System.out.println("1 per pescare da carte Risorsa, 2 per pescare da carte Oro");
+			Integer scelta1=scanner.nextInt();
+			for(int i=0;i<3;i++){
+				if(carteInMano[i].equals(null)){
+					if(scelta1.equals(1)) {
+						carteInMano[i]=carteRisorsa[scelta];
+					} else if(scelta1.equals(2)){
+						carteInMano[i]=carteOro[scelta];
+					} else {
+						System.out.println("Scelta non valida");
+					}
+				}
+			}
+	    } else if(pesca.equals(2)) {
+			System.out.println("1 per pescare da carte Risorsa, 2 per pescare da carte Oro");
+			Integer scelta2=scanner.nextInt();
+			for(int i=0;i<3;i++){
+				if(carteInMano[i].equals(null)) {
+					if(scelta2.equals(1)){
+						int pescata1=(int)(Math.random()*mazzoCarteRisorse.size());
+						carteInMano[i]=mazzoCarteRisorse.get(pescata1);
+					} else if(scelta2.equals(2)) {
+						int pescata2=(int)(Math.random()*mazzoCarteOro.size());
+						carteInMano[i]=mazzoCarteOro.get(pescata2);
+					} else {
+						System.out.println("Scelta non valida");
+					}
+				}
+			}
+		} else {
+			System.out.println("Scelta non valida");
+		}
 
 
+		
+		
+		
+
+	}
 }

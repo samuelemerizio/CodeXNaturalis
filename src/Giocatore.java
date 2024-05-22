@@ -86,6 +86,7 @@ public class Giocatore {
     			
     			if(cartaIniziale.cercaCarta(numeroCarta).equals("Risorsa")) {
     				System.out.println("Seleziona dove vuoi piazzare la carta");
+                    carteInMano[i]=null;
     			}else { //la carta è oro
     				if(cartaIniziale.controllaCondizione(numeroCarta)== true) { //come parametro ci deve essere id carta per capire che condizione deve essere verificata
     					System.out.println("Selezione dove vuoi piazzare la carta");
@@ -95,6 +96,7 @@ public class Giocatore {
     						System.out.println("Angolo occupato, scegline un altro!");
     						manoscritto.posiziona(selezione);
     					}
+                        carteInMano[i]=null;
     				}
     			}
     		}else {
