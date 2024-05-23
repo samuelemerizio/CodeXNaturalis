@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 public final class Schermo_SceltaCartaObiettivo {
     // Creo i pulsanti per lo Schermo_NuovoGiocatore
     private Pulsante pbEsci = new Pulsante(100, Variabili.dyTavolo - 50, 200, 40, "Indietro");
-    private Pulsante pbSalvaGiocatore = new Pulsante(Variabili.dxTavolo - 300 - 20, Variabili.dyTavolo - 60, 300, 40, "Salva giocatore");
+    private Pulsante pbSalvaGiocatore = new Pulsante(Variabili.dxTavolo - 300 - 20, Variabili.dyTavolo - 50, 300, 40, "Salva giocatore");
     private Pulsante pbOb1 = new Pulsante(270, 150, 500 * 3 / 5, 330 * 3 / 5, "");
     private Pulsante pbOb2 = new Pulsante(270, 400, 500 * 3 / 5, 330 * 3 / 5, "");
 

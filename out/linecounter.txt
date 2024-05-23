@@ -1,0 +1,371 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2024-05-23 23:21:01
+count workspace : /Users/samuele/Documents/Progetti Java/CodeX Naturalis/CodeXNaturalis
+total files : 350
+total code lines : 2630
+total comment lines : 731
+total blank lines : 575
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |          .java|           2376|            731|            571|     90|
+   |           .csv|            190|              0|              0|    7.2|
+   |               |             60|              0|              4|    2.3|
+   |            .md|              2|              0|              0|  0.076|
+   |           .txt|              2|              0|              0|  0.076|
+   -------------------------------------------------------------------------
+.classpath, code is 6, comment is 0, blank is 0.
+.gitattributes, code is 2, comment is 0, blank is 0.
+.gitignore, code is 3, comment is 0, blank is 1.
+.project, code is 28, comment is 0, blank is 0.
+bin/assets/CarteIniziale/iniziale00.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale01.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale02.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale03.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale04.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale05.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale06.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale07.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale08.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale09.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale10.png, it is a binary file.
+bin/assets/CarteIniziale/iniziale11.png, it is a binary file.
+bin/assets/CarteIniziali.csv, code is 13, comment is 0, blank is 0.
+bin/assets/CarteObiettivo/obiettivo00.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo01.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo02.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo03.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo04.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo05.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo06.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo07.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo08.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo09.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo10.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo11.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo12.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo13.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo14.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivo15.png, it is a binary file.
+bin/assets/CarteObiettivo/obiettivoRetro.png, it is a binary file.
+bin/assets/CarteOro.csv, code is 41, comment is 0, blank is 0.
+bin/assets/CarteOro/oro00.png, it is a binary file.
+bin/assets/CarteOro/oro01.png, it is a binary file.
+bin/assets/CarteOro/oro02.png, it is a binary file.
+bin/assets/CarteOro/oro03.png, it is a binary file.
+bin/assets/CarteOro/oro04.png, it is a binary file.
+bin/assets/CarteOro/oro05.png, it is a binary file.
+bin/assets/CarteOro/oro06.png, it is a binary file.
+bin/assets/CarteOro/oro07.png, it is a binary file.
+bin/assets/CarteOro/oro08.png, it is a binary file.
+bin/assets/CarteOro/oro09.png, it is a binary file.
+bin/assets/CarteOro/oro10.png, it is a binary file.
+bin/assets/CarteOro/oro11.png, it is a binary file.
+bin/assets/CarteOro/oro12.png, it is a binary file.
+bin/assets/CarteOro/oro13.png, it is a binary file.
+bin/assets/CarteOro/oro14.png, it is a binary file.
+bin/assets/CarteOro/oro15.png, it is a binary file.
+bin/assets/CarteOro/oro16.png, it is a binary file.
+bin/assets/CarteOro/oro17.png, it is a binary file.
+bin/assets/CarteOro/oro18.png, it is a binary file.
+bin/assets/CarteOro/oro19.png, it is a binary file.
+bin/assets/CarteOro/oro20.png, it is a binary file.
+bin/assets/CarteOro/oro21.png, it is a binary file.
+bin/assets/CarteOro/oro22.png, it is a binary file.
+bin/assets/CarteOro/oro23.png, it is a binary file.
+bin/assets/CarteOro/oro24.png, it is a binary file.
+bin/assets/CarteOro/oro25.png, it is a binary file.
+bin/assets/CarteOro/oro26.png, it is a binary file.
+bin/assets/CarteOro/oro27.png, it is a binary file.
+bin/assets/CarteOro/oro28.png, it is a binary file.
+bin/assets/CarteOro/oro29.png, it is a binary file.
+bin/assets/CarteOro/oro30.png, it is a binary file.
+bin/assets/CarteOro/oro31.png, it is a binary file.
+bin/assets/CarteOro/oro32.png, it is a binary file.
+bin/assets/CarteOro/oro33.png, it is a binary file.
+bin/assets/CarteOro/oro34.png, it is a binary file.
+bin/assets/CarteOro/oro35.png, it is a binary file.
+bin/assets/CarteOro/oro36.png, it is a binary file.
+bin/assets/CarteOro/oro37.png, it is a binary file.
+bin/assets/CarteOro/oro38.png, it is a binary file.
+bin/assets/CarteOro/oro39.png, it is a binary file.
+bin/assets/CarteOro/oroRetroBlu.png, it is a binary file.
+bin/assets/CarteOro/oroRetroRosso.png, it is a binary file.
+bin/assets/CarteOro/oroRetroVerde.png, it is a binary file.
+bin/assets/CarteOro/oroRetroViola.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa00.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa01.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa02.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa03.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa04.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa05.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa06.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa07.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa08.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa09.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa10.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa11.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa12.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa13.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa14.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa15.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa16.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa17.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa18.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa19.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa20.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa21.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa22.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa23.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa24.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa25.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa26.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa27.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa28.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa29.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa30.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa31.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa32.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa33.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa34.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa35.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa36.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa37.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa38.png, it is a binary file.
+bin/assets/CarteRisorsa/risorsa39.png, it is a binary file.
+bin/assets/CarteRisorsa/risorseRetroBlu.png, it is a binary file.
+bin/assets/CarteRisorsa/risorseRetroRosso.png, it is a binary file.
+bin/assets/CarteRisorsa/risorseRetroVerde.png, it is a binary file.
+bin/assets/CarteRisorsa/risorseRetroViola.png, it is a binary file.
+bin/assets/CarteRisorse.csv, code is 41, comment is 0, blank is 0.
+bin/assets/Main.png, it is a binary file.
+bin/assets/MainBig.png, it is a binary file.
+bin/assets/ManoDX.png, it is a binary file.
+bin/assets/ManoSX.png, it is a binary file.
+bin/assets/Nullo.png, it is a binary file.
+bin/assets/Pedine/blu.png, it is a binary file.
+bin/assets/Pedine/gialla.png, it is a binary file.
+bin/assets/Pedine/nera.png, it is a binary file.
+bin/assets/Pedine/rossa.png, it is a binary file.
+bin/assets/Pedine/verde.png, it is a binary file.
+bin/assets/SfondoMercato.png, it is a binary file.
+bin/assets/Tavolo.png, it is a binary file.
+bin/assets/Tavolo2.png, it is a binary file.
+bin/assets/TracciatoSegnapunti.png, it is a binary file.
+bin/assets/zoom1.png, it is a binary file.
+bin/assets/zoom2.png, it is a binary file.
+bin/assets/zoom4.png, it is a binary file.
+bin/Carta.class, it is a binary file.
+bin/Carta_Gioco.class, it is a binary file.
+bin/Carta_Obiettivo.class, it is a binary file.
+bin/Carte.class, it is a binary file.
+bin/Cella_Manoscritto.class, it is a binary file.
+bin/CodeX$1.class, it is a binary file.
+bin/CodeX$2.class, it is a binary file.
+bin/CodeX$mouseClick.class, it is a binary file.
+bin/CodeX$mouseMoving.class, it is a binary file.
+bin/CodeX.class, it is a binary file.
+bin/Enums$eAngolo.class, it is a binary file.
+bin/Enums$eColoreGiocatore.class, it is a binary file.
+bin/Enums$eCondizioneObiettivi.class, it is a binary file.
+bin/Enums$eElencoSchermi.class, it is a binary file.
+bin/Enums$eMoltiplicatorePunti.class, it is a binary file.
+bin/Enums$eSimbolo.class, it is a binary file.
+bin/Enums$eTipoCarta.class, it is a binary file.
+bin/Enums.class, it is a binary file.
+bin/Funzioni$comparatoreRisultati.class, it is a binary file.
+bin/Funzioni$risultati.class, it is a binary file.
+bin/Funzioni.class, it is a binary file.
+bin/Giocatore.class, it is a binary file.
+bin/Gioco.class, it is a binary file.
+bin/Grafica.class, it is a binary file.
+bin/LetturaFile.class, it is a binary file.
+bin/Manoscritto.class, it is a binary file.
+bin/Mercato.class, it is a binary file.
+bin/Pulsante.class, it is a binary file.
+bin/Schermo_Gioco.class, it is a binary file.
+bin/Schermo_Iniziale.class, it is a binary file.
+bin/Schermo_Mercato$eCarteMercato.class, it is a binary file.
+bin/Schermo_Mercato.class, it is a binary file.
+bin/Schermo_NuovaPartita.class, it is a binary file.
+bin/Schermo_NuovoGiocatore.class, it is a binary file.
+bin/Schermo_Punteggio.class, it is a binary file.
+bin/Schermo_SceltaCartaIniziale.class, it is a binary file.
+bin/Schermo_SceltaCartaObiettivo.class, it is a binary file.
+bin/Schermo_SplashScreen.class, it is a binary file.
+bin/Turno.class, it is a binary file.
+bin/Variabili.class, it is a binary file.
+CodeXNaturalis.jar, it is a binary file.
+Documentazione/Esempio angoli nelle carte e simboli associati.png, it is a binary file.
+Documentazione/Esempio carta condizioni + punti.png, it is a binary file.
+Documentazione/Esempio carta gioco.txt, code is 2, comment is 0, blank is 0.
+Documentazione/Struttura_file_carte, code is 21, comment is 0, blank is 3.
+README.md, code is 2, comment is 0, blank is 0.
+src/assets/CarteIniziale/iniziale00.png, it is a binary file.
+src/assets/CarteIniziale/iniziale01.png, it is a binary file.
+src/assets/CarteIniziale/iniziale02.png, it is a binary file.
+src/assets/CarteIniziale/iniziale03.png, it is a binary file.
+src/assets/CarteIniziale/iniziale04.png, it is a binary file.
+src/assets/CarteIniziale/iniziale05.png, it is a binary file.
+src/assets/CarteIniziale/iniziale06.png, it is a binary file.
+src/assets/CarteIniziale/iniziale07.png, it is a binary file.
+src/assets/CarteIniziale/iniziale08.png, it is a binary file.
+src/assets/CarteIniziale/iniziale09.png, it is a binary file.
+src/assets/CarteIniziale/iniziale10.png, it is a binary file.
+src/assets/CarteIniziale/iniziale11.png, it is a binary file.
+src/assets/CarteIniziali.csv, code is 13, comment is 0, blank is 0.
+src/assets/CarteObiettivo/obiettivo00.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo01.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo02.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo03.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo04.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo05.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo06.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo07.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo08.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo09.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo10.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo11.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo12.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo13.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo14.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivo15.png, it is a binary file.
+src/assets/CarteObiettivo/obiettivoRetro.png, it is a binary file.
+src/assets/CarteOro.csv, code is 41, comment is 0, blank is 0.
+src/assets/CarteOro/oro00.png, it is a binary file.
+src/assets/CarteOro/oro01.png, it is a binary file.
+src/assets/CarteOro/oro02.png, it is a binary file.
+src/assets/CarteOro/oro03.png, it is a binary file.
+src/assets/CarteOro/oro04.png, it is a binary file.
+src/assets/CarteOro/oro05.png, it is a binary file.
+src/assets/CarteOro/oro06.png, it is a binary file.
+src/assets/CarteOro/oro07.png, it is a binary file.
+src/assets/CarteOro/oro08.png, it is a binary file.
+src/assets/CarteOro/oro09.png, it is a binary file.
+src/assets/CarteOro/oro10.png, it is a binary file.
+src/assets/CarteOro/oro11.png, it is a binary file.
+src/assets/CarteOro/oro12.png, it is a binary file.
+src/assets/CarteOro/oro13.png, it is a binary file.
+src/assets/CarteOro/oro14.png, it is a binary file.
+src/assets/CarteOro/oro15.png, it is a binary file.
+src/assets/CarteOro/oro16.png, it is a binary file.
+src/assets/CarteOro/oro17.png, it is a binary file.
+src/assets/CarteOro/oro18.png, it is a binary file.
+src/assets/CarteOro/oro19.png, it is a binary file.
+src/assets/CarteOro/oro20.png, it is a binary file.
+src/assets/CarteOro/oro21.png, it is a binary file.
+src/assets/CarteOro/oro22.png, it is a binary file.
+src/assets/CarteOro/oro23.png, it is a binary file.
+src/assets/CarteOro/oro24.png, it is a binary file.
+src/assets/CarteOro/oro25.png, it is a binary file.
+src/assets/CarteOro/oro26.png, it is a binary file.
+src/assets/CarteOro/oro27.png, it is a binary file.
+src/assets/CarteOro/oro28.png, it is a binary file.
+src/assets/CarteOro/oro29.png, it is a binary file.
+src/assets/CarteOro/oro30.png, it is a binary file.
+src/assets/CarteOro/oro31.png, it is a binary file.
+src/assets/CarteOro/oro32.png, it is a binary file.
+src/assets/CarteOro/oro33.png, it is a binary file.
+src/assets/CarteOro/oro34.png, it is a binary file.
+src/assets/CarteOro/oro35.png, it is a binary file.
+src/assets/CarteOro/oro36.png, it is a binary file.
+src/assets/CarteOro/oro37.png, it is a binary file.
+src/assets/CarteOro/oro38.png, it is a binary file.
+src/assets/CarteOro/oro39.png, it is a binary file.
+src/assets/CarteOro/oroRetroBlu.png, it is a binary file.
+src/assets/CarteOro/oroRetroRosso.png, it is a binary file.
+src/assets/CarteOro/oroRetroVerde.png, it is a binary file.
+src/assets/CarteOro/oroRetroViola.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa00.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa01.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa02.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa03.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa04.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa05.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa06.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa07.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa08.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa09.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa10.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa11.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa12.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa13.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa14.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa15.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa16.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa17.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa18.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa19.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa20.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa21.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa22.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa23.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa24.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa25.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa26.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa27.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa28.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa29.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa30.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa31.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa32.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa33.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa34.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa35.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa36.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa37.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa38.png, it is a binary file.
+src/assets/CarteRisorsa/risorsa39.png, it is a binary file.
+src/assets/CarteRisorsa/risorseRetroBlu.png, it is a binary file.
+src/assets/CarteRisorsa/risorseRetroRosso.png, it is a binary file.
+src/assets/CarteRisorsa/risorseRetroVerde.png, it is a binary file.
+src/assets/CarteRisorsa/risorseRetroViola.png, it is a binary file.
+src/assets/CarteRisorse.csv, code is 41, comment is 0, blank is 0.
+src/assets/Main.png, it is a binary file.
+src/assets/MainBig.png, it is a binary file.
+src/assets/ManoDX.png, it is a binary file.
+src/assets/ManoSX.png, it is a binary file.
+src/assets/Nullo.png, it is a binary file.
+src/assets/Pedine/blu.png, it is a binary file.
+src/assets/Pedine/gialla.png, it is a binary file.
+src/assets/Pedine/nera.png, it is a binary file.
+src/assets/Pedine/rossa.png, it is a binary file.
+src/assets/Pedine/verde.png, it is a binary file.
+src/assets/SfondoMercato.png, it is a binary file.
+src/assets/Tavolo.png, it is a binary file.
+src/assets/Tavolo2.png, it is a binary file.
+src/assets/TracciatoSegnapunti.png, it is a binary file.
+src/assets/zoom1.png, it is a binary file.
+src/assets/zoom2.png, it is a binary file.
+src/assets/zoom4.png, it is a binary file.
+src/Carta.java, code is 6, comment is 0, blank is 0.
+src/Carta_Gioco.java, code is 50, comment is 45, blank is 17.
+src/Carta_Obiettivo.java, code is 12, comment is 12, blank is 6.
+src/Carte.java, code is 4, comment is 0, blank is 3.
+src/Cella_Manoscritto.java, code is 12, comment is 9, blank is 3.
+src/CodeX.java, code is 269, comment is 21, blank is 45.
+src/Enums.java, code is 101, comment is 31, blank is 12.
+src/Funzioni.java, code is 39, comment is 19, blank is 33.
+src/Giocatore.java, code is 16, comment is 33, blank is 13.
+src/Gioco.java, code is 441, comment is 213, blank is 80.
+src/Grafica.java, code is 178, comment is 9, blank is 35.
+src/LetturaFile.java, code is 25, comment is 8, blank is 5.
+src/Manoscritto.java, code is 305, comment is 117, blank is 32.
+src/Mercato.java, code is 37, comment is 23, blank is 12.
+src/Pulsante.java, code is 63, comment is 11, blank is 18.
+src/Schermo_Gioco.java, code is 186, comment is 47, blank is 60.
+src/Schermo_Iniziale.java, code is 23, comment is 9, blank is 9.
+src/Schermo_Mercato.java, code is 210, comment is 26, blank is 46.
+src/Schermo_NuovaPartita.java, code is 79, comment is 15, blank is 14.
+src/Schermo_NuovoGiocatore.java, code is 104, comment is 18, blank is 28.
+src/Schermo_Punteggio.java, code is 39, comment is 7, blank is 15.
+src/Schermo_SceltaCartaIniziale.java, code is 37, comment is 5, blank is 15.
+src/Schermo_SceltaCartaObiettivo.java, code is 47, comment is 10, blank is 21.
+src/Schermo_SplashScreen.java, code is 31, comment is 11, blank is 14.
+src/Turno.java, code is 4, comment is 10, blank is 6.
+src/Variabili.java, code is 58, comment is 22, blank is 29.
+===============================================================================

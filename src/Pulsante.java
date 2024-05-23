@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 public class Pulsante {
     // Dichiaro e inizializzo le proprietà dei pulsanti
     public Rectangle area;
-    public String testo;
+    public String testo = "";
     public boolean visibile = true;
     public BufferedImage img = null;
     public Color coloreSfondo = new Color(128, 128, 128, 230);
