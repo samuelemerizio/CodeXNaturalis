@@ -1,4 +1,3 @@
-
 /**
  * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
  */
@@ -54,6 +53,8 @@ public class Carta_Gioco {
      * Moltiplicatore punti carta (vedi variabile valorePunti)
      */
     Enums.eMoltiplicatorePunti moltiplicatorePunti;
+    
+   
 
     /**
      * Il costruttore inizializza le variabili della classe a partire dall'array di stringhe parametri
@@ -95,18 +96,4 @@ public class Carta_Gioco {
                                             e.getMessage());
         }
     }
-
-
-
-	public boolean controllaCondizione(int ID) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	
-	//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
-	public String cercaCarta(int ID) {
-		return null;
-	}
-
-
 }

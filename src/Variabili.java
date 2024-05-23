@@ -96,14 +96,4 @@ public final class Variabili {
     public static Giocatore giocatoreInCreazione = null;
 
 
-    
-
-
-
-
-
-    public Variabili(){
-        
-    }
-
 }
