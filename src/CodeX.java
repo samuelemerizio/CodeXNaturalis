@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Canvas;
 import java.awt.Color;
 
@@ -14,12 +16,29 @@ import java.awt.Color;
  * Classe principale del programma
  */
 public class CodeX extends Canvas{
+	private static int i=0;
+	private static int j=0;
 
     JFrame tela = new JFrame();
     public static void main(String[] args) throws Exception {
         new CodeX();
-        Turno t=new Turno();
-        t.turno();
+        Funzioni f=new Funzioni();
+        Manoscritto m=new Manoscritto();
+        f.initCarteOro();
+        List<Carta_Gioco> mazzoCarteOro=new ArrayList<Carta_Gioco>();
+        mazzoCarteOro=f.carteprova();
+        for(Carta_Gioco g: mazzoCarteOro) {
+        	Lista_Carte Giocatore1=new Lista_Carte(g,i,j);
+        	i+=1;
+        	j+=1;
+        	m.carte.add(Giocatore1);
+        	if(i==5) {
+        		break;
+        	}
+        }
+        
+        
+        m.contaSimboliPiazzati(m.carte);
     }
     
     
@@ -250,6 +269,8 @@ public class CodeX extends Canvas{
         }
         
     }
+    
+
 
 
 

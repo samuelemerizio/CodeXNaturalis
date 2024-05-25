@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -8,6 +9,14 @@ import java.util.List;
  * Rappresenta la partita in corso con mazzi, giocatori e mercato
  */
 public class Gioco {
+	
+	Giocatore g=new Giocatore();
+	private Boolean primoTurno=true;
+	private Funzioni f=new Funzioni();
+	private List<Carta_Gioco> mazzoCarteOro=new ArrayList<Carta_Gioco>();
+	private List<Carta_Gioco> mazzoCarteRisorsa=new ArrayList<Carta_Gioco>();
+	private List<Carta_Gioco> mazzoCarteIniziali=new ArrayList<Carta_Gioco>();
+	private Carta_Obiettivo[] mazzoCarteObiettivo = new Carta_Obiettivo[16];
 
     /**
      * Lista dei giocatori che partecipano alla partita.
@@ -49,7 +58,7 @@ public class Gioco {
      */
     int faseDelGiocatore;
 
-    List <Carta_Gioco> mazzoCarteIniziali = new ArrayList<Carta_Gioco>();
+    //List <Carta_Gioco> mazzoCarteIniziali = new ArrayList<Carta_Gioco>();
 
     int indiceCartaMercatoScelta = 0;				//Identifica la carta 1,2 o 3 scelta dal giocatore
     Enums.eAngolo angoloCartaMercatoScelta;			//Identifica quale angolo della carta scelta dal giocatore verrà utilizzato per aggancio
@@ -311,6 +320,40 @@ public class Gioco {
 
 
 
+    }
+    
+    public void turno() {
+		//ciclo dei turni durante tutta la partita
+		/*
+		 * questo if è valido solo al primo turno quando vengono inizializzati tutti i parametri
+		 * in uso durante il gioco.
+		 * Verranno inizializzate tutte le carte
+		 * Verranno messe sul mercato le carte
+		 * Verranno assegnate a ogni giocatore le proprie carte iniziali e l'obiettivo segreto
+		 */
+		
+		if(primoTurno=true) {
+			try {
+				this.mazzoCarteObiettivo=f.initCarteObiettivo();
+				this.mazzoCarteIniziali=f.initCarteIniziali();
+				this.mazzoCarteOro=f.initCarteOro();
+				this.mazzoCarteRisorsa=f.initCarteRisorsa();
+				for(Giocatore g: giocatori) {
+					//g.initContaSimboli();
+				}
+				primoTurno=false;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		//il giocatore inizia scegliendo dove piazzare una tra le carte in mano
+		g.mostraCarte(g.carteInMano);
+		g.piazzaCarta();
+		//il giocatore deve pescare dal mercato la carta
+		
+		
+	
     }
 
 

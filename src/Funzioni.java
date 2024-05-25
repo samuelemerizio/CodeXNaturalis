@@ -55,7 +55,7 @@ public class Funzioni {
     	for(int i=0; i<16; i++) {
     		mazzoCarteObiettivo[i]=new Carta_Obiettivo(lettura.scansioneRiga("CarteObiettivo.csv", i));
     	}
-       	System.out.println("Carte OBIETTIVO inizializzate con successo");
+       	//System.out.println("Carte OBIETTIVO inizializzate con successo");
     	return mazzoCarteObiettivo;
     	
     }
@@ -66,7 +66,7 @@ public class Funzioni {
             mazzoCarteOro.add(g0);
             CONTATORE1+=1;
          }
-   	 	System.out.println("Carte ORO inizializzate con successo");
+   	 	//System.out.println("Carte ORO inizializzate con successo");
     	return mazzoCarteOro;
     }
     public List<Carta_Gioco> initCarteRisorsa() throws IOException{
@@ -76,8 +76,13 @@ public class Funzioni {
            	mazzoCarteRisorsa.add(g0);
                CONTATORE2+=1;
            }
-    	 System.out.println("Carte RISORSA inizializzate con successo");
+    	 //System.out.println("Carte RISORSA inizializzate con successo");
     	 return mazzoCarteRisorsa;
+    }
+    
+    public List<Carta_Gioco> carteprova(){
+		return mazzoCarteOro;
+    	
     }
     
 

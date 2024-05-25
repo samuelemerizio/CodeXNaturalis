@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class Carta_Gioco {
     
-    /**
+	/**
     * Identifica in modo univoco la carta in funzione del tipo
     */
     int ID;        
@@ -111,6 +111,15 @@ public class Carta_Gioco {
 	public String cercaCarta(int ID) {
 		return null;
 	}
+	
+	 public Enums.eSimbolo[] getSimboloAngolo() {
+			return simboloAngolo;
+		}
+	 
+	 public boolean latoCarta(boolean fronte) {
+		return fronte;
+		 
+	 }
 
 
 }

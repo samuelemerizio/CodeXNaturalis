@@ -1,3 +1,7 @@
+//import Enums.eSimbolo;
+
+import java.util.List;
+
 /**
  * Rappresenta il giocatore con le sue proprietà, il suo manoscritto ed il suo obiettivo
  */
@@ -50,20 +54,8 @@ public class Giocatore {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private List<Lista_Carte> carte;
+	private Funzioni f=new Funzioni();
     /**
      * Questo metodo mostra le carte che sono nella mano del giocatore
      * @param carteInMano array di carte che ha il giocatore a disposizione da giocare
@@ -79,7 +71,7 @@ public class Giocatore {
     	mostraCarte(carteInMano);
     	System.out.println("Scegliere quale carta piazzare indicandola con un numero" +
     						"da 0 (per la prima) a 2 (per la terza)");
-    	Funzioni f = null;
+    	
     	int numeroCarta = f.ScansionaNumero();
     	for(int i=0; i<3; i++) {
     		if(i==numeroCarta) {
@@ -102,10 +94,7 @@ public class Giocatore {
     		}
     	}
     }
-    
-    public void contaSimboliPiazzati() {
-    	
-    }
+
 
     
 }
