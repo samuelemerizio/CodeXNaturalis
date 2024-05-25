@@ -3,7 +3,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.awt.Point;
 
 /**
  * Rappresenta la partita in corso con mazzi, giocatori e mercato
@@ -60,22 +62,31 @@ public class Gioco {
 
     //List <Carta_Gioco> mazzoCarteIniziali = new ArrayList<Carta_Gioco>();
 
-    int indiceCartaMercatoScelta = 0;				//Identifica la carta 1,2 o 3 scelta dal giocatore
+    int indiceCartaGiocoScelta = 0;				//Identifica la carta 1,2 o 3 scelta dal giocatore
     Enums.eAngolo angoloCartaMercatoScelta;			//Identifica quale angolo della carta scelta dal giocatore verrà utilizzato per aggancio
     int indiceCartaManoscrittoScelta;				//Identifica l'indice della carta manoscritto scelta dal giocatore
     Enums.eAngolo angoloCartaManoscrittoScelta;		//Identifica quale angolo della carta del manoscritto è stata scelta
-    boolean selezioneCarteGiocoValida = false;		//Quanto a TRUE è possibile visualizzare il pulsante per effettuare giocata carta RETRO
-    boolean selezioneCarteGiocoFronteValida = false;//Quanto a TRUE è possibile visualizzare il pulsante per effettuare giocata carta FRONTE
+    boolean selezioneCarteGiocoRetroValida = false;		//Quanto a TRUE è possibile visualizzare il pulsante per effettuare giocata carta RETRO
+    boolean selezioneCarteGiocoFronteValida = false; //Quanto a TRUE è possibile visualizzare il pulsante per effettuare giocata carta FRONTE
     boolean selezioneCartaRimpiazzoValida = false;	//TRUE se la carta selezionata dal mercato per il rimpiazzo è valida
     int indiceCartaMercatoRimpiazzo = -1;			//Carta selezionata dal mercato per essere caricata al giocatore, mazzo, o una delle 2 del mercato
     boolean CartaMercatoRimpiazzoTipo = false;		//TRUE ho selezionato una carta risorsa, FALSE carta oro
     int indiceCartaGiocatoreDaRimpiazzare = -1;		//Carta da rimpiazzare al giocatore in fase 1
+    int punteggioTurno = 0;
 
+    List <Funzioni.risultati> classifica = new ArrayList<>();       // Lista in cui sarà contenuta la classifica
 
+    /**
+     * Costruttore della classe Gioco.
+     * Inizializza tutti i mazzi di carte oro, risorsa, iniziali e obiettivo
+     */
     public Gioco(){
         Init_Carte();
     }
 
+    /**
+     * Funzione di inizializzazone dei mazzi di carte
+     */
     public void Init_Carte(){
         // Inizializzo i mazzi di carte leggendoli dai vari file
         initCarteIniziali();
@@ -98,17 +109,35 @@ public class Gioco {
         ultimoTurno = false;
     }
 
+    // Assegna ad ogni giocatore le carte gioco
+    public void assegnaCarteGioco(){
+        // Aggiungo ad ogni utente le sue carte gioco
+        for (int i = 0; i < Variabili.partita.giocatori.size(); i++){
+            giocatori.get(i).carteInMano[0] = pescaCartaGioco(mercato.mazzoCarteRisorse);
+            giocatori.get(i).carteInMano[1] = pescaCartaGioco(mercato.mazzoCarteRisorse);
+            giocatori.get(i).carteInMano[2] = pescaCartaGioco(mercato.mazzoCarteOro);
+            // Memorizzo nella variabile cella la carta iniziale dell'i-esimo giocatore e la posizione in cui verrà posta
+            Cella_Manoscritto cella = new Cella_Manoscritto(giocatori.get(i).cartaIniziale, 20, 20);
+            // Posiziono la carta iniziale del giocatore i-esimo
+            giocatori.get(i).manoscritto.carte.add(cella);
+        }
+    }
 
-
-
+    /**
+     * Inizializza le carte risorsa
+     */
     private void initCarteRisorse(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteRisorse.csv");
+        // Eccezione per la lettura dei file delle carte risorsa
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
     		int i = 0;
+            // ciclo per la lettura del file CarteRisorse.csv (leggi finchè la riga non è null)
     		while ((linea = br.readLine()) != null) {
+                // la linea i=0 contiene l'esplicazione dei valori inseriti nel file (non è da leggere)
     			if (i!= 0) {
 	    			String[] valori = linea.split(";");
+                    // Aggiunge la carta al mazzo originale
 	    			Variabili.mazzoCarteRisorsaOriginali.add(new Carta_Gioco(valori));
     			}
     			i++;
@@ -120,14 +149,21 @@ public class Gioco {
 
     }
 
+    /**
+     * Inizializza le carte oro
+     */
     private void initCarteOro(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteOro.csv");
+        // Eccezione per la lettura dei file delle carte oro
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
     		int i = 0;
+            // ciclo per la lettura del file CarteOro.csv (leggi finchè la riga non è null)
     		while ((linea = br.readLine()) != null) {
+                // la linea i=0 contiene l'esplicazione dei valori inseriti nel file (non è da leggere)
     			if (i!= 0) {
 	    			String[] valori = linea.split(";");
+                    // Aggiunge la carta al mazzo originale
 	    			Variabili.mazzoCarteOroOriginali.add(new Carta_Gioco(valori));
     			}
     			i++;
@@ -139,14 +175,21 @@ public class Gioco {
 
     }
 
+    /**
+     * Inizializza le carte iniziali
+     */
     private void initCarteIniziali(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteIniziali.csv");
+        // Eccezione per la lettura dei file delle carte iniziali
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
     		int i = 0;
+            // ciclo per la lettura del file CarteIniziali.csv (leggi finchè la riga non è null)
     		while ((linea = br.readLine()) != null) {
+                // la linea i=0 contiene l'esplicazione dei valori inseriti nel file (non è da leggere)
     			if (i!= 0) {
 	    			String[] valori = linea.split(";");
+                    // Aggiunge la carta al mazzo originale
 	    			Variabili.mazzoCarteInizialiOriginali.add(new Carta_Gioco(valori));
     			}
     			i++;
@@ -185,10 +228,18 @@ public class Gioco {
 
     }
 
+    /**
+     * Assegna carta obiettivo al giocatore 
+     * @param ID_giocatore ID del giocatore a cui verrà assegnata la carta obiettivo
+     * @return Numero casuale che rappresenta l'indice della carta obiettivo assegnata
+     */
     public int obiettivoAssegna(int ID_giocatore){
         boolean continuaACercare = true;
+        // Ciclo che assegna al giocatore la prima carta obiettivo disponibile
         while (continuaACercare){
+            // Numero casuale che rappresenta un casuale indice delle carte obiettivo
             int numeroCasuale = (int)(Math.random() * Variabili.mazzoCarteObiettivo.length);
+            // Controllo per verificare se la carta obiettivo considerata è disponibile
             if (Variabili.mazzoCarteObiettivo[numeroCasuale].cartaDisponibile == -1){
                 Variabili.mazzoCarteObiettivo[numeroCasuale].cartaDisponibile = ID_giocatore;
                 return numeroCasuale;
@@ -209,17 +260,25 @@ public class Gioco {
     	int indice = 0;
     	int[] IDs = new int[2];
 
+        // Ciclo che assegna al mercato le prime due carte obiettivo disponibili
     	while (continuaACercare)
     	{
+            // Numero casuale che rappresenta un casuale indice delle carte obiettivo
 	    	int  numeroCasuale = (int)(Math.random() * Variabili.mazzoCarteObiettivo.length);
+            // Controllo per verificare se la carta obiettivo considerata è disponibile
 	    	if (Variabili.mazzoCarteObiettivo[numeroCasuale].cartaDisponibile == -1)
 	    	{
+                // Se è la prima carta obiettivo comune la assegno alla prima posizione dell'array IDs
 	    		if (indice == 0) {
 	    			IDs[indice] = numeroCasuale;
 	    			indice++;
 	    		}
 	    		else
 	    		{
+                    // Se non è la prima carta obiettivo comune controllo che il numero casuale
+                    // sia diverso dall'indice dela prima carta, 
+                    // se sono diversi assegno la carta con tale indice alla seconda posizione dell'array IDs
+
 	    			if (numeroCasuale != IDs[0])
 	    			{
 		    			IDs[indice] = numeroCasuale;
@@ -241,7 +300,11 @@ public class Gioco {
     	Variabili.mazzoCarteObiettivo[IDObiettivo].cartaDisponibile = IDGiocatore;
     }
 
-
+    /**
+     * Pesca una carta e la rimuove dal mazzo
+     * @param mazzo Mazzo da cui viene pescata la carta
+     * @return
+     */
     public Carta_Gioco pescaCartaGioco(List<Carta_Gioco> mazzo){
         Carta_Gioco cG = null;
         if (mazzo.size() > 0){
@@ -258,19 +321,28 @@ public class Gioco {
      */
     public Carta_Gioco estraiCartaIniziale()
     {
-    	//Genera il primo numero casuale compreso tra 0 ed il numero di carte iniziali rimaste
+    	// Genera il primo numero casuale compreso tra 0 ed il numero di carte iniziali rimaste
     	boolean continuaACercare = true;
+        // Ciclo che assegna al giocatore la prima carta iniziale disponibile
     	while (continuaACercare)
     	{
+            // Numero casuale che rappresenta un casuale indice delle carte iniziale
 	    	int  numeroCasuale = (int)(Math.random() * mazzoCarteIniziali.size() / 2);
 	    	return mazzoCarteIniziali.get(numeroCasuale);
     	}
     	return null;
     }
 
+    /**
+     * Restituisce la carta iniziale a partire dall'ID della carta iniziale
+     * @param IDCartaIniziale ID della carta iniziale restituita
+     * @return
+     */
     public Carta_Gioco ottieniCartaInizialeDaID(int IDCartaIniziale){
         int ID = IDCartaIniziale;
+        // Ciclo per trovare la carta iniziale con lo stesso ID passato come parametro
         for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
+            // Controllo per verificare se gli ID sono uguali
             if (cI.ID == ID){
                 return cI;
             }
@@ -278,21 +350,31 @@ public class Gioco {
         return null;
     }
 
+
+    /**
+     * Rimuove la carta iniziale dal mazzo delle carte iniziali
+     * @param IDCartaIniziale ID della carta da rimuovere
+     */
     public void rimuoviCartaIniziale(int IDCartaIniziale){
         int ID = IDCartaIniziale;
         int posI = 0;
+        // Ciclo per trovare la carta iniziale con lo stesso ID passato come parametro
         for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
             if (cI.ID == ID){
+                // Rimuovo la carta iniziale
                 Variabili.partita.mazzoCarteIniziali.remove(posI);
                 break;
             }
             posI++;
         }
+        // Controllo per eliminare il fronte/retro associato alla carta rimossa
         if (ID > 5) ID -= 6;
         else ID += 6;
         posI = 0;
+        // Ciclo per trovare il fronte/retro associato carta iniziale con lo stesso ID passato come parametro
         for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
             if (cI.ID == ID){
+                // Rimuovo la carta iniziale associata
                 Variabili.partita.mazzoCarteIniziali.remove(posI);
                 break;
             }
@@ -300,7 +382,8 @@ public class Gioco {
         }
     }
 
-
+    // Stampa le carte iniziali e obiettivo presenti nei rispettivi mazzi
+    // Funzione utilizzata per il debug
     public void stampaCartePresenti()
     {
         System.out.println("");
@@ -315,10 +398,327 @@ public class Gioco {
             if (Variabili.mazzoCarteObiettivo[i].cartaDisponibile < 0)
                 System.out.print(" " + i);
         }
+    }
 
+    /**
+     * Toglie la carta al giocatore e la posiziona nel manoscritto
+     * @param giocaFronte Identifica se la carta è giocata sul fronte
+     */
+    public void daGiocatoreAManoscritto(boolean giocaFronte){
+        // Ottengo riga e colonna dalla carta del manoscritto selezionata
+        int riga = giocatori.get(giocatoreAttuale).manoscritto.carte.get(indiceCartaManoscrittoScelta).riga;
+        int colonna = giocatori.get(giocatoreAttuale).manoscritto.carte.get(indiceCartaManoscrittoScelta).colonna;
+        // Ricaviamo riga e colonna della carta da agganciare
+        Point p = rigaColonnaDaAngolo(riga, colonna, angoloCartaManoscrittoScelta);
+        riga = p.y;
+        colonna = p.x;
+        // Otteniamo la carta selezionata dal giocatore
+        Carta_Gioco cGG = giocatori.get(giocatoreAttuale).carteInMano[indiceCartaGiocoScelta];
+        // Memorizzo se la carta da mettere nel manoscritto è giocata sul fronte o sul retro
+        cGG.fronte = giocaFronte;
+        // Posiziono la carta nel manoscritto
+        giocatori.get(giocatoreAttuale).manoscritto.carte.add(new Cella_Manoscritto(cGG, riga, colonna));
+        // Rimuovo la carta dalle carte del giocatore
+        giocatori.get(giocatoreAttuale).carteInMano[indiceCartaGiocoScelta] = null;
+        // Termino a fase di posizionamento carta e passo alla fase di rimpiazzo carta giocatore
+        faseDelGiocatore = 1;
+        // Resetto le variabili delle scelte fatte
+        selezioneCarteGiocoRetroValida = false;
+        indiceCartaGiocatoreDaRimpiazzare = indiceCartaGiocoScelta;
+        angoloCartaManoscrittoScelta = null;
+        angoloCartaMercatoScelta = null;
+
+        // Se ho giocato una carta sul fronte calcolo i punti ottenuti
+        if (giocaFronte)
+            calcolaPuntiTurno(cGG);
+
+    }
+
+    /*
+     * Rimpiazza la carta giocata dal giocatore
+     * Se la carta è RISORSA1, RISORSA2, ORO1 o ORO2 la assegna al giocatore e rimpiazza la carta assegnata 
+     * con la prima del rispettivo mazzo
+     * Se la carta per il rimpiazzo arriva dal mazzo la rimpiazza
+     */
+    public void daMercatoAGiocatore(){
+        Carta_Gioco cGMR = null;
+        switch (indiceCartaMercatoRimpiazzo) {
+            case 0:     // Selezionata carta mazzo risorse
+                cGMR = mercato.mazzoCarteRisorse.get(0);
+                if (mercato.mazzoCarteRisorse.size() > 0) mercato.mazzoCarteRisorse.remove(0);
+                break;
+            case 1:     // Selezionata carta mazzo oro
+                cGMR = mercato.mazzoCarteOro.get(0);
+                if (mercato.mazzoCarteOro.size() > 0) mercato.mazzoCarteOro.remove(0);
+                break;
+            case 2:     // Selezionata carta RISORSA1
+                cGMR = mercato.carteRisorsa[0];  
+                mercato.carteRisorsa[0] = mercato.mazzoCarteRisorse.get(0);
+                if (mercato.mazzoCarteRisorse.size() > 0) mercato.mazzoCarteRisorse.remove(0);
+                break;
+            case 3:     // selezionata carta ORO1
+                cGMR = mercato.carteOro[0];
+                mercato.carteOro[0] = mercato.mazzoCarteOro.get(0);
+                if (mercato.mazzoCarteOro.size() > 0) mercato.mazzoCarteOro.remove(0);
+                break;
+            case 4:     // selezionata carta RISORSA2
+                cGMR = mercato.carteRisorsa[1];
+                mercato.carteRisorsa[1] = mercato.mazzoCarteRisorse.get(0);
+                if (mercato.mazzoCarteRisorse.size() > 0) mercato.mazzoCarteRisorse.remove(0);
+                break;
+            case 5:     // selezionata carta ORO2
+                cGMR = mercato.carteOro[1];
+                mercato.carteOro[1] = mercato.mazzoCarteOro.get(0);
+                if (mercato.mazzoCarteOro.size() > 0) mercato.mazzoCarteOro.remove(0);
+                break;
+        }
+
+        // Assegno la carta al giocatore
+        giocatori.get(giocatoreAttuale).carteInMano[indiceCartaGiocatoreDaRimpiazzare] = cGMR;
+        // Resetto le variabili utilizzate
+        indiceCartaGiocatoreDaRimpiazzare = -1;
+        indiceCartaMercatoRimpiazzo = -1;
+        selezioneCarteGiocoFronteValida = false;
+        selezioneCarteGiocoRetroValida = false;
+        selezioneCartaRimpiazzoValida = false;
+
+        // Passo alla fase 2 del gioco
+        faseDelGiocatore = 2;
+
+    }
+
+    /**
+     * Incrementa il numero del giocatore attuale limitandolo e verifica il fine partita
+     */
+    public void prossimoGiocatore(){
+        giocatoreAttuale++;
+
+        inizioTurno();
+        // Se il giocatore attuale è dopo l'ultimo riseleziono il primo
+        if (giocatoreAttuale > giocatori.size() - 1){
+            // Se ho raggiunto l'ultimo turno la partita è terminata
+            if (ultimoTurno){
+                calcolaPuntiDaObiettivi();
+                faseDelGiocatore = 3;
+                Variabili.schermoAttivo = Enums.eElencoSchermi.PUNTEGGIO;
+            }
+            giocatoreAttuale = 0;
+        }
+        Variabili.schermoGioco.init();
+    }
+
+    /**
+     * Ripristino condizioni iniziali ad inizio turno giocatore
+     */
+    private void inizioTurno(){
+        indiceCartaGiocatoreDaRimpiazzare = -1;
+        indiceCartaGiocoScelta = -1;
+        indiceCartaManoscrittoScelta = -1;
+        indiceCartaMercatoRimpiazzo = -1;
+        angoloCartaManoscrittoScelta = null;
+        angoloCartaMercatoScelta = null;
+        selezioneCartaRimpiazzoValida = false;
+        selezioneCarteGiocoFronteValida = false;
+        selezioneCarteGiocoRetroValida = false;
         
+        faseDelGiocatore = 0;
+        punteggioTurno = 0;
+    }
+
+    /**
+     * Data riga e colonna restituisce riga e colonna della carta "agganciata" all'angolo
+     * @param riga - Riga della carta origine
+     * @param colonna - Colonna della carta origine
+     * @param angolo - Angolo dove si vuole posizionare la carta
+     * @return - Point con riga e colonna della carta agganciata all'angolo
+     */
+    public Point rigaColonnaDaAngolo(int riga, int colonna, Enums.eAngolo angolo){
+        int r = 20;
+        int c = 20;
+        switch (angolo) {
+            case NO:
+                r = riga - 1;
+                c = colonna - 1;
+                break;
+            case NE:
+                r = riga - 1;
+                c = colonna + 1;
+                break;
+            case SE:
+                r = riga + 1;
+                c = colonna + 1;
+                break;
+            case SO:
+                r = riga + 1;
+                c = colonna - 1;
+                break;
+        
+            default:
+                break;
+        }
+        return new Point(c, r);
+    }
+
+    /**
+     * Calcola i punti effettuati dal piazzamento di una carta (un turno)
+     * @param cGG Carta piazzata
+     */
+    public void calcolaPuntiTurno(Carta_Gioco cGG){
+        punteggioTurno = giocatori.get(giocatoreAttuale).manoscritto.contaPunti(cGG);
+        giocatori.get(giocatoreAttuale).punteggio += punteggioTurno;
+        verificaFineGioco();
+    }
+
+    /**
+     * Verifica se far partire l'ultimo turno
+     */
+    public void verificaFineGioco(){
+        if (giocatori.get(giocatoreAttuale).punteggio >= 20)
+            ultimoTurno = true;
+    }
+
+    /**
+     * Valuta se le condizioni per il posizionamento della carta giocatore nel manoscritto sono verificate
+     */
+    public void valutaCarteScelte(){
+        if (faseDelGiocatore != 0) return;
+        if (!giocoInCorso) return;
+        if (angoloCartaManoscrittoScelta == null) return;
+        // Se non ho selezionato la carta del giocatore esco
+        // Se non ho selezionato la carta del manoscritto esco
+        if (indiceCartaGiocoScelta < 0 || indiceCartaManoscrittoScelta < 0){
+            selezioneCarteGiocoRetroValida = false;
+            selezioneCarteGiocoFronteValida = false;
+            return;
+        }
+        int riga;
+        int colonna;
+        Giocatore gio = giocatori.get(giocatoreAttuale); 
+        // Ottengo la carta da giocare
+        Carta_Gioco cGG = gio.carteInMano[indiceCartaGiocoScelta];
+        // Ottengo riga e colonna della carta del manoscritto
+        Cella_Manoscritto cella = gio.manoscritto.carte.get(indiceCartaManoscrittoScelta);
+        riga = cella.riga;
+        colonna = cella.colonna;
+
+        //Richiedo al manoscritto di generarmi la matrice degli angoli utilizzati
+        gio.manoscritto.generaAngoliDaCarte();
+
+        // Recupero la matrice degli angoli
+        Enums.eSimbolo[][][] matrAngoli = gio.manoscritto.angoli;
+        int[][] matrNumCarte = gio.manoscritto.numeroCarteSuAngolo;
+
+        //Creo la matrice dei quattro angoli da valutare
+        Point[] angoloG = new Point[4];
+        // Passando da matrice carte a matrice angoli devo raddoppiare riga e colonna
+        riga *= 2;
+        colonna *= 2;
+
+        // Determino in senso orario gli angoli della carta da verificare
+        switch (angoloCartaManoscrittoScelta) {
+            case NO:
+                colonna -= 2;            
+                riga -= 2;
+                break;
+            case NE:
+                colonna += 2;            
+                riga -= 2;
+                break;
+            case SE:
+                colonna += 2;            
+                riga += 2;
+                break;
+            case SO:
+                colonna -= 2;            
+                riga += 2;
+                break;
+        }
+        angoloG[0] = new Point(colonna, riga);
+        angoloG[1] = new Point(colonna + 2, riga);
+        angoloG[2] = new Point(colonna + 2, riga + 2);
+        angoloG[3] = new Point(colonna, riga + 2);
+
+        // Confronto ogni singolo angolo, le condizioni sono:
+        // 1 : Se non ho carte va bene
+        // 2 : Se ho una carta non deve essere nulla
+        // 3 : Se ho più di una carta non va bene
+        boolean piazzamentoValido = true;
+        for (int ang = 0; ang < 4; ang++){
+            int numeroCarteSuAngolo = matrNumCarte[angoloG[ang].x][angoloG[ang].y];
+            Enums.eSimbolo simboloSuAngolo = matrAngoli[angoloG[ang].x][angoloG[ang].y][0];
+            // Verifico condizione 2
+            if (numeroCarteSuAngolo == 1 && simboloSuAngolo == Enums.eSimbolo.NULLO){
+                piazzamentoValido = false;
+                break;
+            }
+            // Verifico condizione 3
+            if (numeroCarteSuAngolo > 1){
+                piazzamentoValido = false;
+                break;
+            }
+           
+        }
+        selezioneCarteGiocoFronteValida = piazzamentoValido;
+        selezioneCarteGiocoRetroValida = piazzamentoValido;
+        if (!piazzamentoValido) return;
+
+        // Nel caso di carta oro verifico se le condizioni di piazzamento sono verificate
+        boolean retroPiazzabile = false;
+        if (cGG.tipo == Enums.eTipoCarta.ORO){
+            // Ottengo i simboli e le quantità richieste per il posizionamento delle carte giocatore nel manoscritto
+            Enums.eSimbolo[] simb = cGG.simboliXPosizionamento;
+            int[] quantiNeServono = cGG.simboliXPosizionamentoQuantita;
+            int[] quantiNeHoTrovati = new int[2];
+            // Conto la quantità di simboli richiesti presenti nel manoscritto
+            quantiNeHoTrovati[0] = gio.manoscritto.contaSimboliManoscritto(simb[0]);
+            if (simb[1] == Enums.eSimbolo.NULLO) quantiNeHoTrovati[1] = 10000;
+            else quantiNeHoTrovati[1] = gio.manoscritto.contaSimboliManoscritto(simb[1]);
+            // Confronto le quantità richieste con quelle trovate
+            if (quantiNeHoTrovati[0] < quantiNeServono[0]) piazzamentoValido = false;
+            if (quantiNeHoTrovati[1] < quantiNeServono[1]) piazzamentoValido = false;
+
+            retroPiazzabile = true;
+        }
+        selezioneCarteGiocoFronteValida = piazzamentoValido;
+        selezioneCarteGiocoRetroValida = piazzamentoValido | retroPiazzabile;
 
 
+    }
+
+    /**
+     * Calcola i punti effettuati tramite gli obiettivi
+     */
+    public void calcolaPuntiDaObiettivi(){
+        int indiceGiocatore = 0;
+
+        // Ciclo nella lista giocatori 
+        for (Giocatore gio : giocatori){
+            int punti = 0;
+            int obiettiviRaggiunti = 0;
+
+            // Aggiorno il conteggio dei punti e del numero di obiettivi raggiunti considerando i due obiettivi comuni 
+            // e quello segreto appartenente al giocatore corrente
+            Carta_Obiettivo cO = Variabili.mazzoCarteObiettivo[obiettiviComuni[0]];
+            gio.puntiObiettivoComune1 = gio.manoscritto.contaPuntiObiettivo(cO);
+            if (gio.puntiObiettivoComune1 > 0) obiettiviRaggiunti++;
+
+            cO = Variabili.mazzoCarteObiettivo[obiettiviComuni[1]];
+            gio.puntiObiettivoComune2 = gio.manoscritto.contaPuntiObiettivo(cO);
+            if (gio.puntiObiettivoComune2 > 0) obiettiviRaggiunti++;
+
+            cO = gio.cartaObiettivo;
+            gio.puntiObiettivoSegreto = gio.manoscritto.contaPuntiObiettivo(cO);
+            if (gio.puntiObiettivoSegreto > 0) obiettiviRaggiunti++;
+
+            punti = gio.punteggio + gio.puntiObiettivoComune1 + gio.puntiObiettivoComune2 + gio.puntiObiettivoSegreto;
+
+            // Memorizzo i valori per ordinare la classifica
+            classifica.add(new Funzioni.risultati(punti, indiceGiocatore, obiettiviRaggiunti));
+            indiceGiocatore++;
+
+        }
+        // Ordino la classifica
+        Collections.sort(classifica, new Funzioni.comparatoreRisultati());
 
     }
     

@@ -61,7 +61,14 @@ public final class Schermo_NuovaPartita {
                 Variabili.schermoNuovoGiocatore.presetGiocatore();
                 // Porta allo Schermo_NuovoGiocatore se le condizioni sono verificate
                 Variabili.schermoAttivo = Enums.eElencoSchermi.NUOVOGIOCATORE; 
-            }  
+            }
+            if (pbAvviaGioco.area.contains(e.getX(), e.getY()))
+                if (pbAvviaGioco.visibile){
+                    Variabili.schermoGioco.init();
+                    Variabili.partita.giocoInCorso = true;
+                    Variabili.partita.assegnaCarteGioco();
+                    Variabili.schermoAttivo = Enums.eElencoSchermi.GIOCO;
+                }
     }
 
     private void drawGiocatore(Graphics2D g2d, int numeroGiocatore)

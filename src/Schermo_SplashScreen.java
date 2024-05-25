@@ -4,16 +4,20 @@ import java.awt.event.MouseEvent;
 
 
 public final class Schermo_SplashScreen {
-	public String messaggioCaricamento = "";
+	public String messaggioCaricamento =  " ";
     // Creo i pulsanti per Schermo_SplashScreen
 	private Pulsante pbAvanti = new Pulsante((Variabili.dxMonitor - 100)/2, 700, 100, 50, "Avanti");
-	private Pulsante pbChiudi = new Pulsante(Variabili.dxMonitor - 100, 0, 100, 50, "Chiudi");
+	private Pulsante pbChiudi = new Pulsante(Variabili.dxMonitor - 105, 0, 100, 50, "Chiudi");
 
     public Schermo_SplashScreen(){
 
+        
     }
 
     public void paint(Graphics2D g2d){
+        g2d.setColor(Color.black);
+        g2d.fillRect(0, 0, Variabili.dxMonitor, Variabili.dyMonitor);
+        
         // Imposto il colore della scritta per il messaggio di caricamento
 		g2d.setColor(Color.yellow);
         //Carico l'immagine di sfondo se presente

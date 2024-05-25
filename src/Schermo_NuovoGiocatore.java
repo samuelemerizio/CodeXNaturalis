@@ -127,7 +127,7 @@ public final class Schermo_NuovoGiocatore {
         if (pbSelezioneCartaIniziale.area.contains(e.getX(), e.getY()))
             if (pbSelezioneCartaIniziale.visibile){
                 Variabili.giocatoreInCreazione.colore = coloreSelezionato;
-                Variabili.partita.stampaCartePresenti();
+               // Variabili.partita.stampaCartePresenti();
                 Variabili.schermoAttivo = Enums.eElencoSchermi.SCELTACARTAINIZIALE;   
             }
 

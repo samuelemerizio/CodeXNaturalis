@@ -50,6 +50,7 @@ public final class Variabili {
     public static int dxTavolo = 840;
     public static int dyTavolo = dyMonitor;
     public static Enums.eElencoSchermi schermoAttivo = Enums.eElencoSchermi.SPLASHSCREEN;
+    public static double zoom = 1;
 
 
     // Variabili utilizzate per le classi grafiche
@@ -60,7 +61,10 @@ public final class Variabili {
     public static Schermo_NuovoGiocatore schermoNuovoGiocatore;
     public static Schermo_SceltaCartaIniziale schermoSceltaCartaIniziale;
     public static Schermo_SceltaCartaObiettivo schermoSceltaCartaObiettivo;
+    public static Schermo_Gioco schermoGioco;
+    public static Schermo_Punteggio schermoPunteggio;
 
+    public static boolean immaginiCaricate = false;
 
 
     //Variabili immagini utilizzate nel programma
@@ -91,26 +95,5 @@ public final class Variabili {
 
     public static Giocatore giocatoreInCreazione = null;
 
-    
-
-
-
-
-    //costruttore
-    public Variabili(){
-        
-    }
-    public void arrayCarteOro() {
-    	List<Carta_Gioco> mazzoCarteOroOriginali = new ArrayList<Carta_Gioco>(); 
-    	LetturaFile lettura=new LetturaFile("CarteOro.csv");
-    	if(lettura.exists()== true) {
-    		System.out.println("True");
-    		
-    	}else {
-    		System.out.println("False");
-    	}
-    	System.out.println(lettura.getAbsolutePath());
-    	
-    }
 
 }

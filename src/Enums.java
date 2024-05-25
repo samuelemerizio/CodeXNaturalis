@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Enums {
 
     /**
@@ -103,6 +105,16 @@ public class Enums {
         VERDE,
         BLU,
         GIALLO;
+
+        public static Color colorFromEnum(Enums.eColoreGiocatore colore){
+            switch (colore) {
+                case ROSSO: return Color.RED;
+                case VERDE: return Color.GREEN;
+                case BLU: return Color.BLUE;
+                case GIALLO: return Color.YELLOW;
+            }
+            return Color.BLACK;
+        }
     }
 
     /**

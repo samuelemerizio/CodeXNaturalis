@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Rappresenta una carta gioco di tipo risorse, oro ed iniziale
  */
@@ -99,9 +96,7 @@ public class Carta_Gioco {
                                             e.getMessage());
         }
     }
-
-
-
+    
 	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
 		return true;
@@ -120,6 +115,4 @@ public class Carta_Gioco {
 		return fronte;
 		 
 	 }
-
-
 }

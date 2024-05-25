@@ -51,10 +51,14 @@ public class Giocatore {
     boolean fronte = true;          // Determina se è stata selezionata la carta iniziale fronte o retro durante la creazione giocatore
 
     boolean ob1 = true;             // Determina se è stata selezionata la carta obiettivo 1 o obiettivo 2 durante la creazione giocatore
+   
+    int puntiObiettivoComune1 = 0;          // Contiene il numero di punti ottenuti dal primo obiettivo comune
+
+    int puntiObiettivoComune2 = 0;          // Contiene il numero di punti ottenuti dal secondo obiettivo comune
 
 
 
-	private List<Lista_Carte> carte;
+	//private List<Lista_Carte> carte;
 	private Funzioni f=new Funzioni();
     /**
      * Questo metodo mostra le carte che sono nella mano del giocatore
@@ -96,5 +100,6 @@ public class Giocatore {
     }
 
 
-    
+    int puntiObiettivoSegreto = 0;          // Contiene il numero di punti ottenuti dall'obiettivo segreto del giocatore
+
 }
