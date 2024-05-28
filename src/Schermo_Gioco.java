@@ -91,7 +91,6 @@ public final class Schermo_Gioco {
         if (Variabili.DEBUG_MAPPA_ANGOLI) {
         	Point pt;
         	int offX, offY;
-        	int val;
         	giocatore.manoscritto.generaAngoliDaCarte();
         	g2d.setColor(Color.black);
         	Enums.eSimbolo[][][] mas = giocatore.manoscritto.angoli;

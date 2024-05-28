@@ -232,15 +232,6 @@ public final class Schermo_Mercato {
     }
 
 	private void verificaCartaRimpiazzo(eCarteMercato cM){
-		// Determino quale carta rimpiazzare
-		int qualeCartaRimpiazzare = -1;
-		if (Variabili.partita.giocatori.get(Variabili.partita.giocatoreAttuale).carteInMano[0] == null)
-			qualeCartaRimpiazzare = 0;
-		if (Variabili.partita.giocatori.get(Variabili.partita.giocatoreAttuale).carteInMano[1] == null)
-			qualeCartaRimpiazzare = 1;
-		if (Variabili.partita.giocatori.get(Variabili.partita.giocatoreAttuale).carteInMano[2] == null)
-			qualeCartaRimpiazzare = 2;
-
 		// Imposto la carta selezionata come valida
 		Variabili.partita.selezioneCartaRimpiazzoValida = true;
 
