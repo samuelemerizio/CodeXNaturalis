@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.Canvas;
 import java.awt.Color;
 
@@ -14,8 +16,9 @@ import java.awt.Color;
  * Classe principale del programma
  */
 public class CodeX extends Canvas{
-
     JFrame tela = new JFrame();
+    boolean splashCaricata = false;
+
     public static void main(String[] args) throws Exception {
         new CodeX();
     }
@@ -30,6 +33,8 @@ public class CodeX extends Canvas{
         Variabili.schermoNuovoGiocatore = new Schermo_NuovoGiocatore();
         Variabili.schermoSceltaCartaIniziale = new Schermo_SceltaCartaIniziale();
         Variabili.schermoSceltaCartaObiettivo = new Schermo_SceltaCartaObiettivo();
+        Variabili.schermoGioco = new Schermo_Gioco();
+        Variabili.schermoPunteggio = new Schermo_Punteggio();
 
 
 
@@ -47,14 +52,53 @@ public class CodeX extends Canvas{
         // Inizializzo variabili doubleBuffering
         Variabili.immagineBack = createImage(Variabili.dxMonitor, Variabili.dyMonitor);
         Variabili.immagineBackGraphics = (Graphics2D)Variabili.immagineBack.getGraphics();
-    
+
         caricaFileImmagini();
+
+        //Genero un timer che rinfresca l'immagine nella pagina SPLASHSCREEN
+        Timer timerAvvio = new Timer();
+        TimerTask taskAvvio = new TimerTask() {
+            @Override
+            public void run(){
+                repaint();
+                if (Variabili.immaginiCaricate){
+                    Variabili.schermoAttivo = Enums.eElencoSchermi.INIZIALE;
+                    repaint();
+                    timerAvvio.cancel();
+                }
+            }
+        };
+
+        //Genero un timer che rinfresca l'immagine nella pagina SPLASHSCREEN
+        Timer timerSplash = new Timer();
+        TimerTask taskSplash = new TimerTask() {
+            @Override
+            public void run(){
+                repaint();
+                if (splashCaricata)
+                {
+                    caricaGliAltriFileImmagine();
+                    timerSplash.cancel();   
+                    timerAvvio.schedule(taskAvvio, 100);
+                }
+            }
+        };
+        timerSplash.schedule(taskSplash, 100);  
     }
 
     public void caricaFileImmagini(){
-
         try{
             Variabili.bkIniziale = ImageIO.read(ClassLoader.getSystemResource("assets/MainBig.png"));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        repaint();
+        splashCaricata = true;
+    }
+
+    public void caricaGliAltriFileImmagine(){
+        try{
             repaint();
             Variabili.bkMain = ImageIO.read(ClassLoader.getSystemResource("assets/Main.png"));
             Variabili.schermoSplashScreen.messaggioCaricamento = "Caricamento immagini in corso";
@@ -64,27 +108,27 @@ public class CodeX extends Canvas{
             Variabili.imgZoom0 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom1.png"));
             Variabili.imgZoom1 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom2.png"));
             Variabili.imgZoom2 = ImageIO.read(ClassLoader.getSystemResource("assets/zoom4.png"));
-            
+            repaint();
             Variabili.imgSfondoMercato = ImageIO.read(ClassLoader.getSystemResource("assets/SfondoMercato.png"));
             Variabili.imgTracciatoSegnapunti = ImageIO.read(ClassLoader.getSystemResource("assets/TracciatoSegnapunti.png"));
-            
+            repaint();
             Variabili.imgCartaRisorsaRossaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroRosso.png"));
             Variabili.imgCartaRisorsaVerdeRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroVerde.png"));
             Variabili.imgCartaRisorsaBluRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroBlu.png"));
             Variabili.imgCartaRisorsaViolaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/risorseRetroViola.png"));
-
+            repaint();
             Variabili.imgCartaOroRossaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroRosso.png"));
             Variabili.imgCartaOroVerdeRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroVerde.png"));
             Variabili.imgCartaOroBluRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroBlu.png"));
             Variabili.imgCartaOroViolaRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/oroRetroViola.png"));
-
+            repaint();
             Variabili.imgCartaObiettivoRetro = ImageIO.read(ClassLoader.getSystemResource("assets/CarteObiettivo/obiettivoRetro.png"));
-
+            repaint();
             Variabili.imgPedine[0] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/rossa.png"));
             Variabili.imgPedine[1] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/verde.png"));
             Variabili.imgPedine[2] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/blu.png"));
             Variabili.imgPedine[3] = ImageIO.read(ClassLoader.getSystemResource("assets/Pedine/gialla.png"));
-
+            repaint();
             String indice;
             String nomeFile;
             //Carico immagine delle carte risorse
@@ -94,6 +138,7 @@ public class CodeX extends Canvas{
                 nomeFile = "risorsa" + indice + ".png";
                 Variabili.imgCarteRisorse[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteRisorsa/" + nomeFile));
             }
+            repaint();
             //Carico immagine delle carte oro
             for (int i= 0; i < Variabili.imgCarteOro.length; i++)
             {
@@ -101,6 +146,7 @@ public class CodeX extends Canvas{
                 nomeFile = "oro" + indice + ".png";
                 Variabili.imgCarteOro[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteOro/" + nomeFile));
             }
+            repaint();
             //Carico immagine delle carte obiettivo
             for (int i= 0; i < Variabili.imgCarteObiettivi.length; i++)
             {
@@ -108,6 +154,7 @@ public class CodeX extends Canvas{
                 nomeFile = "obiettivo" + indice + ".png";
                 Variabili.imgCarteObiettivi[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteObiettivo/" + nomeFile));
             }
+            repaint();
             //Carico immagine delle carte iniziali
             for (int i= 0; i < Variabili.imgCarteIniziali.length; i++)
             {
@@ -116,12 +163,17 @@ public class CodeX extends Canvas{
                 Variabili.imgCarteIniziali[i] = ImageIO.read(ClassLoader.getSystemResource("assets/CarteIniziale/" + nomeFile));
             }
             Variabili.schermoSplashScreen.messaggioCaricamento = "Caricamento immagini terminato";
+            Variabili.immaginiCaricate = true;
+            
+            Variabili.schermoAttivo = Enums.eElencoSchermi.INIZIALE;
+
             repaint();
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
+
     @Override
     public void paint(Graphics g){
 
@@ -163,6 +215,14 @@ public class CodeX extends Canvas{
                     Variabili.schermoSceltaCartaObiettivo.paint(Variabili.immagineBackGraphics);
                     Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
                     break;
+                case GIOCO:
+                    Variabili.schermoGioco.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
+                case PUNTEGGIO:
+                    Variabili.schermoPunteggio.paint(Variabili.immagineBackGraphics);
+                    Variabili.schermoMercato.paint(Variabili.immagineBackGraphics);
+                    break;
                 default:
                     break;
             }
@@ -171,7 +231,7 @@ public class CodeX extends Canvas{
             g.drawImage( Variabili.immagineBack, 0, 0, this);
         }
         catch(Exception e){
-            System.out.println("ERRORE: " + e.getMessage());
+            System.out.println("ERRORE: " + e.getMessage() + " Nello schermo " +Variabili.schermoAttivo);
         }
         g.dispose();
     }
@@ -181,6 +241,21 @@ public class CodeX extends Canvas{
         @Override
         public void mouseClicked(MouseEvent e) {
            // System.out.println(String.format("Hai cliccato: %d, %d", e.getX(), e.getY()));
+           
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+           
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
             // Determino quale classe grafica richiamare in funzione dello schermo attivo
             switch (Variabili.schermoAttivo) {
                 case SPLASHSCREEN:
@@ -205,6 +280,18 @@ public class CodeX extends Canvas{
                     Variabili.schermoSceltaCartaObiettivo.mousePressed(e);
                     Variabili.schermoMercato.mousePressed(e);
                     break;
+                case GIOCO:
+                    Variabili.schermoGioco.mousePressed(e);
+                    if (Variabili.partita == null) {
+                        repaint();
+                        return;
+                    }
+                    Variabili.schermoMercato.mousePressed(e);
+                    break;
+                case PUNTEGGIO:
+                    Variabili.schermoPunteggio.mousePressed(e);
+                    Variabili.schermoMercato.mousePressed(e);
+                    break;
                 default:
                     break;
             }
@@ -213,33 +300,25 @@ public class CodeX extends Canvas{
             repaint();
         }
 
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-           
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-           
-        }
-
+        // Registra dove è stato rilasciato il click del mouse dopo il trascinamento
         @Override
         public void mouseReleased(MouseEvent e) {
-            
+            if (Variabili.schermoAttivo == Enums.eElencoSchermi.GIOCO){
+                Variabili.schermoGioco.mouseReleased(e);
+                repaint();
+            }
         }
         
     }
-
+    // Registra i movimenti del mouse durante il trascinamento
     class mouseMoving implements MouseMotionListener{
 
         @Override
         public void mouseDragged(MouseEvent e) {
-           
+           if (Variabili.schermoAttivo == Enums.eElencoSchermi.GIOCO){
+                Variabili.schermoGioco.mouseDragged(e);
+                repaint();
+           }
         }
 
         @Override

@@ -19,7 +19,7 @@ public class Mercato {
     /**
      * Sono le 2 carte risorsa disponibili nel mercato
      */
-    public static Carta_Gioco[] carteRisorsa = new Carta_Gioco[2];
+    Carta_Gioco[] carteRisorsa = new Carta_Gioco[2];
 
     /**
      * Sono le 2 carte oro disponibili nel mercato

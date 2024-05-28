@@ -134,12 +134,46 @@ public final class Grafica {
 			default:
 				break;
 		}
-
 	}
 
-	public void drawCartaGioco(Graphics2D g2d, Carta_Gioco cG, Rectangle area, boolean evidenzia, int spessore){
+	public static void drawCartaGioco(Graphics2D g2d, Carta_Gioco cG, Rectangle area, boolean evidenzia, int spessore){
 		if (cG == null) return ;
-		if (evidenzia) evidenziaCarta(g2d, area, Color.YELLOW, spessore);
+		if (evidenzia) evidenziaCarta(g2d, area, Color.GREEN, spessore);
+		drawCartaGioco(g2d, cG, area);
+	}
+
+
+	public static void evidenziaCarta(Graphics2D g2d, Rectangle area, Color fillColor)
+	{
+		g2d.setColor(fillColor);
+		g2d.fillRoundRect(area.x - 30, area.y - 30, area.width + 60, area.height + 60, 15, 15);
+	}
+	
+	
+	public static void evidenziaAngoloCarta(Graphics2D g2d, Rectangle area, Enums.eAngolo angolo, Color colore)
+	{
+		if (angolo == null) return;
+		
+		g2d.setColor(colore);
+		Rectangle r = new Rectangle(area.x, area.y, area.width, area.height);
+		r.width = r.width / 2;
+		r.height = r.height / 2;
+		switch (angolo)
+		{
+			case NO:
+				break;
+			case NE:
+				r.x += r.width;
+				break;
+			case SE:
+				r.x += r.width;
+				r.y += r.height;
+				break;
+			case SO:
+				r.y += r.height;
+				break;
+		}
+		g2d.fillRect(r.x, r.y, r.width, r.height);
 	}
 
 	/**

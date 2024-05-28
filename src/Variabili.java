@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public final class Variabili {
      */
     static Carta_Obiettivo[] mazzoCarteObiettivo = new Carta_Obiettivo[16];
 
+    public static boolean DEBUG_MAPPA_ANGOLI = false;
     
 
     public static Gioco partita = null;
@@ -50,8 +52,9 @@ public final class Variabili {
     public static int dxTavolo = 840;
     public static int dyTavolo = dyMonitor;
     public static Enums.eElencoSchermi schermoAttivo = Enums.eElencoSchermi.SPLASHSCREEN;
-
-
+    public static double zoom = 1;
+    public static Rectangle mappaTavola = new Rectangle(0,0, 40 * carta.stepX, 40 * carta.stepY);
+ 
     // Variabili utilizzate per le classi grafiche
     public static Schermo_SplashScreen schermoSplashScreen;
     public static Schermo_Iniziale schermoIniziale;
@@ -60,7 +63,10 @@ public final class Variabili {
     public static Schermo_NuovoGiocatore schermoNuovoGiocatore;
     public static Schermo_SceltaCartaIniziale schermoSceltaCartaIniziale;
     public static Schermo_SceltaCartaObiettivo schermoSceltaCartaObiettivo;
+    public static Schermo_Gioco schermoGioco;
+    public static Schermo_Punteggio schermoPunteggio;
 
+    public static boolean immaginiCaricate = false;
 
 
     //Variabili immagini utilizzate nel programma
@@ -90,6 +96,7 @@ public final class Variabili {
 
 
     public static Giocatore giocatoreInCreazione = null;
+
 
     
 
