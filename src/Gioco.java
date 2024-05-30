@@ -119,6 +119,7 @@ public class Gioco {
      */
     private void initCarteRisorse(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteRisorse.csv");
+        Variabili.mazzoCarteRisorsaOriginali = new ArrayList<Carta_Gioco>();
         // Eccezione per la lettura dei file delle carte risorsa
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
@@ -145,6 +146,7 @@ public class Gioco {
      */
     private void initCarteOro(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteOro.csv");
+        Variabili.mazzoCarteOroOriginali = new ArrayList<Carta_Gioco>();
         // Eccezione per la lettura dei file delle carte oro
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
@@ -171,6 +173,7 @@ public class Gioco {
      */
     private void initCarteIniziali(){
         InputStream in = ClassLoader.getSystemResourceAsStream("assets/CarteIniziali.csv");
+        Variabili.mazzoCarteInizialiOriginali = new ArrayList<Carta_Gioco>();
         // Eccezione per la lettura dei file delle carte iniziali
     	try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){	
     		String linea;
