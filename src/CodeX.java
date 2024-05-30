@@ -18,6 +18,7 @@ import java.awt.Color;
 /**
  * Classe principale del programma
  */
+@SuppressWarnings("serial")
 public class CodeX extends Canvas{
 
     JFrame tela = new JFrame();

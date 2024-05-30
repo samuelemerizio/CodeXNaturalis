@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -67,7 +68,7 @@ public final class Schermo_Mercato {
         g2d.setTransform(at);
 
         // Condizione per stabilire quale immagine visualizzare
-        if (Variabili.mostraMercato){
+        if (Variabili.mostraMercato){     	
             //Disegno il mercato e le carte del giocatore
 	    	int largCarta = (int)(Variabili.carta.dx * zoomCarte);
 	    	int altCarta = (int)(Variabili.carta.dy * zoomCarte);
@@ -85,8 +86,10 @@ public final class Schermo_Mercato {
 	    	areeCarte[eCarteMercato.OBIETTIVO.ordinal()] = new Rectangle(400 - 40 - largCarta, 535 + 105, largCarta, altCarta);
 
             g2d.drawImage(Variabili.imgSfondoMercato, 0, 0, 400, Variabili.dyMonitor, null);
-
-            //Titolo area
+            
+            
+            
+        	//Titolo area
 		    Grafica.disegnaTesto(g2d, "Risorse - Oro", 200, areeCarte[eCarteMercato.MAZZORISORSE.ordinal()].y - 5, Color.LIGHT_GRAY, Color.BLACK, 1, 2, 20, false);
 		    //Mazzo risorse
 		    Grafica.drawMazzo(g2d, areeCarte[eCarteMercato.MAZZORISORSE.ordinal()]);
@@ -136,12 +139,16 @@ public final class Schermo_Mercato {
 				// Disegno carta obiettivo
 				Grafica.drawCartaObiettivo(g2d, giocatore.cartaObiettivo, areeCarte[eCarteMercato.OBIETTIVO.ordinal()], new Color(0, 0, 0, 0), new Color(0, 0, 0, 0));
 			}
-
-
-
-
-        }else{
+			
+			if (Variabili.partita.giocoInCorso && Variabili.schermoAttivo != Enums.eElencoSchermi.PUNTEGGIO)
+				Grafica.disegnaTesto(g2d, String.format("%s : punti %d", giocatore.nome, giocatore.punteggio + giocatore.puntiObiettivoComune1 + giocatore.puntiObiettivoComune2 + giocatore.puntiObiettivoSegreto),
+														 200, Variabili.dyTavolo - 5, Color.BLACK, Color.YELLOW, 1, 2, 22, false);
+	       
+        }
+        else
+        {        	
             g2d.drawImage(Variabili.imgTracciatoSegnapunti, 0, 0, 400, Variabili.dyMonitor, null);
+
 			if (Variabili.partita != null){
 				for (Giocatore gio : Variabili.partita.giocatori){
 					int punti = gio.punteggio + gio.puntiObiettivoComune1 + gio.puntiObiettivoComune2 + gio.puntiObiettivoSegreto;
@@ -149,17 +156,33 @@ public final class Schermo_Mercato {
 					if (punti > 29) punti = 29;
 					xP = coordinatePunti[punti].x + (gio.ID < 2 ? 0 : -28);
 					yP = coordinatePunti[punti].y + (gio.ID == 1 || gio.ID == 2 ? 0 : -28);
+					
+					
 					g2d.drawImage(Variabili.imgPedine[gio.colore.ordinal()], xP, yP, null);
+					if (gio.ID == 0)
+					{
+						g2d.setColor(Color.black);
+						g2d.setStroke(new BasicStroke(6.0f));
+						g2d.drawOval(xP, yP, 28, 28);
+						g2d.setStroke(new BasicStroke(1.0f));
+					}
 				}
 			}
         }
         
-		if (Variabili.partita.giocoInCorso && Variabili.schermoAttivo != Enums.eElencoSchermi.PUNTEGGIO)
-			Grafica.disegnaTesto(g2d, String.format("%s : punti %d", giocatore.nome, giocatore.punteggio + giocatore.puntiObiettivoComune1 + giocatore.puntiObiettivoComune2 + giocatore.puntiObiettivoSegreto),
-													 200, Variabili.dyTavolo - 5, Color.BLACK, Color.YELLOW, 1, 2, 22, false);
-        // Pitturo i pulsanti 
+		 // Pitturo i pulsanti 
         pb1.drawCerchio(g2d);
         pb2.drawCerchio(g2d);
+        
+        g2d.setColor(Color.green);
+        if (Variabili.mostraMercato) 
+        	//Evidenzio pulsante mappa o mercato
+        	g2d.fillOval(182, 12, 11, 11);
+        else
+            //Evidenzio tabellone punti
+        	g2d.fillOval(207, 12, 11, 11);
+        
+        
 
         // Ripristino le coordinate originali
         g2d.setTransform(originaleAt);
@@ -180,7 +203,7 @@ public final class Schermo_Mercato {
 
 		// Verifico se ho clicato su una carta gioco
 		if (Variabili.mostraMercato){
-			if (Variabili.partita.faseDelGiocatore == 0)
+			if (Variabili.partita.faseDelGiocatore == 0 && Variabili.partita.giocoInCorso)
 			{
 				if (areeCarte[eCarteMercato.GIOCO1.ordinal()].contains(xM, yM))
 					Variabili.partita.indiceCartaGiocoScelta = 0;
@@ -209,7 +232,6 @@ public final class Schermo_Mercato {
     }
 
 	private void verificaCartaRimpiazzo(eCarteMercato cM){
-
 		// Imposto la carta selezionata come valida
 		Variabili.partita.selezioneCartaRimpiazzoValida = true;
 

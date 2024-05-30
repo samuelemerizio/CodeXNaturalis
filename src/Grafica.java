@@ -134,12 +134,11 @@ public final class Grafica {
 			default:
 				break;
 		}
-
 	}
 
 	public static void drawCartaGioco(Graphics2D g2d, Carta_Gioco cG, Rectangle area, boolean evidenzia, int spessore){
 		if (cG == null) return ;
-		if (evidenzia) evidenziaCarta(g2d, area, Color.YELLOW, spessore);
+		if (evidenzia) evidenziaCarta(g2d, area, Color.GREEN, spessore);
 		drawCartaGioco(g2d, cG, area);
 	}
 

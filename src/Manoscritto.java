@@ -51,13 +51,26 @@ public class Manoscritto {
             riga = cella.riga * 2;
             // Posiziono i simboli negli angoli della nuova matrice
             if (cella.carta.fronte){
-                angoli[colonna][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NO.ordinal()];
-                angoli[colonna + 2][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NE.ordinal()];
-                angoli[colonna + 2][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SE.ordinal()];
-                angoli[colonna][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SO.ordinal()];
-                angoli[colonna + 1][riga + 1][0] = Enums.eSimbolo.NULLO;
-                angoli[colonna + 1][riga + 1][1] = Enums.eSimbolo.NULLO;
-                angoli[colonna + 1][riga + 1][2] = Enums.eSimbolo.NULLO;
+            	if (cella.carta.tipo == Enums.eTipoCarta.INIZIALE)
+            	{
+            		angoli[colonna][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NO.ordinal()];
+                    angoli[colonna + 2][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NE.ordinal()];
+                    angoli[colonna + 2][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SE.ordinal()];
+                    angoli[colonna][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SO.ordinal()];
+                    angoli[colonna + 1][riga + 1][0] = cella.carta.simboloRetro[0];
+                    angoli[colonna + 1][riga + 1][1] = cella.carta.simboloRetro[1];
+                    angoli[colonna + 1][riga + 1][2] = cella.carta.simboloRetro[2];            		
+            	}
+            	else
+            	{
+	                angoli[colonna][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NO.ordinal()];
+	                angoli[colonna + 2][riga][0] = cella.carta.simboloAngolo[Enums.eAngolo.NE.ordinal()];
+	                angoli[colonna + 2][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SE.ordinal()];
+	                angoli[colonna][riga + 2][0] = cella.carta.simboloAngolo[Enums.eAngolo.SO.ordinal()];
+	                angoli[colonna + 1][riga + 1][0] = Enums.eSimbolo.VUOTO;
+	                angoli[colonna + 1][riga + 1][1] = Enums.eSimbolo.VUOTO;
+	                angoli[colonna + 1][riga + 1][2] = Enums.eSimbolo.VUOTO;
+            	}
                 // Incremento il numero di carte sull'angolo
                 numeroCarteSuAngolo[colonna][riga]++;
                 numeroCarteSuAngolo[colonna + 2][riga]++;
@@ -78,10 +91,10 @@ public class Manoscritto {
                 }
                 else
                 {
-                    angoli[colonna][riga][0] = Enums.eSimbolo.NULLO;
-                    angoli[colonna + 2][riga][0] = Enums.eSimbolo.NULLO;
-                    angoli[colonna + 2][riga + 2][0] = Enums.eSimbolo.NULLO;
-                    angoli[colonna][riga + 2][0] = Enums.eSimbolo.NULLO;
+                    angoli[colonna][riga][0] = Enums.eSimbolo.VUOTO;
+                    angoli[colonna + 2][riga][0] = Enums.eSimbolo.VUOTO;
+                    angoli[colonna + 2][riga + 2][0] = Enums.eSimbolo.VUOTO;
+                    angoli[colonna][riga + 2][0] = Enums.eSimbolo.VUOTO;
                     angoli[colonna + 1][riga + 1][0] = cella.carta.simboloRetro[0];
                     angoli[colonna + 1][riga + 1][1] = cella.carta.simboloRetro[1];
                     angoli[colonna + 1][riga + 1][2] = cella.carta.simboloRetro[2];
@@ -188,7 +201,7 @@ public class Manoscritto {
     }
 
     /**
-     * Conta quante carte sono presenti su una data carta
+     * Conta quante carte sono presenti su una data crata
      * @param cGG Carta gioco su cui effettuare il controllo, ogni angolo coperto incrementa di uno il totale
      * @return Totale dei punti effettuati (ogni angolo coperto assegna un punto)
      */

@@ -24,7 +24,7 @@ public final class Schermo_SceltaCartaIniziale {
         pbEsci.draw(g2d);
         pbSelezioneCartaObiettivo.draw(g2d);
 
-        Grafica.disegnaTesto(g2d, "Selezionare carta iniziale", Variabili.dxTavolo / 2, 50, Color.BLACK, Color.WHITE, 1, 1, 20, false);
+        Grafica.disegnaTesto(g2d, "Selezionare fronte o retro carta iniziale", Variabili.dxTavolo / 2, 50, Color.BLACK, Color.WHITE, 1, 1, 30, false);
 		
 		Grafica.evidenziaCarta(g2d,  Variabili.giocatoreInCreazione.fronte ? pbFronte.area : pbRetro.area, new Color(0,255,0,128), 12);
 

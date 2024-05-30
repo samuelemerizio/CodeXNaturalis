@@ -9,12 +9,15 @@ import java.awt.geom.AffineTransform;
 
 public final class Schermo_Gioco {
     // Creo i pulsanti per lo Schermo_NuovoGiocatore
-    private Pulsante pbEsci = new Pulsante(200, Variabili.dyTavolo - 60, 250, 50, "Termina");
+    private Pulsante pbEsci = new Pulsante(200, Variabili.dyTavolo - 60, 80, 50, "Esci");
     private Pulsante pbConfermaCartaGiocataFronte = new Pulsante(Variabili.dxTavolo - 60 - 200, 10, 250, 40, "Gioca fronte");
     private Pulsante pbConfermaCartaGiocataRetro = new Pulsante(Variabili.dxTavolo - 60 - 200, 60, 250, 40, "Gioca retro");
     private Pulsante pbConfermaCartaRimpiazzare = new Pulsante(Variabili.dxTavolo - 60 - 200, 10, 250, 40, "Prendi rimpiazzo");
     private Pulsante pbFineTurno = new Pulsante(Variabili.dxTavolo - 60 - 200, 10, 250, 40, "Fine turno");
 
+    private Pulsante pbSi = new Pulsante((Variabili.dxTavolo / 2 - 80 - 40) , 400, 80, 40, "SI");
+    private Pulsante pbNo = new Pulsante((Variabili.dxTavolo / 2 + 40) , 400, 80, 40, "NO");
+    
     private Pulsante pbZoom0 = new Pulsante(20, 676, 28, 28, Variabili.imgZoom0); 
     private Pulsante pbZoom1 = new Pulsante(90, 676, 28, 28, Variabili.imgZoom1); 
     private Pulsante pbZoom2 = new Pulsante(150, 676, 28, 28, Variabili.imgZoom2); 
@@ -24,7 +27,7 @@ public final class Schermo_Gioco {
     int indiceZoom = 0;
     Point mouseStart = new Point(0, 0);                         // Coordinata del mouse in cui inizia il trascinamento
     boolean trascinamento = false;                              // Azione di trascinamento tavolo in corso
-
+    boolean menuUscita = false;									// Con true visualizza il menù di uscita
 
 
 
@@ -83,6 +86,40 @@ public final class Schermo_Gioco {
 
             cella.rectCarta = areaT;
         }
+        
+        //Se ho attivo modalità DEBUG_SIMBOLI_MAPPA visualizzo sulla carta i simboli acquisiti nella mappa angoli
+        if (Variabili.DEBUG_MAPPA_ANGOLI) {
+        	Point pt;
+        	int offX, offY;
+        	giocatore.manoscritto.generaAngoliDaCarte();
+        	g2d.setColor(Color.black);
+        	Enums.eSimbolo[][][] mas = giocatore.manoscritto.angoli;
+        	for (int riga = 0; riga < 78; riga++) {
+        		for (int colonna = 0; colonna < 78; colonna++) {
+        			offX = (riga % 2 == 1) ? Variabili.carta.dx / 2 : 0;
+        			offY = (colonna % 2 == 1) ? Variabili.carta.dy / 2: 0;
+        			
+        			pt = Funzioni.coordinateCarta(colonna / 2, riga / 2);
+        				
+        			if (mas[riga][colonna][0] != null) 
+        				Grafica.disegnaTesto(g2d, String.format("%d",  mas[riga][colonna][0].ordinal()),
+        									pt.x + offX , pt.y + offY, Color.black , Color.white, 0, 0, 20, false);
+    				if (mas[riga][colonna][1] != null) 
+        				Grafica.disegnaTesto(g2d, String.format("%d",  mas[riga][colonna][1].ordinal()),
+        									pt.x + offX +20, pt.y + offY, Color.black , Color.white, 0, 0, 20, false);
+    				if (mas[riga][colonna][2] != null) 
+        				Grafica.disegnaTesto(g2d, String.format("%d",  mas[riga][colonna][2].ordinal()),
+        									pt.x + offX + 40, pt.y + offY, Color.black , Color.white, 0, 0, 20, false);
+        				
+        			
+        			
+        		}
+        			
+        	}
+        	
+        }
+        
+        
         // Ripristino la trasformata affine originale per disegnare gli oggetti grafici che non traslano con la carta
         g2d.setTransform(originaleAt);
 
@@ -121,7 +158,30 @@ public final class Schermo_Gioco {
                 break;
         }
 
-        
+        //Disegno mappa del tavolo, creo una nuova trasformaione
+		//Creo la nuova trasformazione affine 
+		AffineTransform atM = new AffineTransform();
+		//Traslo il tavolo di gioco
+		atM.translate(20, (Variabili.dyTavolo - Variabili.mappaTavola.height * 0.025) - 15);
+		
+		//Scalo il tavolo di gioco
+		atM.scale(0.025, 0.025);
+		//Attivo la trasformazione
+		g2d.setTransform(atM);
+		
+		
+		g2d.setColor(new Color(0, 0, 0, 255));
+		g2d.fillRect(0, 0, Variabili.mappaTavola.width, Variabili.mappaTavola.height);
+		g2d.setColor(Color.yellow);
+		
+		g2d.setStroke(new BasicStroke(10));
+		int mapX = (int)(Variabili.dxTavolo / Variabili.zoom);
+		int mapY = (int)(Variabili.dyTavolo / Variabili.zoom);
+				
+		g2d.setColor(Color.blue);
+		g2d.drawRect(+Variabili.mappaTavola.width  +(int)(xZ / Variabili.zoom), Variabili.mappaTavola.height +(int)(yZ / Variabili.zoom), mapX, mapY);	
+		
+		g2d.setTransform(originaleAt);
 
 
 
@@ -138,17 +198,44 @@ public final class Schermo_Gioco {
         if (Variabili.partita.ultimoTurno) 
             Grafica.disegnaTesto(g2d, "Ultimo turno di gioco", Variabili.dxTavolo, Variabili.dyTavolo - 40, Color.CYAN, Color.BLACK, 2, 0, 30, true);
 
+        
+        //Menu uscita
+        if (menuUscita) {
+        	g2d.setColor(new Color(0,0,0,196));
+        	g2d.fillRect(0, 0, Variabili.dxMonitor, Variabili.dyMonitor);
+        	g2d.setColor(new Color(0,0,0,196));
+        	g2d.fillRect(50, 150, Variabili.dxTavolo - 2 * 50, 350);
+        	g2d.setColor(new Color(0, 255, 255,196));
+        	g2d.drawRect(50, 150, Variabili.dxTavolo - 2 * 50, 350);
+        	pbSi.draw(g2d);
+        	pbNo.draw(g2d);
+        	Grafica.disegnaTesto(g2d, "Vuoi terminare la partita ?", Variabili.dxTavolo / 2, 200, Color.CYAN, Color.BLACK, 1, 0, 50, true);      	
+        }
+        
    }
 
     public void mousePressed(MouseEvent e){
         int xM = e.getX();
         int yM = e.getY();
+        
+        if (menuUscita) {
+        	if (pbSi.area.contains(xM, yM)) {
+        		Variabili.schermoAttivo = Enums.eElencoSchermi.INIZIALE;  
+        		menuUscita = false;
+                Variabili.partita = null;
+        	}
+        	if (pbNo.area.contains(xM, yM)) {
+        		menuUscita = false;
+        	}
+        	return;
+        }
+        
         if (pbEsci.area.contains(e.getX(), e.getY()))
             if (pbEsci.visibile){
-                Variabili.schermoAttivo = Enums.eElencoSchermi.INIZIALE;   
-                Variabili.partita = null;
+                menuUscita = true;
                 return;
-            }
+            }    
+
         // Pulsante zoom0
         if (pbZoom0.area.contains(xM, yM)){
             indiceZoom = 0;

@@ -23,7 +23,7 @@ public final class Schermo_SceltaCartaObiettivo {
         pbEsci.draw(g2d);
         pbSalvaGiocatore.draw(g2d);
 
-        Grafica.disegnaTesto(g2d, "Selezionare carta obiettivo", Variabili.dxTavolo / 2, 50, Color.BLACK, Color.WHITE, 1, 1, 20, false);
+        Grafica.disegnaTesto(g2d, "Selezionare carta obiettivo segreto", Variabili.dxTavolo / 2, 50, Color.BLACK, Color.WHITE, 1, 1, 30, false);
 		
 		Grafica.evidenziaCarta(g2d,  Variabili.giocatoreInCreazione.ob1 ? pbOb1.area : pbOb2.area, new Color(0,255,0,128), 12);
 
