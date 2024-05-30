@@ -48,15 +48,53 @@ public class Carta_Gioco {
     * 3: punti indicato da valorePunti moltiplicato per le condizioni indicate da moltiplicatorePunti
     */
     int valorePunti;
+    
+    public int getIdCartaBase() {
+		return idCartaBase;
+	}
+
+	public void setIdCartaBase(int idCartaBase) {
+		this.idCartaBase = idCartaBase;
+	}
+
+	public Enums.eAngolo getAngoloIdCartaBase() {
+		return angoloCartaBase;
+	}
+
+	public void setAngoloIdCartaBase(Enums.eAngolo angoloIdCartaBase) {
+		this.angoloCartaBase = angoloIdCartaBase;
+	}
+
+	/**
+     * indica l'id della carta alla quale quest'ultima si aggancerà
+     */
+    private int idCartaBase=-1;
+    /**
+     * indica il tipo della carta base
+     */
+    private Enums.eTipoCarta tipoCartaBase=Enums.eTipoCarta.INIZIALE;
+    public Enums.eTipoCarta getTipoCartaBase() {
+		return tipoCartaBase;
+	}
+
+	public void setTipoCartaBase(Enums.eTipoCarta tipoCartaBase) {
+		this.tipoCartaBase = tipoCartaBase;
+	}
+
+	/**
+     * indica l'angolo alla quale questa carta si aggancia  
+     */
+    private Enums.eAngolo angoloCartaBase=Enums.eAngolo.NE;
 
     /**
      * Moltiplicatore punti carta (vedi variabile valorePunti)
      */
     Enums.eMoltiplicatorePunti moltiplicatorePunti;
+    Gioco gioco;
     
-   
+    
 
-    /**
+	/**
      * Il costruttore inizializza le variabili della classe a partire dall'array di stringhe parametri
      * @param parametri i parametri vengono acquisiti dal file Carte.csv
      */
@@ -96,6 +134,47 @@ public class Carta_Gioco {
                                             e.getMessage());
         }
     }
+
+    public Carta_Gioco() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String versoCarta(Carta_Gioco g) {
+    	if(g.fronte==true) {
+    		return "fronte";
+    	}
+    	return "retro";
+    }
+    //mostra in sequenza che cosa contengono gli angoli
+    public String simboliAngoliFronte(Carta_Gioco g) {
+    	
+    		return "NO: "+g.simboloAngolo[0].name()+", NE: "+g.simboloAngolo[1].name()
+    				+", SE: "+g.simboloAngolo[2].name()+", SO: "+g.simboloAngolo[3].name();
+    	
+    }
+    public String simboliRetro(Carta_Gioco g) {
+    	
+		return "Simbolo1: "+g.simboloRetro[0].name()+", Simbolo2: "+g.simboloRetro[1].name()
+				+", Simbolo3: "+g.simboloRetro[2].name();
+	
+}
+    public String requisiti(Carta_Gioco g) {
+    	return (", Req1 piazzamento: "+g.simboliXPosizionamento[0].name()+" qta: "+g.simboliXPosizionamentoQuantita[0]
+    			+", Req2 piazzamento: "+g.simboliXPosizionamento[1].name()+" qta: "+g.simboliXPosizionamentoQuantita[1]);
+    			//+", Req3 piazzamento: "+g.simboliXPosizionamento[2]+" qta: "+g.simboliXPosizionamentoQuantita[3]);
+    }
+    //elenco delle caratteristiche della carta
+    public void toString(Carta_Gioco c, boolean fronte) {
+    	if(fronte==true) {
+    		System.out.println("Carta fronte: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliAngoliFronte(c)
+    					+requisiti(c)+", Cond pti bonus: "+c.moltiplicatorePunti.name()+", Pti bonus: "+c.valorePunti);
+    	}else {
+    		System.out.println("Carta retro: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliRetro(c));
+    	}
+    }
+    
+    
+
     
 	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
@@ -115,4 +194,84 @@ public class Carta_Gioco {
 		return fronte;
 		 
 	 }
+	 
+	 /**
+		 * 
+		 * @param g
+		 * @param angolo
+		 * @param ID della carta da controllare se ha gli angoli liberi (ultima carta piazzata nel manoscritto)
+		 * @return
+		 */
+	    public boolean angoloLibero(Giocatore giocatore,String angolo, String ID) throws Exception {
+	    	//inizializzo cella manoscritto con una carta per evitare errori
+	    	Cella_Manoscritto CartaCercata=new Cella_Manoscritto(giocatore.cartaIniziale,giocatore.manoscritto, 20, 20);
+	    	CartaCercata.cercaCarta(giocatore.manoscritto.carte, ID);
+	    	  	
+	    	if(angolo.equals("NO")) {
+	    		//vado a prendere ultima carta dalla lista carte e guardo angolo NO
+	    		//giocatore attuale dovra essere quello in gioco (da impostare)
+	    		if(CartaCercata.angoloOccupatoNO(giocatore.manoscritto.carte, CartaCercata)==true) {
+	    			//ANGOLO OCCUPATO
+	    			return false;
+	    		}else {
+	    			return true;
+	    		}
+	    	}else if(angolo.equals("NE")) {
+	    		if(CartaCercata.angoloOccupatoNE(giocatore.manoscritto.carte, CartaCercata)==true) {
+	    			//ANGOLO OCCUPATO
+	    			return false;
+	    		}else {
+	    			return true;
+	    		}
+	    	}else if(angolo.equals("SE")) {
+	    		if(CartaCercata.angoloOccupatoSE(giocatore.manoscritto.carte, CartaCercata)==true) {
+	    			//ANGOLO OCCUPATO
+	    			return false;
+	    		}else {
+	    			return true;
+	    		}
+	    	}else {
+	    		if(CartaCercata.angoloOccupatoSO(giocatore.manoscritto.carte, CartaCercata)==true) {
+	    			//ANGOLO OCCUPATO
+	    			return false;
+	    		}else {
+	    			return true;
+	    		}
+	    	}
+			
+	    	
+	    	
+	    }
+	    
+	    public boolean requisitiCarta(Giocatore g,Carta_Gioco carta) {
+	    	for(int i=0;i<2;i++) {
+	    		if(carta.simboliXPosizionamento[i]==Enums.eSimbolo.FUNGO) {
+	    			if(g.getContatoreSimboli(0)==simboliXPosizionamentoQuantita[i]) {
+	    				return true; //la carta è piazzabile
+	    			}else {
+	    				return false;
+	    			}
+	    		}else if(carta.simboliXPosizionamento[i]==Enums.eSimbolo.FOGLIA) {
+	    			if(g.getContatoreSimboli(1)==simboliXPosizionamentoQuantita[i]) {
+	    				return true; //la carta è piazzabile
+	    			}else {
+	    				return false;
+	    			}
+	    		}else if(carta.simboliXPosizionamento[i]==Enums.eSimbolo.LUPO) {
+	    			if(g.getContatoreSimboli(2)==simboliXPosizionamentoQuantita[i]) {
+	    				return true; //la carta è piazzabile
+	    			}else {
+	    				return false;
+	    			}
+	    		}else if(carta.simboliXPosizionamento[i]==Enums.eSimbolo.FARFALLA) {
+	    			if(g.getContatoreSimboli(3)==simboliXPosizionamentoQuantita[i]) {
+	    				return true; //la carta è piazzabile
+	    			}else {
+	    				return false;
+	    			}
+	    		}
+	    	}
+			return false;
+	    		
+	    }
 }

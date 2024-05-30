@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 // import java.util.Scanner;
 
 /**
@@ -69,12 +70,64 @@ public class Mercato {
     }
 
 	public void stampaMercato(Carta_Gioco[] carteRisorsa, Carta_Gioco[] carteOro) {
-		for(int i=0;i<2;i++){
-			System.out.println(carteRisorsa[i]+",");
+		for(int i=0;i<carteRisorsa.length;i++) {
+			System.out.println(i+", Risorsa, "+"fronte");
+			carteRisorsa[i].toString(carteRisorsa[i], true);
+			System.out.println(i+", Risorsa, "+"retro");
+			carteRisorsa[i].toString(carteRisorsa[i], true);
+			System.out.println("\n");
 		}
-		for(int i=0;i<2;i++){
-			System.out.println(carteOro[i]+",");
+		for(int i=0;i<carteOro.length;i++) {
+			System.out.println(i+", Oro, "+"fronte");
+			carteRisorsa[i].toString(carteRisorsa[i], true);
+			System.out.println(i+", Oro, "+"retro");
+			carteRisorsa[i].toString(carteRisorsa[i], true);
+			
 		}
+	}
+	
+	public Carta_Gioco PescaCarta(Mercato mercato) {
+		System.out.println("Da che parte del mercato vuoi pescare? "+
+				"Input richiesto: mazzoRisorsa oppure mazzoOro; risorsa0 oppure oro2");
+		Scanner sc=new Scanner(System.in);
+		if(sc.nextLine().equals("mazzoRisorsa")) {
+			//prendo la prima che capita perche sono gia state mescolate
+			Carta_Gioco pescata=mazzoCarteRisorse.get(0);
+			mazzoCarteRisorse.remove(0);
+			return pescata;
+		}else if(sc.nextLine().equals("mazzoOro")) {
+			Carta_Gioco pescata=mazzoCarteOro.get(0);
+			mazzoCarteRisorse.remove(0);
+			return pescata;
+		}else if(sc.nextLine().equals("risorsa0")) {
+			Carta_Gioco pescata=carteRisorsa[0];
+			//posiziono al posto della carta appena pescata una carta dal mazzo
+			carteRisorsa[0]=mazzoCarteRisorse.get(0);
+			mazzoCarteRisorse.remove(0);
+			return pescata;
+		}else if(sc.nextLine().equals("risorsa1")) {
+			Carta_Gioco pescata=carteRisorsa[1];
+			//posiziono al posto della carta appena pescata una carta dal mazzo
+			carteRisorsa[1]=mazzoCarteRisorse.get(0);
+			mazzoCarteRisorse.remove(0);
+			return pescata;
+		}else if(sc.nextLine().equals("oro0")) {
+			Carta_Gioco pescata=carteRisorsa[0];
+			//posiziono al posto della carta appena pescata una carta dal mazzo
+			carteOro[0]=mazzoCarteOro.get(0);
+			mazzoCarteOro.remove(0);
+			return pescata;
+		}else if(sc.nextLine().equals("oro1")) {
+			Carta_Gioco pescata=carteRisorsa[1];
+			//posiziono al posto della carta appena pescata una carta dal mazzo
+			carteRisorsa[1]=mazzoCarteRisorse.get(0);
+			mazzoCarteRisorse.remove(0);
+			return pescata;
+		}else {
+			//scelta non valida
+			return null;
+		}
+		
 	}
 
 

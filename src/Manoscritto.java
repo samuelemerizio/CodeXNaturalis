@@ -10,21 +10,13 @@ import java.util.List;
 public class Manoscritto {
 	private ArrayList<Integer> carteSovrapposte=new ArrayList<Integer>();
 	private int hashCode;
-
-    /**
-     * Questo array contiene tutti i contatori dei simboli presenti nella partita
-     * ATTENZIONE: segue posizioni Enums.eSimbolo
-     * ([0]=FUNGO, [1]=FOGLIA, [2]=LUPO, [3]=FARFALLA, [4]=PIUMA, [5]=VASETTO, [6]=PERGAMENA
-     */
-	private int[] contatoreSimboli=new int[7];
-    
+	private Cella_Manoscritto cella;
+	int[][] griglia=new int[81][81]; //rappresenta il manoscritto
+ 
     /**
      * Lista che rappresenta le carte giocate dal giocatore nell'ordine crescente.
      * Per ogni elemento di carte si ha la carta, la riga e la colonna in cui è posizionata nel manoscritto
      */
-
-    
-    
 
     List<Cella_Manoscritto> carte = new ArrayList<Cella_Manoscritto>();
 
@@ -46,6 +38,7 @@ public class Manoscritto {
      */
     int[][] numeroCarteSuAngolo = new int[81][81];
 
+    int[][] rettangoloStampa=new int[20][20];
 
     public void generaAngoliDaCarte(){
         int colonna, riga;
@@ -122,8 +115,10 @@ public class Manoscritto {
 	 * Questo metodo mette la carta nel manoscritto
 	 * @param selezione la carta che viene inserita nel manoscritto
 	 */
-	public void posiziona(int selezione) {
-		
+	public void posiziona(Carta_Gioco base, Carta_Gioco appendi) {
+		//cella=new Cella_Manoscritto()
+		//viene mostrata una scelta di carte nella console
+		carte.add(cella);
 	}
 	
 	public ArrayList<Integer> listaCarteSovrapposte() {
@@ -474,21 +469,76 @@ public class Manoscritto {
         return mappa;
     }
 
-    public int[] initContaSimboli() {
-    	for(int i=0; i<contatoreSimboli.length; i++) {
-    		//contatoreSimboli[i]=Enums.eSimbolo.NULLO; 
-    		contatoreSimboli[i]=0;
-    	}
-    	return contatoreSimboli;
-    }
+    
     
     /**
+     * Questo metodo conta tutti i simboli piazzati nel manoscritto del giocatore
      * 
-     * @param carte lista delle carte piazzate nel manoscritto
+     * @param g giocatore attuale
      * @return contatoreSimboli: array contenente il conteggio dei simboli piazzati (vedi dichiarazione attributo
      * per info sulla posizione di ogni simbolo nell'array
      */
-    public int[] contaSimboliPiazzati(List<Lista_Carte> carte) {
+    public void contaSimboliPiazzati(Giocatore g) {
+    	for(int i=0;i<g.manoscritto.carte.size();i++) {
+    		if(g.manoscritto.carte.get(i).carta.fronte==true) {
+            	for(int j=0;j<carte.get(i).carta.simboloAngolo.length;j++) {
+                			
+               		if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.FUNGO)){
+               			g.setContatoreSimboli(0);
+               				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.FOGLIA)){
+               			g.setContatoreSimboli(1);
+                				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.LUPO)){
+               			g.setContatoreSimboli(2);
+                				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.FARFALLA)){
+               			g.setContatoreSimboli(3);
+               				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.PIUMA)){
+               			g.setContatoreSimboli(4);
+                				
+                	}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.VASETTO)){
+                		g.setContatoreSimboli(5);
+               				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloAngolo[j].equals(Enums.eSimbolo.PERGAMENA)){
+               			g.setContatoreSimboli(6);
+                				
+              		}
+               	}
+            }else {
+           		//LA CARTA è GIOCATA SUL RETRO
+           		for(int j=0;j<carte.get(i).carta.simboloRetro.length;j++) {
+           			if(carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.FUNGO)){
+           				g.setContatoreSimboli(0);
+                				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.FOGLIA)){
+               			g.setContatoreSimboli(1);
+               				
+              		}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.LUPO)){
+              			g.setContatoreSimboli(2);
+                				
+              		}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.FARFALLA)){
+              			g.setContatoreSimboli(3);
+               				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.PIUMA)){
+               			g.setContatoreSimboli(4);
+                				
+               		}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.VASETTO)){
+               			g.setContatoreSimboli(5);
+                				
+                	}else if(g.manoscritto.carte.get(i).carta.simboloRetro[j].equals(Enums.eSimbolo.PERGAMENA)){
+                		g.setContatoreSimboli(6);
+                				
+                	}
+            	}
+           	}
+    		
+    		
+    	}
+    	
+    
+    	/*
     	for(int i=0;i<carte.size();i++) {
     		if(carteSovrapposte.contains(carte.get(i))) { //la carta i che considero è sovrapposta da un'altra carta
     			//faccio tre cicli for per passare ogni riga/colonna/simbolo possibile presente nella carta
@@ -577,13 +627,36 @@ public class Manoscritto {
     	
 
     	}
+    	*/
     	
-    	System.out.println("Fungo: "+contatoreSimboli[0]+"\nFoglia: "+contatoreSimboli[1]+"\nLupo: "+contatoreSimboli[2]+
-    			"\nFarfalla: "+contatoreSimboli[3]+ "\nPiuma: "+contatoreSimboli[4]+"\nVasetto: "+contatoreSimboli[5]+
-    			"\nPergamena: "+contatoreSimboli[6]);
     	
-		return contatoreSimboli;
     }
+
+    public void initGriglia() {
+    	for(int i=0;i<griglia.length;i++) {
+    		for(int j=0;j<griglia.length;j++) {
+    			griglia[i][j]=-1; //-1: carta assente nella cella del manoscritto
+    		}
+    	}
+    }
+    
+    
+    
+    
+
+    
+   
+    
+  //cerca la carta all'interno della lista carte e la restituisce se combacia con l'id cercato
+  	public Cella_Manoscritto cercaCarta(Giocatore g, int id) {
+  		for(int i=0;i<g.manoscritto.carte.size();i++) {
+  			if(g.manoscritto.carte.get(i).carta.ID==id) {
+  				return g.manoscritto.carte.get(i);
+  			}
+  		}
+		return null;
+  	}
 }
 
+	
 

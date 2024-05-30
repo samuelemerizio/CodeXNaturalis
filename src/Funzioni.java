@@ -69,7 +69,7 @@ public class Funzioni {
     public List<Carta_Gioco> initCarteRisorsa() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	 while(CONTATORE2 != 40) {
-           	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteRisorsa.csv", CONTATORE2));
+           	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteRisorse.csv", CONTATORE2));
            	mazzoCarteRisorsa.add(g0);
                CONTATORE2+=1;
            }
@@ -127,4 +127,6 @@ public class Funzioni {
 			return 0;
 		}
 	}
+	
+
 }

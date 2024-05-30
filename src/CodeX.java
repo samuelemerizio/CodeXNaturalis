@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Canvas;
@@ -23,7 +24,14 @@ public class CodeX extends Canvas{
     boolean splashCaricata = false;
 
     public static void main(String[] args) throws Exception {
-        new CodeX();
+        System.out.println("Premi c per giocare con la console");
+       Scanner sc=new Scanner(System.in);
+        if(sc.nextLine().equals("c")) {
+        	Console c=new Console();
+        	c.Console();
+        }else {
+        	new CodeX();
+        }
     }
     
     

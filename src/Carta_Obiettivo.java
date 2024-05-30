@@ -35,5 +35,12 @@ public class Carta_Obiettivo {
         this.condizioneObiettivi = condizioneObiettivi;
         this.cartaDisponibile = cartaDisponibile;
     }
+    public void toString(Carta_Obiettivo c) {
+    	System.out.println("Carta: "+c.ID+", condizione: "+c.condizioneObiettivi.name());
+    	
+    }
+
+
+    
 
 }

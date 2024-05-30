@@ -1,6 +1,8 @@
 //import Enums.eSimbolo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Rappresenta il giocatore con le sue proprietà, il suo manoscritto ed il suo obiettivo
@@ -9,7 +11,7 @@ public class Giocatore {
     /**
      * Identifica in modo univoco il giocatore
      */
-    int ID;
+    static int ID=0;
 
     /**
      * Nome del giocatore
@@ -56,10 +58,66 @@ public class Giocatore {
 
     int puntiObiettivoComune2 = 0;          // Contiene il numero di punti ottenuti dal secondo obiettivo comune
 
+    private Funzioni f=new Funzioni();
+  	
+    
+    
+    
+    /**
+     * Questo array contiene tutti i contatori dei simboli presenti nella partita
+     * ATTENZIONE: segue posizioni Enums.eSimbolo
+     * ([0]=FUNGO, [1]=FOGLIA, [2]=LUPO, [3]=FARFALLA, [4]=PIUMA, [5]=VASETTO, [6]=PERGAMENA
+     */
+	private int[] contatoreSimboli=new int[7];
+	
+	public int[] initContaSimboli() {
+    	for(int i=0; i<contatoreSimboli.length; i++) {
+    		//contatoreSimboli[i]=Enums.eSimbolo.NULLO; 
+    		contatoreSimboli[i]=0;
+    	}
+    	return contatoreSimboli;
+    }
+    
 
 
-	//private List<Lista_Carte> carte;
-	private Funzioni f=new Funzioni();
+    
+public int getContatoreSimboli(int i) {
+		return contatoreSimboli[i];
+	}
+
+
+
+
+	public void setContatoreSimboli(int posizioneArray) {
+		this.contatoreSimboli[posizioneArray]+=1;
+	}
+
+
+
+	
+
+	
+
+
+
+	public Giocatore(String nome, Enums.eColoreGiocatore colore ) {
+    	this.nome=nome;
+    	this.colore=colore;
+    	this.manoscritto=manoscritto;
+    	this.ID+=1;
+    }
+    public Giocatore(String nome) {
+    	this.nome=nome;
+    	this.manoscritto=manoscritto;
+    	this.ID+=1;
+    }
+    public Giocatore() {
+    	
+    }
+	
+	
+    
+    
     /**
      * Questo metodo mostra le carte che sono nella mano del giocatore
      * @param carteInMano array di carte che ha il giocatore a disposizione da giocare
@@ -71,35 +129,225 @@ public class Giocatore {
     	
     }
     
-    public void piazzaCarta() {
-    	mostraCarte(carteInMano);
+    public void piazzaCarta(Giocatore giocatoreAttuale) {
+    	//mostraCarte(carteInMano);
+    	Scanner scanner=new Scanner(System.in);
     	System.out.println("Scegliere quale carta piazzare indicandola con un numero" +
     						"da 0 (per la prima) a 2 (per la terza)");
     	
+    	
+    	
     	int numeroCarta = f.ScansionaNumero();
-    	for(int i=0; i<3; i++) {
-    		if(i==numeroCarta) {
-    			
-    			if(cartaIniziale.cercaCarta(numeroCarta).equals("Risorsa")) {
-    				System.out.println("Seleziona dove vuoi piazzare la carta");
-    			}else { //la carta è oro
-    				if(cartaIniziale.controllaCondizione(numeroCarta)== true) { //come parametro ci deve essere id carta per capire che condizione deve essere verificata
-    					System.out.println("Selezione dove vuoi piazzare la carta");
-    					int selezione=f.ScansionaNumero();
-    					manoscritto.selezionaCarta(selezione);
-    					while(manoscritto.angoloSceltoLibero()!= true) {
-    						System.out.println("Angolo occupato, scegline un altro!");
-    						manoscritto.posiziona(selezione);
-    					}
-    				}
+    	
+    	//controllo che la carta scelta sia posizionabile (solo su carte di tipo oro)
+    	
+    	while(giocatoreAttuale.carteInMano[numeroCarta].tipo.ordinal()==1) {
+    		boolean requisitiSoddisfatti;
+    		if(giocatoreAttuale.carteInMano[numeroCarta].requisitiCarta(giocatoreAttuale, giocatoreAttuale.carteInMano[numeroCarta])==false) {
+    			System.out.println("Carta non soddisfa i requisiti di piazzamento: scegli di giocarla sul retro (retro) o indica un'altra carta nella mano");
+    			String scelta=scanner.nextLine();
+    			if(scelta.equals("retro")) {
+    				giocatoreAttuale.carteInMano[numeroCarta].fronte=false;
+    				break;
     			}
+    				
     		}else {
-    			System.out.println("La carta non è in mano");
+    			//scansiono un altro numero e ricontrollo se la condizione viene soddisfatta
+    			numeroCarta=f.ScansionaNumero();
+        		requisitiSoddisfatti=giocatoreAttuale.carteInMano[numeroCarta].requisitiCarta(giocatoreAttuale, giocatoreAttuale.carteInMano[numeroCarta]);
+        		if(requisitiSoddisfatti==true) {
+        			//scelta di giocare la carta sul fronte o sul retro
+        	    	System.out.println("vuoi usare il fronte (true) o il retro(false)?");
+        	    	if(scanner.nextLine().equals("true")) {
+        	    		giocatoreAttuale.carteInMano[numeroCarta].fronte=true;
+        	    	}else {
+        	    		//la carta viene giocata sul retro di default
+        	    		giocatoreAttuale.carteInMano[numeroCarta].fronte=false;
+        	    	}
+        			break;
+        			
+    			}
+
     		}
     	}
+    	
+    	
+    	
+    	Cella_Manoscritto cartaAggiunta = manoscritto.carte.get(0); //gli assegno la prima carta delle carte piazzate nel manoscritto per evitare errori
+    	try {
+    		System.out.println("Inserisci ID della carta alla quale agganci la carta scelta:");
+    		//String IDCartaAggancio=scanner.nextLine();
+    		String IDInserito=scanner.nextLine();
+    		
+    		System.out.println("Inserici il tipo della carta alla quale agganci la carta scelta");
+    		String tipoIdInserito=scanner.nextLine();
+    		//verifico che l'id inserito coincida con un id presente nella lista delle carte piazzate al momento
+    		Cella_Manoscritto cella = giocatoreAttuale.manoscritto.carte.get(0);
+    		Enums.eTipoCarta tipoCartaDaControllare=Enums.eTipoCarta.INIZIALE;
+    		//converto in string il tipo della carta
+    		if(tipoIdInserito.equals("0")) {
+    			tipoCartaDaControllare=Enums.eTipoCarta.ORO;
+    		}else if(tipoIdInserito.equals("1")) {
+    			tipoCartaDaControllare=Enums.eTipoCarta.RISORSA;
+    		}else if(tipoIdInserito.equals("2")){
+    			tipoCartaDaControllare=Enums.eTipoCarta.INIZIALE;
+    		}
+    		
+    		//
+    		while(cella.cercaCarta(giocatoreAttuale.manoscritto.carte,IDInserito,tipoCartaDaControllare)==null) {
+    			System.out.println("ID inserito non valido, riprova");
+    			IDInserito=scanner.nextLine();
+    			System.out.println("TIPO inserito non valido, riprova");
+    			tipoIdInserito=scanner.nextLine();
+    		}
+    		
+    		
+    		int indiceInserito=cella.getIndex(giocatoreAttuale.manoscritto.carte, IDInserito);
+    		System.out.println("Inserisci angolo dove agganciare la carta.\nNO: alto-sinistra, NE: alto-sinistra, SE: basso-destra, SO: basso-sinistra");
+			String selezioneAngolo=scanner.nextLine();
+    		//ciclo per ripetere la scelta dell'angolo finchè l'angolo scelto non è libero
+			//se l'angolo è libero guardo dove si vuole posizionare la carta
+			if(giocatoreAttuale.manoscritto.carte.get(indiceInserito).carta.angoloLibero(giocatoreAttuale,selezioneAngolo , IDInserito)==true) {
+				
+				if(numeroCarta==0) {
+					//seleziono carta 0
+					
+					//segno l'id della carta base a cui si aggancerà questa
+					giocatoreAttuale.carteInMano[0].setIdCartaBase(Integer.parseInt(IDInserito));
+					//segno il tipo della carta appena selezionata
+					giocatoreAttuale.carteInMano[0].setTipoCartaBase(giocatoreAttuale.carteInMano[0].tipo);
+					
+					
+					if(selezioneAngolo.equals("NO")) {
+						//l'angolo dove si uniscono due carte sarà l'angolo opposto a quello che scelgo
+						giocatoreAttuale.carteInMano[0].setAngoloIdCartaBase(Enums.eAngolo.SE);
+						//aggiungo la carta alla lista delle carte piazzate aggiornando riga e colonna di piazzamento
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[0],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+			    		
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[0]=null;
+					}else if(selezioneAngolo.equals("NE")) {
+						giocatoreAttuale.carteInMano[0].setAngoloIdCartaBase(Enums.eAngolo.SO);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[0],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[0]=null;
+					}else if(selezioneAngolo.equals("SE")) {
+						giocatoreAttuale.carteInMano[0].setAngoloIdCartaBase(Enums.eAngolo.NO);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[0],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+					
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[0]=null;
+					}else if(selezioneAngolo.equals("SO")) {
+						giocatoreAttuale.carteInMano[0].setAngoloIdCartaBase(Enums.eAngolo.NE);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[0],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[0]=null;
+					}
+					
+				}else if(numeroCarta==1) {
+					//seleziono carta 1
+					
+					//segno l'id della carta base a cui si aggancerà questa
+					giocatoreAttuale.carteInMano[1].setIdCartaBase(Integer.parseInt(IDInserito));
+					
+					//segno il tipo della carta appena selezionata
+					giocatoreAttuale.carteInMano[1].setTipoCartaBase(giocatoreAttuale.carteInMano[1].tipo);
+					
+					if(selezioneAngolo.equals("NO")) {
+						giocatoreAttuale.carteInMano[1].setAngoloIdCartaBase(Enums.eAngolo.SE);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[1],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[1]=null;
+					}else if(selezioneAngolo.equals("NE")) {
+						giocatoreAttuale.carteInMano[1].setAngoloIdCartaBase(Enums.eAngolo.SO);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[1],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[1]=null;
+					}else if(selezioneAngolo.equals("SE")) {
+						giocatoreAttuale.carteInMano[1].setAngoloIdCartaBase(Enums.eAngolo.NO);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[1],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[1]=null;
+					}else if(selezioneAngolo.equals("SO")) {
+						giocatoreAttuale.carteInMano[1].setAngoloIdCartaBase(Enums.eAngolo.NE);
+						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[1],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+						giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+						
+			    		//la carta giocata viene rimossa dalla mano del giocatore
+			    		//giocatoreAttuale.carteInMano[1]=null;
+					}else {
+						//la carta selezionata è la 2
+						
+						//segno l'id della carta base a cui si aggancerà questa
+						giocatoreAttuale.carteInMano[2].setIdCartaBase(Integer.parseInt(IDInserito));
+						
+						//segno il tipo della carta appena selezionata
+						giocatoreAttuale.carteInMano[2].setTipoCartaBase(giocatoreAttuale.carteInMano[2].tipo);
+						
+						if(selezioneAngolo.equals("NO")) {
+							giocatoreAttuale.carteInMano[2].setAngoloIdCartaBase(Enums.eAngolo.SE);
+							cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[2],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+							giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+							
+				    		//la carta giocata viene rimossa dalla mano del giocatore
+				    		//giocatoreAttuale.carteInMano[2]=null;
+						}else if(selezioneAngolo.equals("NE")) {
+							giocatoreAttuale.carteInMano[2].setAngoloIdCartaBase(Enums.eAngolo.SO);
+							cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[2],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+							giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+							
+				    		//la carta giocata viene rimossa dalla mano del giocatore
+				    		//giocatoreAttuale.carteInMano[2]=null;
+						}else if(selezioneAngolo.equals("SE")) {
+							giocatoreAttuale.carteInMano[2].setAngoloIdCartaBase(Enums.eAngolo.NO);
+							cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[2],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()+1);
+							giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+							
+				    		//la carta giocata viene rimossa dalla mano del giocatore
+				    		//giocatoreAttuale.carteInMano[2]=null;
+						}else if(selezioneAngolo.equals("SO")) {
+							giocatoreAttuale.carteInMano[2].setAngoloIdCartaBase(Enums.eAngolo.NE);
+							cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[2],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()+1,
+									cartaAggiunta.getCoordinataCartaInizialeY()-1);
+							giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
+							
+				    		//la carta giocata viene rimossa dalla mano del giocatore
+				    		//giocatoreAttuale.carteInMano[2]=null;
+					
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	
     }
 
-
     int puntiObiettivoSegreto = 0;          // Contiene il numero di punti ottenuti dall'obiettivo segreto del giocatore
-
+	
 }

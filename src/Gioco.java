@@ -39,7 +39,7 @@ public class Gioco {
     /**
      * Identifica il giocatore attuale: indice della lista giocatori
      */
-    int giocatoreAttuale = 0;
+    static int giocatoreAttuale = 0;
 
     /**
      * True quando tutti i giocatori sono inizializzati e la partita è in corso
@@ -76,12 +76,20 @@ public class Gioco {
 
     List <Funzioni.risultati> classifica = new ArrayList<>();       // Lista in cui sarà contenuta la classifica
 
+    
+    public Gioco(String nome) {
+    	
+    }
     /**
      * Costruttore della classe Gioco.
-     * Inizializza tutti i mazzi di carte oro, risorsa, iniziali e obiettivo
+     * Inizializza tutti i mazzi di carte oro, risorsa, iniziali e obiettivo 
      */
     public Gioco(){
         Init_Carte();
+    }
+    
+    public String getNome(Giocatore g) {
+    	return g.nome;
     }
 
     /**
@@ -97,7 +105,7 @@ public class Gioco {
         // Creo i mazzi Oro e Risorsa da mettere nel mercato
         mercato.mescolaMazziCarteRisorseOro(Variabili.mazzoCarteRisorsaOriginali, Variabili.mazzoCarteOroOriginali);
 
-        mazzoCarteIniziali = Variabili.mazzoCarteInizialiOriginali;
+        setMazzoCarteIniziali(Variabili.mazzoCarteInizialiOriginali);
 
         obiettiviComuni[0] = obiettivoAssegna(5);
         obiettiviComuni[1] = obiettivoAssegna(6);
@@ -112,15 +120,17 @@ public class Gioco {
     // Assegna ad ogni giocatore le carte gioco
     public void assegnaCarteGioco(){
         // Aggiungo ad ogni utente le sue carte gioco
-        for (int i = 0; i < Variabili.partita.giocatori.size(); i++){
+        //for (int i = 0; i < Variabili.partita.giocatori.size(); i++){
+        for (int i = 0; i < giocatori.size(); i++){
             giocatori.get(i).carteInMano[0] = pescaCartaGioco(mercato.mazzoCarteRisorse);
             giocatori.get(i).carteInMano[1] = pescaCartaGioco(mercato.mazzoCarteRisorse);
             giocatori.get(i).carteInMano[2] = pescaCartaGioco(mercato.mazzoCarteOro);
             // Memorizzo nella variabile cella la carta iniziale dell'i-esimo giocatore e la posizione in cui verrà posta
-            Cella_Manoscritto cella = new Cella_Manoscritto(giocatori.get(i).cartaIniziale, 20, 20);
+            //Cella_Manoscritto cella=new Cella_Manoscritto(giocatori.get(i).manoscritto.carte.get(i).carta, 20,20);
             // Posiziono la carta iniziale del giocatore i-esimo
-            giocatori.get(i).manoscritto.carte.add(cella);
+            //giocatori.get(i).manoscritto.carte.add(cella);
         }
+		
     }
 
     /**
@@ -204,7 +214,7 @@ public class Gioco {
     /**
      * Crea le carte obiettivi
      */
-    private void initCarteObiettivi(){
+    public void initCarteObiettivi(){
     	Variabili.mazzoCarteObiettivo[0] = new Carta_Obiettivo(0, 2, Enums.eCondizioneObiettivi.ORO_2_PIUME, -1);
     	Variabili.mazzoCarteObiettivo[1] = new Carta_Obiettivo(1, 2, Enums.eCondizioneObiettivi.ORO_2_VASETTI, -1);
     	Variabili.mazzoCarteObiettivo[2] = new Carta_Obiettivo(2, 2, Enums.eCondizioneObiettivi.ORO_2_PERGAMENE, -1);
@@ -227,6 +237,8 @@ public class Gioco {
         Variabili.mazzoCarteObiettivo[15] = new Carta_Obiettivo(15, 3, Enums.eCondizioneObiettivi.VIOLA_CAVALLO, -1);
 
     }
+    
+    
 
     /**
      * Assegna carta obiettivo al giocatore 
@@ -327,8 +339,8 @@ public class Gioco {
     	while (continuaACercare)
     	{
             // Numero casuale che rappresenta un casuale indice delle carte iniziale
-	    	int  numeroCasuale = (int)(Math.random() * mazzoCarteIniziali.size() / 2);
-	    	return mazzoCarteIniziali.get(numeroCasuale);
+	    	int  numeroCasuale = (int)(Math.random() * getMazzoCarteIniziali().size() / 2);
+	    	return getMazzoCarteIniziali().get(numeroCasuale);
     	}
     	return null;
     }
@@ -341,7 +353,7 @@ public class Gioco {
     public Carta_Gioco ottieniCartaInizialeDaID(int IDCartaIniziale){
         int ID = IDCartaIniziale;
         // Ciclo per trovare la carta iniziale con lo stesso ID passato come parametro
-        for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
+        for (Carta_Gioco cI : Variabili.partita.getMazzoCarteIniziali()){
             // Controllo per verificare se gli ID sono uguali
             if (cI.ID == ID){
                 return cI;
@@ -359,10 +371,10 @@ public class Gioco {
         int ID = IDCartaIniziale;
         int posI = 0;
         // Ciclo per trovare la carta iniziale con lo stesso ID passato come parametro
-        for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
+        for (Carta_Gioco cI : Variabili.partita.getMazzoCarteIniziali()){
             if (cI.ID == ID){
                 // Rimuovo la carta iniziale
-                Variabili.partita.mazzoCarteIniziali.remove(posI);
+                Variabili.partita.getMazzoCarteIniziali().remove(posI);
                 break;
             }
             posI++;
@@ -372,10 +384,10 @@ public class Gioco {
         else ID += 6;
         posI = 0;
         // Ciclo per trovare il fronte/retro associato carta iniziale con lo stesso ID passato come parametro
-        for (Carta_Gioco cI : Variabili.partita.mazzoCarteIniziali){
+        for (Carta_Gioco cI : Variabili.partita.getMazzoCarteIniziali()){
             if (cI.ID == ID){
                 // Rimuovo la carta iniziale associata
-                Variabili.partita.mazzoCarteIniziali.remove(posI);
+                Variabili.partita.getMazzoCarteIniziali().remove(posI);
                 break;
             }
             posI++;
@@ -388,7 +400,7 @@ public class Gioco {
     {
         System.out.println("");
         System.out.println("Carte iniziali disponibili");
-        for(Carta_Gioco cG: Variabili.partita.mazzoCarteIniziali){
+        for(Carta_Gioco cG: Variabili.partita.getMazzoCarteIniziali()){
             System.out.print(" " + cG.ID);
         }
 
@@ -723,38 +735,146 @@ public class Gioco {
     }
     
     public void turno() {
-		//ciclo dei turni durante tutta la partita
-		/*
-		 * questo if è valido solo al primo turno quando vengono inizializzati tutti i parametri
-		 * in uso durante il gioco.
-		 * Verranno inizializzate tutte le carte
-		 * Verranno messe sul mercato le carte
-		 * Verranno assegnate a ogni giocatore le proprie carte iniziali e l'obiettivo segreto
-		 */
-		
-		if(primoTurno=true) {
-			try {
-				this.mazzoCarteObiettivo=f.initCarteObiettivo();
-				this.mazzoCarteIniziali=f.initCarteIniziali();
-				this.mazzoCarteOro=f.initCarteOro();
-				this.mazzoCarteRisorsa=f.initCarteRisorsa();
-				for(Giocatore g: giocatori) {
-					//g.initContaSimboli();
-				}
-				primoTurno=false;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		//il giocatore inizia scegliendo dove piazzare una tra le carte in mano
-		g.mostraCarte(g.carteInMano);
-		g.piazzaCarta();
-		//il giocatore deve pescare dal mercato la carta
-		
-		
-	
+    	while(ultimoTurno==false) {	
+    		for(int i=0;i<giocatori.size();i++) {
+    			giocatoreAttuale=i;
+    			stampaManoscritto(giocatoreAttuale);
+    			giocatori.get(giocatoreAttuale).piazzaCarta(giocatori.get(i));
+    			//mostro le opzioni per fare pescare al giocatore
+    			System.out.println("Opzioni disponibili di pescaggio:\n");
+    			mercato.stampaMercato(mercato.carteRisorsa, mercato.carteOro);
+    			//il giocatore deve ora pescare la carta da rimpiazzare nel mazzo
+    			// e la posiziono la carta pescata nella mano del giocatore
+    			
+    			//cerco una carta presente sia nelle carte piazzate che nella mano 
+    			//(così trovo la carta appena piazzata e la sostituisco con la carta appena pescata)
+    			Cella_Manoscritto c=new Cella_Manoscritto(giocatori.get(giocatoreAttuale).cartaIniziale, giocatori.get(giocatoreAttuale).manoscritto,20,20);
+    			/*
+    			 * Per convertire l'id della carta nella mano e poi compararlo se presente nella lista carte giocate
+    			 */
+    			String IDCartaMano0=String.valueOf(giocatori.get(giocatoreAttuale).carteInMano[0].ID);
+    			String IDCartaMano1=String.valueOf(giocatori.get(giocatoreAttuale).carteInMano[1].ID);
+    			String IDCartaMano2=String.valueOf(giocatori.get(giocatoreAttuale).carteInMano[2].ID);
+    			if(c.getIndex(giocatori.get(giocatoreAttuale).manoscritto.carte,IDCartaMano0)!=-1) {
+    				//ho trovato la carta che ho giocato
+    				giocatori.get(i).carteInMano[0]=mercato.PescaCarta(mercato);
+    			}else if(c.getIndex(giocatori.get(giocatoreAttuale).manoscritto.carte,IDCartaMano1)!=-1) {
+    				giocatori.get(i).carteInMano[1]=mercato.PescaCarta(mercato);
+    			}else {
+    				giocatori.get(i).carteInMano[2]=mercato.PescaCarta(mercato);
+    			}
+    			
+    			//conto i simboli presenti nelle carte piazzate
+    			giocatori.get(i).manoscritto.contaSimboliPiazzati(giocatori.get(i));
+    			
+    			//verifico se piazzamento carta da punti in più e verifica anche se si finisce nell'ultimo turno
+    			calcolaPuntiTurno(giocatori.get(i).manoscritto.carte.get(giocatori.get(i).manoscritto.carte.size()-1).carta);
+    			//controllo se l'obiettivo segreto è stato raggiunto
+    			giocatori.get(i).manoscritto.contaPuntiObiettivo(giocatori.get(i).cartaObiettivo);
+    			
+    			//stampo il manoscritto
+    			stampaManoscritto(giocatoreAttuale);
+    			
+    		
+    			if(ultimoTurno==true) {
+    				//controllo obiettivi comuni se danno punti extra
+    				calcolaPuntiDaObiettivi();
+    			}
+    			
+    			
+    			
+    		}
+    	}
     }
-
-
+	public List<Carta_Gioco> getMazzoCarteIniziali() {
+		return mazzoCarteIniziali;
+	}
+	public void setMazzoCarteIniziali(List<Carta_Gioco> mazzoCarteIniziali) {
+		this.mazzoCarteIniziali = mazzoCarteIniziali;
+	}
+	public List<Carta_Gioco> getMazzoCarteOro() {
+		return mazzoCarteOro;
+	}
+	public void setMazzoCarteOro(List<Carta_Gioco> mazzoCarteOro) {
+		this.mazzoCarteOro = mazzoCarteOro;
+	}
+	public List<Carta_Gioco> getMazzoCarteRisorsa() {
+		return mazzoCarteRisorsa;
+	}
+	public void setMazzoCarteRisorsa(List<Carta_Gioco> mazzoCarteRisorsa) {
+		this.mazzoCarteRisorsa = mazzoCarteRisorsa;
+	}
+	public Carta_Obiettivo[] getMazzoCarteObiettivo() {
+		return mazzoCarteObiettivo;
+	}
+	public Carta_Obiettivo CercaCartaObiettivo(int id) {
+		for(int i=0;i<Variabili.mazzoCarteObiettivo.length;i++) {
+			if(Variabili.mazzoCarteObiettivo[i].ID==id) {
+				return Variabili.mazzoCarteObiettivo[i];
+			}
+		}
+		return null;
+	}
+	public void setMazzoCarteObiettivo(Carta_Obiettivo[] mazzoCarteObiettivo) {
+		this.mazzoCarteObiettivo = mazzoCarteObiettivo;
+	}
+	
+	/**
+	 * stampa il manoscritto di un giocatore
+	 * @param g giocatore
+	 * @param c carta che verrà stampata
+	 */
+	public void stampaManoscritto(int giocatoreAttualee) {
+		//giocatoreAttualee=giocatoreAttuale;	
+		System.out.println("--------------------------------------------------------------------------------"+
+					"\n"+giocatori.get(giocatoreAttualee).nome+
+					"\nCarte in mano:\n");
+			Carta_Gioco mano;
+			for(int i=0;i<giocatori.get(giocatoreAttualee).carteInMano.length;i++) {
+				System.out.println(i+": "+"fronte");
+				mano=giocatori.get(giocatoreAttualee).carteInMano[i];
+				mano.toString(mano,true);
+				System.out.println(i+": "+"retro");
+				mano.toString(mano,false);
+				System.out.println("\n");
+			}
+				System.out.println("--------------------------------------------------------------------------------"+
+				"\nElenco delle carte piazzate");
+				 //Carta_Gioco c=giocatori.get(giocatoreAttualee).cartaIniziale;
+				 //c.toString(c, c.fronte);
+				 //stampa l'elenco delle carte piazzate
+				
+					for(int i=0;i<giocatori.get(giocatoreAttualee).manoscritto.carte.size();i++) {
+						giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.toString(giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta,
+								giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.fronte);
+						
+							
+						
+						
+						//funzione che stampa le carte
+						//giocatori.get(giocatoreAttualee).manoscritto.stampaCarte(giocatori.get(giocatoreAttualee).manoscritto.carte.get(indexCartaBase).carta,
+						//giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta,
+						//giocatori.get(giocatoreAttualee).getAngoliUsati(i));
+							
+					}
+					//stampo obiettivo segreto e obiettivi comuni
+					System.out.println("--------------------------------------------------------------------------------");
+					System.out.println("Obiettivo segreto");
+					giocatori.get(giocatoreAttualee).cartaObiettivo.toString(giocatori.get(giocatoreAttualee).cartaObiettivo);
+					Carta_Obiettivo carta1=CercaCartaObiettivo(obiettiviComuni[0]);
+					Carta_Obiettivo carta2=CercaCartaObiettivo(obiettiviComuni[0]);
+					System.out.println("Obiettivi comuni\n1: ");
+					carta1.toString(carta1);
+					System.out.println("\n2: ");
+					carta2.toString(carta2);
+					
+					//stampo i contatori dei simboli piazzati
+					System.out.println("--------------------------------------------------------------------------------");	
+					System.out.println("FUNGO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(0)+", FOGLIA: "+
+								giocatori.get(giocatoreAttualee).getContatoreSimboli(1)+", LUPO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(2)+
+								", FARFALLA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(3)+", PIUMA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(4)+
+								", VASETTO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(5)+", PERGAMENA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(6));
+					
+				
+	}
 }
