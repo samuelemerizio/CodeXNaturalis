@@ -60,13 +60,37 @@ public class Carta_Gioco {
 	public Enums.eAngolo getAngoloIdCartaBase() {
 		return angoloCartaBase;
 	}
+	public String toString(Enums.eAngolo angolo) {
+		if(angolo.ordinal()==0) {
+			//System.out.println("NO");
+			return "NO";
+		}else if(angolo.ordinal()==1) {
+			//System.out.println("NE");
+			return "NE";
+		}else if(angolo.ordinal()==2) {
+			//System.out.println("SE");
+			return "SE";
+		}else {
+			//System.out.println("SO");
+			return "SO";
+		}
+	}
+	public String toString(Enums.eTipoCarta tipo) {
+		if(tipo.ordinal()==0) {
+			return "Risorsa";
+		}else if(tipo.ordinal()==1) {
+			return "Oro";
+		}else {
+			return "Iniziale";
+		}
+	}
 
 	public void setAngoloIdCartaBase(Enums.eAngolo angoloIdCartaBase) {
 		this.angoloCartaBase = angoloIdCartaBase;
 	}
 
 	/**
-     * indica l'id della carta alla quale quest'ultima si aggancerà
+     * indica l'id della carta alla quale quest'ultima si aggancerà (-1 è il valore di dafault)
      */
     private int idCartaBase=-1;
     /**
@@ -84,7 +108,7 @@ public class Carta_Gioco {
 	/**
      * indica l'angolo alla quale questa carta si aggancia  
      */
-    private Enums.eAngolo angoloCartaBase=Enums.eAngolo.NE;
+    private Enums.eAngolo angoloCartaBase;
 
     /**
      * Moltiplicatore punti carta (vedi variabile valorePunti)
@@ -181,10 +205,7 @@ public class Carta_Gioco {
 		return true;
 	}
 	
-	//scansiona entrambi i file e cerca la carta con l'ID che corrisponde
-	public String cercaCarta(int ID) {
-		return null;
-	}
+	
 	
 	 public Enums.eSimbolo[] getSimboloAngolo() {
 			return simboloAngolo;
@@ -273,5 +294,43 @@ public class Carta_Gioco {
 	    	}
 			return false;
 	    		
+	    }
+	    /**
+	     * 
+	     * @param giocatore giocatore attuale
+	     * @param angoloBase l'angolo della carta a cui si aggancia la prossima
+	     * @param IDcartaBase id della carta alla quale si aggancia la prossima
+	     * @return true se l'angolo è occupato
+	     */
+	    public boolean angoloOccupato(Giocatore giocatore, String angoloBase, String IDcartaBase) {
+	    	int IDConvertito=Integer.parseInt(IDcartaBase);
+	    	Enums.eAngolo angoloDaControllare=Enums.eAngolo.NO;
+	    	if(angoloBase.equals("NO")) {
+	    		angoloDaControllare=Enums.eAngolo.NO;
+	    	}else if(angoloBase.equals("NE")) {
+	    		angoloDaControllare=Enums.eAngolo.NE;
+	    	}else if(angoloBase.equals("SE")) {
+	    		angoloDaControllare=Enums.eAngolo.SE;
+	    	}else {
+	    		angoloDaControllare=Enums.eAngolo.SO;
+	    	}
+	    	
+	    	Carta_Gioco cartaDaControllare=giocatore.cartaIniziale; //inizializzo la variabile
+	    	cartaDaControllare=giocatore.manoscritto.cercaCarta(giocatore, IDConvertito).carta;
+	    	//controllo prima che angolo non sia NULLO (inesistente)
+	    	if(cartaDaControllare.simboloAngolo[angoloDaControllare.ordinal()]==Enums.eSimbolo.NULLO) {
+	    		return true;//angolo inesistente
+	    	}else {
+	    		//cerco nella lista carte se altre carte hanno cartaBase uguale per vedere se l'angolo scelto è occupato
+	    		for(int i=0;i<giocatore.manoscritto.carte.size();i++) {
+	    			if(giocatore.manoscritto.carte.get(i).carta.getIdCartaBase()==IDConvertito) {
+	    				if(giocatore.manoscritto.carte.get(i).carta.getAngoloIdCartaBase()==angoloDaControllare) {
+	    					return true;//angolo occupato
+	    				}
+	    			}
+	    		}
+	    		return false; //angolo libero	
+	    	}
+	    	
 	    }
 }

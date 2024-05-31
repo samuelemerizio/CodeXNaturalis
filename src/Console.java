@@ -21,31 +21,41 @@ public class Console {
 
 	public void Console() {
 		
-		
 		System.out.println("inserire true per inserimento giocatori"+
-		"\n N.B: inserire almeno 2 giocatori");
+				"\n N.B: inserire almeno 2 giocatori");
 		inserimento=sc.nextLine();
-		//controllo l'input e che ci siano almeno 2 giocatori e massimo 4 giocatori
-		while(inserimento.equals("true")) {
+		while(!inserimento.equals("true")) {
+			System.out.println("devi inserire true per cominciare");
+			inserimento=sc.nextLine();
+		}
+		while(inserimento.equals("true")){
+			
 			System.out.println("Inserire il nome del giocatore:");
 			String input=sc.nextLine();
 			gioco.giocatori.add(new Giocatore(input));
 			maxGiocatori+=1;
 			inserimento="";
-			System.out.println("Inserisci true se vuoi continuare a inserire altri giocatori");
-			if(maxGiocatori<2) {
-				while(!inserimento.equals("true")){
-					inserimento=sc.nextLine();
-					System.out.println("devi inserire almeno un altro giocatori, inserisci true");
-				}
-			}else if(maxGiocatori==4){
-				break;
 				
-			}
+			if(maxGiocatori<2) {
+				System.out.println("devi inserire almeno un altro giocatore prima di cominciare la partita, inserisci true");
+				inserimento=sc.nextLine();
+				while(!inserimento.equals("true")) {
+					System.out.println("inserire true");
+					inserimento=sc.nextLine();
+				}
+				continue;	
+				}else if(maxGiocatori==4){
+					break;			
+				}
+				System.out.println("Inserisci true se vuoi continuare a inserire altri giocatori");
+				inserimento=sc.nextLine();
 		}
+		
+		
 		try {
 			initPartita();
 			gioco.turno();
+			gioco.stampaClassifica();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -157,9 +167,6 @@ public class Console {
 		}
 		
         gioco.assegnaCarteGioco();
-        
-        //Cella_Manoscritto cella=new Cella_Manoscritto(giocatori.get(i).manoscritto, 20,20,0);
-        //Cella_Manoscritto cella = new Cella_Manoscritto(giocatori.get(i).cartaIniziale,giocatori.get(i).manoscritto, 20, 20);
         
         
 		

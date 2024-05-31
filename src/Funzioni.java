@@ -43,7 +43,7 @@ public class Funzioni {
         	mazzoCarteIniziali.add(g0);
             CONTATORE0+=1;
          }
-   	 System.out.println("Carte INIZIALI inizializzate con successo");
+   	 //System.out.println("Carte INIZIALI inizializzate con successo");
     	return mazzoCarteIniziali;
     }
     public Carta_Obiettivo[] initCarteObiettivo() throws IOException{

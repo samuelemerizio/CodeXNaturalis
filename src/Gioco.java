@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.awt.Point;
@@ -14,6 +15,7 @@ public class Gioco {
 	
 	Giocatore g=new Giocatore();
 	private Boolean primoTurno=true;
+	private static int contatoreTurni=0;
 	private Funzioni f=new Funzioni();
 	private List<Carta_Gioco> mazzoCarteOro=new ArrayList<Carta_Gioco>();
 	private List<Carta_Gioco> mazzoCarteRisorsa=new ArrayList<Carta_Gioco>();
@@ -738,6 +740,11 @@ public class Gioco {
     }
     
     public void turno() {
+    	if(contatoreTurni!=0) {
+    		//non siamo nel primo turno
+    		primoTurno=false;
+    		
+    	}
     	while(ultimoTurno==false) {	
     		for(int i=0;i<giocatori.size();i++) {
     			giocatoreAttuale=i;
@@ -763,7 +770,7 @@ public class Gioco {
     				giocatori.get(i).carteInMano[0]=mercato.PescaCarta(mercato);
     			}else if(c.getIndex(giocatori.get(giocatoreAttuale).manoscritto.carte,IDCartaMano1)!=-1) {
     				giocatori.get(i).carteInMano[1]=mercato.PescaCarta(mercato);
-    			}else {
+    			}else if(c.getIndex(giocatori.get(giocatoreAttuale).manoscritto.carte,IDCartaMano2)!=-1) {
     				giocatori.get(i).carteInMano[2]=mercato.PescaCarta(mercato);
     			}
     			
@@ -778,7 +785,7 @@ public class Gioco {
     			//stampo il manoscritto
     			stampaManoscritto(giocatoreAttuale);
     			
-    		
+    			
     			if(ultimoTurno==true) {
     				//controllo obiettivi comuni se danno punti extra
     				calcolaPuntiDaObiettivi();
@@ -787,7 +794,9 @@ public class Gioco {
     			
     			
     		}
+    		contatoreTurni+=1;
     	}
+    	
     }
 	public List<Carta_Gioco> getMazzoCarteIniziali() {
 		return mazzoCarteIniziali;
@@ -828,6 +837,7 @@ public class Gioco {
 	 * @param c carta che verrà stampata
 	 */
 	public void stampaManoscritto(int giocatoreAttualee) {
+		System.out.println("Turno numero: "+contatoreTurni);
 		//giocatoreAttualee=giocatoreAttuale;	
 		System.out.println("--------------------------------------------------------------------------------"+
 					"\n"+giocatori.get(giocatoreAttualee).nome+
@@ -843,23 +853,29 @@ public class Gioco {
 			}
 				System.out.println("--------------------------------------------------------------------------------"+
 				"\nElenco delle carte piazzate");
-				 //Carta_Gioco c=giocatori.get(giocatoreAttualee).cartaIniziale;
-				 //c.toString(c, c.fronte);
+				 
 				 //stampa l'elenco delle carte piazzate
-				
 					for(int i=0;i<giocatori.get(giocatoreAttualee).manoscritto.carte.size();i++) {
 						giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.toString(giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta,
 								giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.fronte);
-						
-							
-						
-						
-						//funzione che stampa le carte
-						//giocatori.get(giocatoreAttualee).manoscritto.stampaCarte(giocatori.get(giocatoreAttualee).manoscritto.carte.get(indexCartaBase).carta,
-						//giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta,
-						//giocatori.get(giocatoreAttualee).getAngoliUsati(i));
-							
+		
 					}
+					if(giocatori.get(giocatoreAttualee).manoscritto.carte.size()>1) {
+						System.out.println("--------------------------------------------------------------------------------");
+						//stampo la carta iniziale
+						//giocatori.get(giocatoreAttualee).manoscritto.carte.get(0).carta.toString(giocatori.get(giocatoreAttualee).manoscritto.carte.get(0).carta, 
+								//giocatori.get(giocatoreAttualee).manoscritto.carte.get(0).carta.fronte);
+						//stampo tutte le altre carte piazzate
+						for(int i=1;i<giocatori.get(giocatoreAttualee).manoscritto.carte.size();i++) {
+							//stampo solo ID della carta piazzata, ID, tipo, angolo della carta a cui si è agganciata
+							System.out.println("Carta "+giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.ID+" è piazzata nell'angolo "+
+									giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.toString(giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.getAngoloIdCartaBase())+
+									" della carta "+giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.getIdCartaBase()+" di tipo "+
+									giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.toString(giocatori.get(giocatoreAttualee).manoscritto.carte.get(i).carta.getTipoCartaBase())); 
+						}
+					}
+					
+					
 					//stampo obiettivo segreto e obiettivi comuni
 					System.out.println("--------------------------------------------------------------------------------");
 					System.out.println("Obiettivo segreto");
@@ -873,11 +889,28 @@ public class Gioco {
 					
 					//stampo i contatori dei simboli piazzati
 					System.out.println("--------------------------------------------------------------------------------");	
+					System.out.println("Totale dei simboli piazzati");
 					System.out.println("FUNGO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(0)+", FOGLIA: "+
 								giocatori.get(giocatoreAttualee).getContatoreSimboli(1)+", LUPO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(2)+
 								", FARFALLA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(3)+", PIUMA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(4)+
 								", VASETTO: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(5)+", PERGAMENA: "+giocatori.get(giocatoreAttualee).getContatoreSimboli(6));
-					
-				
+					System.out.println("--------------------------------------------------------------------------------");
+					System.out.println("Il tuo punteggio: "+giocatori.get(giocatoreAttualee).punteggio);
+					System.out.println("--------------------------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------------------");
+	}
+	
+	public void stampaClassifica() {
+		ArrayList<Integer> classifica=new ArrayList<Integer>();
+		for(int i=0;i<giocatori.size();i++) {
+			classifica.add(giocatori.get(i).punteggio);
+		}
+		//ordino l'array
+		Arrays.sort(classifica.toArray());
+		
+		//classifica
+		for(int i=0;i<classifica.size();i++) {
+			System.out.println(i+1+" classificato: "+i);
+		}
 	}
 }

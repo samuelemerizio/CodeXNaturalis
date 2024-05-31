@@ -25,14 +25,20 @@ public class CodeX extends Canvas{
     boolean splashCaricata = false;
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Premi c per giocare con la console");
-       Scanner sc=new Scanner(System.in);
-        if(sc.nextLine().equals("c")) {
+        System.out.println("Due modalità di gioco (inserire numero opzione):\n1: MODALITA GRAFICA\n2: MODALITA CONSOLE");
+    	Scanner sc=new Scanner(System.in);
+    	String scelta=sc.nextLine();
+    	while((!scelta.equals("1"))&&(!scelta.equals("2"))) {
+    		System.out.println("Scelta inserita non valida, riprova");
+    		scelta=sc.nextLine();
+    	}
+    	if(scelta.equals("1")) {
+    		new CodeX();
+    	}else if(scelta.equals("2")) {
         	Console c=new Console();
         	c.Console();
-        }else {
-        	new CodeX();
-        }
+    	}
+        
     }
     
     

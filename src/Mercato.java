@@ -90,43 +90,54 @@ public class Mercato {
 		System.out.println("Da che parte del mercato vuoi pescare? "+
 				"Input richiesto: mazzoRisorsa oppure mazzoOro; risorsa0 oppure oro2");
 		Scanner sc=new Scanner(System.in);
-		if(sc.nextLine().equals("mazzoRisorsa")) {
-			//prendo la prima che capita perche sono gia state mescolate
-			Carta_Gioco pescata=mazzoCarteRisorse.get(0);
-			mazzoCarteRisorse.remove(0);
-			return pescata;
-		}else if(sc.nextLine().equals("mazzoOro")) {
-			Carta_Gioco pescata=mazzoCarteOro.get(0);
-			mazzoCarteRisorse.remove(0);
-			return pescata;
-		}else if(sc.nextLine().equals("risorsa0")) {
-			Carta_Gioco pescata=carteRisorsa[0];
-			//posiziono al posto della carta appena pescata una carta dal mazzo
-			carteRisorsa[0]=mazzoCarteRisorse.get(0);
-			mazzoCarteRisorse.remove(0);
-			return pescata;
-		}else if(sc.nextLine().equals("risorsa1")) {
-			Carta_Gioco pescata=carteRisorsa[1];
-			//posiziono al posto della carta appena pescata una carta dal mazzo
-			carteRisorsa[1]=mazzoCarteRisorse.get(0);
-			mazzoCarteRisorse.remove(0);
-			return pescata;
-		}else if(sc.nextLine().equals("oro0")) {
-			Carta_Gioco pescata=carteRisorsa[0];
-			//posiziono al posto della carta appena pescata una carta dal mazzo
-			carteOro[0]=mazzoCarteOro.get(0);
-			mazzoCarteOro.remove(0);
-			return pescata;
-		}else if(sc.nextLine().equals("oro1")) {
-			Carta_Gioco pescata=carteRisorsa[1];
-			//posiziono al posto della carta appena pescata una carta dal mazzo
-			carteRisorsa[1]=mazzoCarteRisorse.get(0);
-			mazzoCarteRisorse.remove(0);
-			return pescata;
-		}else {
-			//scelta non valida
-			return null;
+		String inserimento=sc.nextLine();
+		while((!inserimento.equals("mazzoRisorsa"))&&(!inserimento.equals("mazzoOro"))&&(!inserimento.equals("risorsa0"))
+				&&(!inserimento.equals("risorsa1"))&&(!inserimento.equals("oro0"))&&(!inserimento.equals("oro1"))){
+			//se inserimento non coincide con nessuna di queste opzioni, faccio reinserire l'input
+			System.out.println("Hai inserito una parola sbagliata, riprova");
+			inserimento=sc.nextLine();
 		}
+			
+		
+			if(inserimento.equals("mazzoRisorsa")) {
+				//prendo la prima che capita perche sono gia state mescolate
+				Carta_Gioco pescata=mazzoCarteRisorse.get(0);
+				mazzoCarteRisorse.remove(0);
+				return pescata;
+			}else if(inserimento.equals("mazzoOro")) {
+				Carta_Gioco pescata=mazzoCarteOro.get(0);
+				mazzoCarteRisorse.remove(0);
+				return pescata;
+			}else if(inserimento.equals("risorsa0")) {
+				Carta_Gioco pescata=carteRisorsa[0];
+				//posiziono al posto della carta appena pescata una carta dal mazzo
+				carteRisorsa[0]=mazzoCarteRisorse.get(0);
+				mazzoCarteRisorse.remove(0);
+				return pescata;
+			}else if(inserimento.equals("risorsa1")) {
+				Carta_Gioco pescata=carteRisorsa[1];
+				//posiziono al posto della carta appena pescata una carta dal mazzo
+				carteRisorsa[1]=mazzoCarteRisorse.get(0);
+				mazzoCarteRisorse.remove(0);
+				return pescata;
+			}else if(inserimento.equals("oro0")) {
+				Carta_Gioco pescata=carteRisorsa[0];
+				//posiziono al posto della carta appena pescata una carta dal mazzo
+				carteOro[0]=mazzoCarteOro.get(0);
+				mazzoCarteOro.remove(0);
+				return pescata;
+			}else if(inserimento.equals("oro1")) {
+				Carta_Gioco pescata=carteRisorsa[1];
+				//posiziono al posto della carta appena pescata una carta dal mazzo
+				carteRisorsa[1]=mazzoCarteRisorse.get(0);
+				mazzoCarteRisorse.remove(0);
+				return pescata;
+			}else {
+				return null; //scelta non valida
+			}
+			
+		
+		
 		
 	}
 

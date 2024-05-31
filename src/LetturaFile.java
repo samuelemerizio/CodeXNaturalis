@@ -29,10 +29,7 @@ public class LetturaFile extends File {
 			}
 	        riga = br.readLine();
 	        array = riga.split(";"); 
-	        System.out.println("Carta "+ IDCartaDaLeggere + "" + Arrays.toString(array));
-	        //for (String part : parts){
-	        		//System.out.println(part + ",");
-	       // }
+	        //System.out.println("Carta "+ IDCartaDaLeggere + "" + Arrays.toString(array));
 		} catch (IOException e) {
 	            e.printStackTrace();
 	      	}
