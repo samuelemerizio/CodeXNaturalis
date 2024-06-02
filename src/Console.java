@@ -1,8 +1,9 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
+import java.io.IOException;
+import java.util.Scanner;
+/**
+ * Questa classe gestisce tutta la partita in modalità console
+ */
 public class Console {
 	private static int maxGiocatori=0;
 	private String inserimento="";
@@ -19,7 +20,7 @@ public class Console {
 	
 
 
-	public void Console() {
+	public void ConsoleCodex() {
 		
 		System.out.println("inserire true per inserimento giocatori"+
 				"\n N.B: inserire almeno 2 giocatori");
@@ -61,6 +62,11 @@ public class Console {
 		}
 	}
 	
+	/**
+	 * Questo metodo si occupa della creazione dei mazzi e assegnazione delle carte e obiettivi ai vari giocatori
+	 * @throws IOException se vengono riscontrati problemi durante l'inizializzazione o configurazione 
+	 * per iniziare a giocate
+	 */
 	public void initPartita() throws IOException {
 		//controllo che non ci siano eccezioni nella fase di inizializzazione delle carte
 		try {
@@ -111,29 +117,28 @@ public class Console {
 			//vengono fatte vedere le due facce delle carte
 			cartaIniziale.toString(cartaIniziale, true);
 			cartaIniziale.toString(cartaIniziale, false);
+			String inserimento=sc.nextLine();
+			while((!inserimento.equals("true"))&&(!inserimento.equals("false"))) {
+				System.out.println("inserimento sbagliato, riprova");
+				inserimento=sc.nextLine();
+			}
 			
-			if(sc.nextLine().equals("true")){
+			if(inserimento.equals("true")){
 				//la carta iniziale viene giocata sul fronte e assegnata al giocatore
 				cartaIniziale.fronte=true;
 				gioco.giocatori.get(i).cartaIniziale=cartaIniziale;
 				Cella_Manoscritto cellaCartaIniziale=new Cella_Manoscritto(cartaIniziale,gioco.giocatori.get(i).manoscritto,20,20);
 				gioco.giocatori.get(i).manoscritto.carte.add(cellaCartaIniziale);
-			}else if(sc.nextLine().equals("false")) {
+			}else if(inserimento.equals("false")) {
 				//la carta iniziale viene giocata sul retro e assegnata al giocatore
 				cartaIniziale.fronte=false;
 				gioco.giocatori.get(i).cartaIniziale=cartaIniziale;
 				Cella_Manoscritto cellaCartaIniziale=new Cella_Manoscritto(cartaIniziale,gioco.giocatori.get(i).manoscritto,20,20);
 				gioco.giocatori.get(i).manoscritto.carte.add(cellaCartaIniziale);
-			}else {
-				throw new IOException(); //viene lanciata un eccezione se la scelta non corrisponde a nessuna delle 2 opzioni
 			}
-			
-			//la carta iniziale va posizionata nel manoscritto
-			
-			//scelta obiettivo segreto per ogni giocatore
-		
-						
-			//mostro le due possibili scelte
+			/*
+			 * Scelta dell'obiettivo segreto per ogni giocatore 
+			 */
 			for(int j=0;j<sceltaObiettivi.length;j++) {
 				sceltaObiettivi=gioco.obiettivoGenera();
 				int idGiocatore=gioco.giocatori.get(gioco.giocatoreAttuale).ID;
@@ -143,16 +148,23 @@ public class Console {
 				cartaObiettivo=gioco.CercaCartaObiettivo(sceltaObiettivi[j]);
 				cartaObiettivo.toString(cartaObiettivo);
 			}
-			if(sc.nextLine().equals("0")) {
+			inserimento=sc.nextLine();
+			while((!inserimento.equals("0"))&&(!inserimento.equals("1"))) {
+				System.out.println("inserimento sbagliato, riprova");
+				inserimento=sc.nextLine();
+			}
+			if(inserimento.equals("0")) {
 				//l'obiettivo scelto è il primo mostrato
 				gioco.giocatori.get(i).cartaObiettivo=gioco.CercaCartaObiettivo(sceltaObiettivi[0]);
-			}else if(sc.nextLine().equals("1")) {
+			}else if(inserimento.equals("1")) {
 				//l'obiettivo scelto è il secondo mostrato
 				gioco.giocatori.get(i).cartaObiettivo=gioco.CercaCartaObiettivo(sceltaObiettivi[1]);
 			}
 			
 		}
+		
 		gioco.mercato.mescolaMazziCarteRisorseOro(gioco.getMazzoCarteRisorsa(), gioco.getMazzoCarteOro());
+		//posizionamento delle carte nel mercato per pescare le carte durante la partita
 		gioco.obiettiviComuni[0] = gioco.obiettivoAssegna(5);
         gioco.obiettiviComuni[1] = gioco.obiettivoAssegna(6);
         gioco.mercato.carteRisorsa[0] = gioco.pescaCartaGioco(gioco.mercato.mazzoCarteRisorse);

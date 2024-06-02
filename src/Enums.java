@@ -140,5 +140,12 @@ public class Enums {
         GIOCO,
         PUNTEGGIO;
     }
+    
+    public enum eColoreCarta{
+    	ROSSO,
+    	VERDE,
+    	BLU,
+    	VIOLA; 
+    }
 }
 

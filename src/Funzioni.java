@@ -61,6 +61,15 @@ public class Funzioni {
     	while(CONTATORE1 != 40) {
         	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteOro.csv", CONTATORE1));
             mazzoCarteOro.add(g0);
+            if((CONTATORE1>=0)&&(CONTATORE1<=9)) {
+           		g0.coloreCarta=Enums.eColoreCarta.ROSSO;
+           	}else if((CONTATORE1>=10)&&(CONTATORE1<=19)) {
+           		g0.coloreCarta=Enums.eColoreCarta.VERDE;
+           	}else if((CONTATORE1>=20)&&(CONTATORE1<=29)) {
+           		g0.coloreCarta=Enums.eColoreCarta.BLU;
+           	}else {
+           		g0.coloreCarta=Enums.eColoreCarta.VIOLA;
+           	}
             CONTATORE1+=1;
          }
    	 	//System.out.println("Carte ORO inizializzate con successo");
@@ -71,16 +80,21 @@ public class Funzioni {
     	 while(CONTATORE2 != 40) {
            	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteRisorse.csv", CONTATORE2));
            	mazzoCarteRisorsa.add(g0);
+           	if((CONTATORE2>=0)&&(CONTATORE2<=9)) {
+           		g0.coloreCarta=Enums.eColoreCarta.ROSSO;
+           	}else if((CONTATORE2>=10)&&(CONTATORE2<=19)) {
+           		g0.coloreCarta=Enums.eColoreCarta.VERDE;
+           	}else if((CONTATORE2>=20)&&(CONTATORE2<=29)) {
+           		g0.coloreCarta=Enums.eColoreCarta.BLU;
+           	}else {
+           		g0.coloreCarta=Enums.eColoreCarta.VIOLA;
+           	}
                CONTATORE2+=1;
            }
     	 //System.out.println("Carte RISORSA inizializzate con successo");
     	 return mazzoCarteRisorsa;
     }
     
-    public List<Carta_Gioco> carteprova(){
-		return mazzoCarteOro;
-    	
-    }
     
 
 	 /** 

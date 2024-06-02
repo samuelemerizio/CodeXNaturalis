@@ -49,6 +49,11 @@ public class Carta_Gioco {
     */
     int valorePunti;
     
+    /**
+     * Indica il colore della carta
+     */
+    Enums.eColoreCarta coloreCarta=Enums.eColoreCarta.ROSSO;
+    
     public int getIdCartaBase() {
 		return idCartaBase;
 	}
@@ -189,12 +194,33 @@ public class Carta_Gioco {
     }
     //elenco delle caratteristiche della carta
     public void toString(Carta_Gioco c, boolean fronte) {
-    	if(fronte==true) {
-    		System.out.println("Carta fronte: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliAngoliFronte(c)
-    					+requisiti(c)+", Cond pti bonus: "+c.moltiplicatorePunti.name()+", Pti bonus: "+c.valorePunti);
+    	//carta risorsa
+    	if(c.tipo.ordinal()==0) {
+    		if(fronte==true) {
+        		System.out.println("Carta fronte: colore "+c.coloreCarta.toString()+", ID "+c.ID+", tipo: "+c.tipo.name()+", "+simboliAngoliFronte(c)
+        					+requisiti(c)+", Cond pti bonus: "+c.moltiplicatorePunti.name()+", Pti bonus: "+c.valorePunti);
+        	}else {
+        		System.out.println("Carta retro: colore "+c.coloreCarta.toString()+", ID: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliRetro(c));
+        	}
+    	//carta oro
+    	}else if(c.tipo.ordinal()==1) {
+    		if(fronte==true) {
+        		System.out.println("Carta fronte: colore "+c.coloreCarta.toString()+", ID: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliAngoliFronte(c)
+        					+requisiti(c)+", Cond pti bonus: "+c.moltiplicatorePunti.name()+", Pti bonus: "+c.valorePunti);
+        	}else {
+        		System.out.println("Carta retro: colore "+c.coloreCarta.toString()+", ID: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliRetro(c));
+        	}
+    	//carta iniziale
     	}else {
-    		System.out.println("Carta retro: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliRetro(c));
+    		if(fronte==true) {
+        		System.out.println("Carta fronte: ID: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliAngoliFronte(c)
+        					+requisiti(c)+", Cond pti bonus: "+c.moltiplicatorePunti.name()+", Pti bonus: "+c.valorePunti);
+        	}else {
+        		System.out.println("Carta retro: ID: "+c.ID+", tipo: "+c.tipo.name()+", "+simboliRetro(c));
+        	}
     	}
+    	
+    	
     }
     
     

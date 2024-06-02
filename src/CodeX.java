@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -36,7 +37,7 @@ public class CodeX extends Canvas{
     		new CodeX();
     	}else if(scelta.equals("2")) {
         	Console c=new Console();
-        	c.Console();
+        	c.ConsoleCodex();
     	}
         
     }

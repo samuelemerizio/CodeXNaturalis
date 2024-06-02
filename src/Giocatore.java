@@ -128,7 +128,10 @@ public int getContatoreSimboli(int i) {
     	}
     	
     }
-    
+    /**
+     * Questo metodo consente al giocatore di scegliere e piazzare la carta nel manoscritto
+     * @param giocatoreAttuale giocatore che sta giocando il turno al momento
+     */
     public void piazzaCarta(Giocatore giocatoreAttuale) {
     	//mostraCarte(carteInMano);
     	Scanner scanner=new Scanner(System.in);
@@ -153,17 +156,9 @@ public int getContatoreSimboli(int i) {
     				//scansiono un altro numero e ricontrollo se la condizione viene soddisfatta
         			System.out.println("scegliere un'altra carta");
     				numeroCarta=f.ScansionaNumero();
-
     			}
-        			
-
-        	}
-    				
-    		
+        	}	
     	}
-    	
-    	
-    	
     	Cella_Manoscritto cartaAggiunta = manoscritto.carte.get(0); //gli assegno la prima carta delle carte piazzate nel manoscritto per evitare errori
     	try {
     		System.out.println("Inserisci ID della carta alla quale agganci la carta scelta:");
@@ -183,7 +178,7 @@ public int getContatoreSimboli(int i) {
     			tipoCartaDaControllare=Enums.eTipoCarta.INIZIALE;
     		}
     		
-    		//
+    		//controllo che l'id e il tipo della carta selezionati coincidano con la carta nella lista delle carte giocate
     		while(cella.cercaCarta(giocatoreAttuale.manoscritto.carte,IDInserito,tipoCartaDaControllare)==null) {
     			System.out.println("ID inserito non valido, riprova");
     			IDInserito=scanner.nextLine();
@@ -198,8 +193,6 @@ public int getContatoreSimboli(int i) {
         			tipoCartaDaControllare=Enums.eTipoCarta.INIZIALE;
         		}
     		}
-    		
-    		
     		int indiceInserito=cella.getIndex(giocatoreAttuale.manoscritto.carte, IDInserito);
     		System.out.println("Inserisci angolo dove agganciare la carta.\nNO: alto-sinistra, NE: alto-sinistra, SE: basso-destra, SO: basso-sinistra");
 			String selezioneAngolo=scanner.nextLine();
@@ -208,13 +201,10 @@ public int getContatoreSimboli(int i) {
 			//se l'angolo è libero guardo dove si vuole posizionare la carta
 			while(giocatoreAttuale.manoscritto.carte.get(indiceInserito).carta.angoloOccupato(giocatoreAttuale,selezioneAngolo,IDInserito)==true) {
 				System.out.println("L'angolo scelto è già occupato/insesistente, inserirne un altro");
-				selezioneAngolo=scanner.nextLine();
-				
+				selezioneAngolo=scanner.nextLine();	
 			}
-
 				if(numeroCarta==0) {
 					//seleziono carta 0
-
 					if(selezioneAngolo.equals("NO")) {
 						//l'angolo dove si uniscono due carte sarà l'angolo opposto a quello che scelgo
 						giocatoreAttuale.carteInMano[0].setAngoloIdCartaBase(Enums.eAngolo.NO);
@@ -261,8 +251,6 @@ public int getContatoreSimboli(int i) {
 					
 				}else if(numeroCarta==1) {
 					//seleziono carta 1
-					
-					
 					if(selezioneAngolo.equals("NO")) {
 						giocatoreAttuale.carteInMano[1].setAngoloIdCartaBase(Enums.eAngolo.NO);
 						cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[1],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
@@ -305,8 +293,6 @@ public int getContatoreSimboli(int i) {
 				
 					}else {
 						//la carta selezionata è la 2
-						
-						
 						if(selezioneAngolo.equals("NO")) {
 							giocatoreAttuale.carteInMano[2].setAngoloIdCartaBase(Enums.eAngolo.NO);
 							cartaAggiunta=new Cella_Manoscritto(giocatoreAttuale.carteInMano[2],manoscritto,cartaAggiunta.getCoordinataCartaInizialeX()-1,
@@ -346,20 +332,13 @@ public int getContatoreSimboli(int i) {
 							//segno il tipo della carta appena selezionata
 							cartaAggiunta.carta.setTipoCartaBase(tipoCartaDaControllare);
 							giocatoreAttuale.manoscritto.carte.add(cartaAggiunta);
-							
-				    		
-					
 						}
 					}
 				}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	
-    	
     }
-
     int puntiObiettivoSegreto = 0;          // Contiene il numero di punti ottenuti dall'obiettivo segreto del giocatore
 	
 }

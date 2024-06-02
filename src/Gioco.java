@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -752,12 +753,9 @@ public class Gioco {
     			giocatori.get(giocatoreAttuale).piazzaCarta(giocatori.get(i));
     			//mostro le opzioni per fare pescare al giocatore
     			System.out.println("Opzioni disponibili di pescaggio:\n");
-    			mercato.stampaMercato(mercato.carteRisorsa, mercato.carteOro);
-    			//il giocatore deve ora pescare la carta da rimpiazzare nel mazzo
-    			// e la posiziono la carta pescata nella mano del giocatore
-    			
+    			mercato.stampaMercato(mercato.carteRisorsa, mercato.carteOro);    			
     			//cerco una carta presente sia nelle carte piazzate che nella mano 
-    			//(così trovo la carta appena piazzata e la sostituisco con la carta appena pescata)
+    			//(così trovo la carta appena piazzata e la sostituisco con la carta da pescare)
     			Cella_Manoscritto c=new Cella_Manoscritto(giocatori.get(giocatoreAttuale).cartaIniziale, giocatori.get(giocatoreAttuale).manoscritto,20,20);
     			/*
     			 * Per convertire l'id della carta nella mano e poi compararlo se presente nella lista carte giocate
@@ -790,9 +788,6 @@ public class Gioco {
     				//controllo obiettivi comuni se danno punti extra
     				calcolaPuntiDaObiettivi();
     			}
-    			
-    			
-    			
     		}
     		contatoreTurni+=1;
     	}
@@ -833,8 +828,7 @@ public class Gioco {
 	
 	/**
 	 * stampa il manoscritto di un giocatore
-	 * @param g giocatore
-	 * @param c carta che verrà stampata
+	 * @param giocatoreAttuale giocatore che sta giocando in questo momento
 	 */
 	public void stampaManoscritto(int giocatoreAttualee) {
 		System.out.println("Turno numero: "+contatoreTurni);
@@ -897,20 +891,39 @@ public class Gioco {
 					System.out.println("--------------------------------------------------------------------------------");
 					System.out.println("Il tuo punteggio: "+giocatori.get(giocatoreAttualee).punteggio);
 					System.out.println("--------------------------------------------------------------------------------");
-					System.out.println("--------------------------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------------------\n\n");
 	}
 	
+	/**
+	 * Questo metodo si occupa di cercare a quale giocatore è associato il punteggio
+	 * @param g giocatore
+	 * @param punti punti da verificare se sono quelli effettuati da questo giocatore
+	 * @return il nome del giocatore se viene trovato un giocatore con questo punteggio
+	 */
+	public String cercaPunteggioGiocatore(Giocatore g, int punti) {
+		if(g.punteggio==punti) {
+			return g.nome;
+		}else {
+			return null;
+		}
+	}
+	/**
+	 * Questo metodo stampa la classifica partendo dall'ultima posizione per arrivare al vincitore
+	 */
 	public void stampaClassifica() {
+		//ordino i punteggi di ogni giocatore in un array così li posso ordinare
 		ArrayList<Integer> classifica=new ArrayList<Integer>();
 		for(int i=0;i<giocatori.size();i++) {
 			classifica.add(giocatori.get(i).punteggio);
 		}
-		//ordino l'array
+		//ordino l'array in modo tale che ho i numeri in ordine crescente
 		Arrays.sort(classifica.toArray());
 		
-		//classifica
+		//cerco il giocatore con quel punteggio e lo mando a schermo
 		for(int i=0;i<classifica.size();i++) {
-			System.out.println(i+1+" classificato: "+i);
+			int numero=classifica.size();
+			System.out.println((classifica.size()-i)+" classificato: "+cercaPunteggioGiocatore(giocatori.get(i),classifica.get(i)));
 		}
+		
 	}
 }
