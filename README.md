@@ -6,6 +6,9 @@ Realizzazione gioco Codex Naturalis in modalità console e grafica. <br>
 Realizzato da: <br> 
 Jacopo Marinelli <br> 
 Luca Zucchetti <br> 
-Samuele Merizio 
+Samuele Merizio <br> <br> <br>
+
+
+Il manuale d'uso della parte grafica è contenuto nella cartella Documentazione <br>
 
 ![](https://github.com/samuelemerizio/CodeXNaturalis/blob/sviluppo/src/assets/MainBig.png)
