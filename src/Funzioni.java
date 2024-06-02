@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -37,29 +38,21 @@ public class Funzioni {
 		return mazzoCarteObiettivo;
     }
     public List<Carta_Gioco> initCarteIniziali() throws IOException{
+    	
     	LetturaFile lettura=new LetturaFile("");
     	while(CONTATORE0 != 12) {
-        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteIniziali.csv", CONTATORE0));
+        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("assets/CarteIniziali.csv", CONTATORE0));
         	mazzoCarteIniziali.add(g0);
             CONTATORE0+=1;
          }
    	 //System.out.println("Carte INIZIALI inizializzate con successo");
     	return mazzoCarteIniziali;
     }
-    public Carta_Obiettivo[] initCarteObiettivo() throws IOException{
-    	LetturaFile lettura=new LetturaFile("");
-    	initArray(); //inizializza array carte obiettivo
-    	for(int i=0; i<16; i++) {
-    		mazzoCarteObiettivo[i]=new Carta_Obiettivo(lettura.scansioneRiga("CarteObiettivo.csv", i));
-    	}
-       	//System.out.println("Carte OBIETTIVO inizializzate con successo");
-    	return mazzoCarteObiettivo;
-    	
-    }
+    
     public List<Carta_Gioco> initCarteOro() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	while(CONTATORE1 != 40) {
-        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteOro.csv", CONTATORE1));
+        	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("assets/CarteOro.csv", CONTATORE1));
             mazzoCarteOro.add(g0);
             if((CONTATORE1>=0)&&(CONTATORE1<=9)) {
            		g0.coloreCarta=Enums.eColoreCarta.ROSSO;
@@ -78,7 +71,7 @@ public class Funzioni {
     public List<Carta_Gioco> initCarteRisorsa() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	 while(CONTATORE2 != 40) {
-           	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("CarteRisorse.csv", CONTATORE2));
+           	Carta_Gioco g0=new Carta_Gioco(lettura.scansioneRiga("assets/CarteRisorse.csv", CONTATORE2));
            	mazzoCarteRisorsa.add(g0);
            	if((CONTATORE2>=0)&&(CONTATORE2<=9)) {
            		g0.coloreCarta=Enums.eColoreCarta.ROSSO;
