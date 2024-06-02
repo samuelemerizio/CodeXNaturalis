@@ -1,14 +1,19 @@
 package grafica;
 import java.awt.Color;
-
+/**
+ * Enums utili per lo sviluppo del software
+ */
 public class Enums {
 
     /**
      * Identifica il tipo di carta tra Risorsa, Oro ed Iniziale
      */
     public enum eTipoCarta{
+    	/** Carta risorsa */
         RISORSA, 
+    	/** Carta oro */
         ORO,
+    	/** Carta iniziale */
         INIZIALE;
 
         /**
@@ -28,14 +33,23 @@ public class Enums {
      * Rappresenta in modo univoco i simboli disponibili sulle carte
      */
     public enum eSimbolo{
+    	/** Simbolo nullo*/
         NULLO,
+    	/** Simbolo vuoto*/
         VUOTO,
+    	/** Simbolo fungo*/
         FUNGO,
+    	/** Simbolo foglia*/
         FOGLIA,
+    	/** Simbolo lupo*/
         LUPO,
+    	/** Simbolo farfalla*/
         FARFALLA,
+    	/** Simbolo piuma*/
         PIUMA,
+    	/** Simbolo vasetto*/
         VASETTO,
+    	/** Simbolo pergamena*/
         PERGAMENA;
 
         /**
@@ -60,12 +74,23 @@ public class Enums {
      * Condizione per il moltiplicatorePunti delle carte gioco
      */
     public enum eMoltiplicatorePunti{
+    	/** Moltiplicatore nullo */
         NULLO,
+    	/** Moltiplicatore piuma */
         PIUMA,
+    	/** Moltiplicatore vasetto */
         VASETTO,
+    	/** Moltiplicatore pergamena */
         PERGAMENA,
+    	/** Moltiplicatore angolo */
         ANGOLO;
 
+    	/**
+    	 * Ottiene l'Enum eMoltiplicatore punti della carta obiettivo in base al valore inserito 
+    	 * nell'inizializzazione delle carte obiettivo
+    	 * @param valore valore inserito nel'inizializzazione
+    	 * @return Enums eMoltiplicatorePunti
+    	 */
         public static eMoltiplicatorePunti getMoltiplicatorePunti(int valore){
             if (valore == NULLO.ordinal()){ return NULLO;
             } else if (valore == PIUMA.ordinal()){ return PIUMA;
@@ -80,21 +105,37 @@ public class Enums {
      * Identifica le possibili condizioni delle carte obiettivi
      */
     public enum eCondizioneObiettivi{
+    	/** Almeno due piume sul manoscritto*/
         ORO_2_PIUME,
+    	/** Almeno due vasetti sul manoscritto*/
         ORO_2_VASETTI,
+    	/** Almeno due pergamene sul manoscritto*/
         ORO_2_PERGAMENE,
+    	/** Almeno tre simboli sul manoscritto*/
         ORO_3_SIMBOLI,
+    	/** Almeno tre funghi sul manoscritto*/
         ROSSO_FUNGHI,
+    	/** Almeno tre carte rosse in diagonale sul manoscritto*/
         ROSSO_DIAGONALE,
+    	/** Almeno due carte rosse in verticale e una del colore richiesto in diagonale sul manoscritto*/
         ROSSO_CAVALLO,
+    	/** Almeno tre foglie sul manoscritto*/
         VERDE_FOGLIE,
+    	/** Almeno tre carte verdi in diagonale sul manoscritto*/
         VERDE_DIAGONALE,
+        /** Almeno due carte verdi in verticale e una del colore richiesto in diagonale sul manoscritto*/
         VERDE_CAVALLO,
+    	/** Almeno tre lupi sul manoscritto*/
         BLU_LUPO,
+    	/** Almeno tre carte blu in diagonale sul manoscritto*/
         BLU_DIAGONALE,
+        /** Almeno due carte blu in verticale e una del colore richiesto in diagonale sul manoscritto*/
         BLU_CAVALLO,
+    	/** Almeno tre farfalle sul manoscritto*/
         VIOLA_FARFALLA,
+    	/** Almeno tre carte viola in diagonale sul manoscritto*/
         VIOLA_DIAGONALE,
+        /** Almeno due carte viola in verticale e una del colore richiesto in diagonale sul manoscritto*/
         VIOLA_CAVALLO;
     }
 
@@ -102,11 +143,20 @@ public class Enums {
      * Identifica il colore della pedina del giocatore
      */
     public enum eColoreGiocatore{
+    	/** Giocatore rosso*/
         ROSSO,
+        /** Giocatore verde*/
         VERDE,
+        /** Giocatore blu*/
         BLU,
+        /** Giocatore giallo*/
         GIALLO;
 
+    	/**
+    	 * Estrae il colore tramite l'Enum eColoregiocatore
+    	 * @param colore Colore ricercato
+    	 * @return Colore
+    	 */
         public static Color colorFromEnum(Enums.eColoreGiocatore colore){
             switch (colore) {
                 case ROSSO: return Color.RED;
@@ -122,9 +172,13 @@ public class Enums {
      * Identifica i quattro angoli in senso orario
      */
     public enum eAngolo{
-        NO,
+    	/** Direzione NordOvest */
+        NO,	
+        /** Direzione NordEst */
         NE,
+        /** Direzione SudEst */
         SE,
+        /** Direzione SudOvest */
         SO;
     }
 
@@ -132,13 +186,21 @@ public class Enums {
      * Identifica la pagina visualizzata
      */
     public enum eElencoSchermi{
+    	/** Schermo_SplashScreen*/
         SPLASHSCREEN,
+        /** Schermo_Iniziale*/
         INIZIALE,
+        /** Schermo_NuovaPartita*/
         NUOVAPARTITA,
+        /** Schermo_NuovoGiocatore*/
         NUOVOGIOCATORE,
+        /** Schermo_SceltaCartaIniziale*/
         SCELTACARTAINIZIALE,
+        /** Schermo_SceltaCartaObiettivo*/
         SCELTACARTAOBIETTIVO,
+        /** Schermo_Gioco*/
         GIOCO,
+        /** Schermo_Punteggio*/
         PUNTEGGIO;
     }
 }
