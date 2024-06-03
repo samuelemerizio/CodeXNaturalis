@@ -18,6 +18,10 @@ public class Carta_Obiettivo {
      */
     Enums.eCondizioneObiettivi condizioneObiettivi;
     
+    /**
+     * 
+     * @param parametri
+     */
     public Carta_Obiettivo(String[] parametri) {
 		try {
 			this.ID=Integer.valueOf(parametri[0]);
@@ -30,12 +34,24 @@ public class Carta_Obiettivo {
 
     int cartaDisponibile = -1;
 
+    /**
+     * 
+     * @param ID
+     * @param valorePunti
+     * @param condizioneObiettivi
+     * @param cartaDisponibile
+     */
     public Carta_Obiettivo(int ID, int valorePunti, Enums.eCondizioneObiettivi condizioneObiettivi, int cartaDisponibile){
         this.ID = ID;
         this.valorePunti = valorePunti;
         this.condizioneObiettivi = condizioneObiettivi;
         this.cartaDisponibile = cartaDisponibile;
     }
+    
+    /**
+     * Stampa le informazioni del parametro Carta_Obiettivo c
+     * @param c
+     */
     public void toString(Carta_Obiettivo c) {
     	System.out.println("Carta: "+c.ID+", condizione: "+c.condizioneObiettivi.name());
     	

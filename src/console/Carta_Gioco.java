@@ -55,17 +55,35 @@ public class Carta_Gioco {
      */
     Enums.eColoreCarta coloreCarta=Enums.eColoreCarta.ROSSO;
     
-    public int getIdCartaBase() {
+    /**
+	 * 
+	 * @return
+	 */
+	public int getIdCartaBase() {
 		return idCartaBase;
 	}
 
+	/**
+	 * 
+	 * @param idCartaBase
+	 */
 	public void setIdCartaBase(int idCartaBase) {
 		this.idCartaBase = idCartaBase;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Enums.eAngolo getAngoloIdCartaBase() {
 		return angoloCartaBase;
 	}
+	
+	/**
+	 * Permette di visualizzare l'angolo selezionato dal parametro angolo
+	 * @param angolo
+	 * @return
+	 */
 	public String toString(Enums.eAngolo angolo) {
 		if(angolo.ordinal()==0) {
 			//System.out.println("NO");
@@ -81,6 +99,12 @@ public class Carta_Gioco {
 			return "SO";
 		}
 	}
+	
+	/**
+	 * Permette di visualizzare il tipo di carta selezionato dal parametro tipo
+	 * @param tipo
+	 * @return
+	 */
 	public String toString(Enums.eTipoCarta tipo) {
 		if(tipo.ordinal()==0) {
 			return "Risorsa";
@@ -91,6 +115,10 @@ public class Carta_Gioco {
 		}
 	}
 
+	/**
+	 * 
+	 * @param angoloIdCartaBase
+	 */
 	public void setAngoloIdCartaBase(Enums.eAngolo angoloIdCartaBase) {
 		this.angoloCartaBase = angoloIdCartaBase;
 	}
@@ -107,6 +135,10 @@ public class Carta_Gioco {
 		return tipoCartaBase;
 	}
 
+	/**
+	 * 
+	 * @param tipoCartaBase
+	 */
 	public void setTipoCartaBase(Enums.eTipoCarta tipoCartaBase) {
 		this.tipoCartaBase = tipoCartaBase;
 	}
@@ -165,35 +197,65 @@ public class Carta_Gioco {
         }
     }
 
-    public Carta_Gioco() {
+	public Carta_Gioco() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Permette di visualizzare il verso del parametro Carta_Gioco g
+	 * @param g
+	 * @return
+	 */
 	public String versoCarta(Carta_Gioco g) {
     	if(g.fronte==true) {
     		return "fronte";
     	}
     	return "retro";
     }
-    //mostra in sequenza che cosa contengono gli angoli
-    public String simboliAngoliFronte(Carta_Gioco g) {
+    
+	/**
+	 * Stampa i simboli presenti sugli angoli del fronte del parametro Carta_Gioco g
+	 * @param g
+	 * @return
+	 */
+	//mostra in sequenza che cosa contengono gli angoli
+	public String simboliAngoliFronte(Carta_Gioco g) {
     	
     		return "NO: "+g.simboloAngolo[0].name()+", NE: "+g.simboloAngolo[1].name()
     				+", SE: "+g.simboloAngolo[2].name()+", SO: "+g.simboloAngolo[3].name();
     	
     }
-    public String simboliRetro(Carta_Gioco g) {
+    
+	/**
+	 * Stampa i simboli presenti sugli angoli del retro del parametro Carta_Gioco g
+	 * @param g
+	 * @return
+	 */
+	public String simboliRetro(Carta_Gioco g) {
     	
 		return "Simbolo1: "+g.simboloRetro[0].name()+", Simbolo2: "+g.simboloRetro[1].name()
 				+", Simbolo3: "+g.simboloRetro[2].name();
 	
-}
-    public String requisiti(Carta_Gioco g) {
+    }
+    
+	/**
+	 * Stampa i requisiti necessari per piazzare la carta gioco indicata dal parametro Carta_Gioco g
+	 * @param g
+	 * @return
+	 */
+	public String requisiti(Carta_Gioco g) {
     	return (", Req1 piazzamento: "+g.simboliXPosizionamento[0].name()+" qta: "+g.simboliXPosizionamentoQuantita[0]
     			+", Req2 piazzamento: "+g.simboliXPosizionamento[1].name()+" qta: "+g.simboliXPosizionamentoQuantita[1]);
     			//+", Req3 piazzamento: "+g.simboliXPosizionamento[2]+" qta: "+g.simboliXPosizionamentoQuantita[3]);
     }
-    //elenco delle caratteristiche della carta
+    
+	/**
+	 * Stampa le informazioni del parametro Carta_Gioco c
+	 * Le informazioni variano in base al tipo della carta
+	 * @param c
+	 * @param fronte
+	 */
+	//elenco delle caratteristiche della carta
     public void toString(Carta_Gioco c, boolean fronte) {
     	//carta risorsa
     	if(c.tipo.ordinal()==0) {
@@ -227,21 +289,35 @@ public class Carta_Gioco {
     
 
     
+	/**
+	 * 
+	 * @param ID
+	 * @return
+	 */
 	public boolean controllaCondizione(int ID) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	
 	
-	
-	 public Enums.eSimbolo[] getSimboloAngolo() {
+	/**
+	 * 
+	 * @return
+	 */
+	public Enums.eSimbolo[] getSimboloAngolo() {
 			return simboloAngolo;
-		}
+	}
 	 
-	 public boolean latoCarta(boolean fronte) {
+	
+	/**
+	 * 
+	 * @param fronte
+	 * @return
+	 */	
+	public boolean latoCarta(boolean fronte) {
 		return fronte;
 		 
-	 }
+	}
 	 
 	 /**
 		 * 
@@ -291,7 +367,13 @@ public class Carta_Gioco {
 	    	
 	    }
 	    
-	    public boolean requisitiCarta(Giocatore g,Carta_Gioco carta) {
+	    /**
+		 * Verifica che i requisiti per piazzare la carta gioco g siano rispettati
+		 * @param g
+		 * @param carta
+		 * @return true se la carta è piazzabile
+		 */
+		public boolean requisitiCarta(Giocatore g,Carta_Gioco carta) {
 	    	for(int i=0;i<2;i++) {
 	    		if(carta.simboliXPosizionamento[i]==Enums.eSimbolo.FUNGO) {
 	    			if(g.getContatoreSimboli(0)==simboliXPosizionamentoQuantita[i]) {

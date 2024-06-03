@@ -36,7 +36,9 @@ public class Mercato {
     /**
      * Mediante questa funzione, viene mescolato il mazzo delle carte risorse ed il mazzo delle carte oro
      * Il procedimento consiste nel selezione 2 carte a caso e scambiando la loro posizione
-     * Questo viene eseguito un numero elavato di volte 
+     * Questo viene eseguito un numero elavato di volte
+	 * @param  mazzoRisorseOriginale
+	 * @param mazzoOroOriginale
      */
     public void mescolaMazziCarteRisorseOro(List<Carta_Gioco> mazzoRisorseOriginale , List<Carta_Gioco> mazzoOroOriginale) {
     	//Creo i mazzi della partita in funzione delle carte disponibili generate dal file
@@ -70,6 +72,11 @@ public class Mercato {
     	}
     }
 
+	/**
+	 * Viene stampato il fronte ed il retro delle carte gioco presenti nel mercato
+	 * @param carteRisorsa
+	 * @param carteOro
+	 */
 	public void stampaMercato(Carta_Gioco[] carteRisorsa, Carta_Gioco[] carteOro) {
 		for(int i=0;i<carteRisorsa.length;i++) {
 			System.out.println(i+", Risorsa, "+"fronte");
@@ -87,6 +94,12 @@ public class Mercato {
 		}
 	}
 	
+	/**
+	 * Permette di pescare una carta dal mercato
+	 * La carta può essere pescata dalle carte disponibli nel mercato o dai mezzi
+	 * @param mercato
+	 * @return
+	 */
 	public Carta_Gioco PescaCarta(Mercato mercato) {
 		System.out.println("Da che parte del mercato vuoi pescare? "+
 				"Input richiesto: mazzoRisorsa oppure mazzoOro; risorsa0 oppure oro2");

@@ -121,7 +121,9 @@ public class Gioco {
         ultimoTurno = false;
     }
 
-    // Assegna ad ogni giocatore le carte gioco
+    /**
+     * Assegna ad ogni giocatore le carte gioco
+     */
     public void assegnaCarteGioco(){
         // Aggiungo ad ogni utente le sue carte gioco
         //for (int i = 0; i < Variabili.partita.giocatori.size(); i++){

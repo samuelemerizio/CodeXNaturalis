@@ -66,6 +66,11 @@ public class Enums {
         PERGAMENA,
         ANGOLO;
 
+        /**
+         * Restituisce l'oggetto di tipo eMoltiplicatorePunti in funzione del parametro intero valore
+         * @param valore Valore da restituire in formato eMoltiplicatorePunti
+         * @return Valore restituito dalla funzione
+         */
         public static eMoltiplicatorePunti getMoltiplicatorePunti(int valore){
             if (valore == NULLO.ordinal()){ return NULLO;
             } else if (valore == PIUMA.ordinal()){ return PIUMA;
@@ -107,6 +112,11 @@ public class Enums {
         BLU,
         GIALLO;
 
+        /**
+         * Restituisce l'oggetto di tipo Color in funzione del parametro intero colore
+         * @param colore Valore da restituire in formato Color
+         * @return Valore restituito dalla funzione
+         */
         public static Color colorFromEnum(Enums.eColoreGiocatore colore){
             switch (colore) {
                 case ROSSO: return Color.RED;
@@ -142,6 +152,9 @@ public class Enums {
         PUNTEGGIO;
     }
     
+    /**
+     * Identifica il colore della carta
+     */
     public enum eColoreCarta{
     	ROSSO,
     	VERDE,
