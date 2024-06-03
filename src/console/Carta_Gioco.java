@@ -242,7 +242,7 @@ public class Carta_Gioco {
 		return fronte;
 		 
 	 }
-	 
+
 	 /**
 		 * 
 		 * @param g
@@ -250,6 +250,7 @@ public class Carta_Gioco {
 		 * @param ID della carta da controllare se ha gli angoli liberi (ultima carta piazzata nel manoscritto)
 		 * @return
 		 */
+	 /*
 	    public boolean angoloLibero(Giocatore giocatore,String angolo, String ID) throws Exception {
 	    	//inizializzo cella manoscritto con una carta per evitare errori
 	    	Cella_Manoscritto CartaCercata=new Cella_Manoscritto(giocatore.cartaIniziale,giocatore.manoscritto, 20, 20);
@@ -290,6 +291,7 @@ public class Carta_Gioco {
 	    	
 	    	
 	    }
+	    */
 	    
 	    public boolean requisitiCarta(Giocatore g,Carta_Gioco carta) {
 	    	for(int i=0;i<2;i++) {
