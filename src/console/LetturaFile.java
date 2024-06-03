@@ -3,11 +3,9 @@ package console;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 
 public class LetturaFile extends File {
@@ -23,6 +21,7 @@ public class LetturaFile extends File {
 	 * @param IDCartaDaLeggere numero della carta da leggere
 	 */
 	public String[] scansioneRiga(String posizioneFile,int IDCartaDaLeggere) {
+		//accedo al file che si trova nel pacchetto jar del progetto e non nella directory del progetto
 		InputStream in = ClassLoader.getSystemResourceAsStream(posizioneFile);
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 		//try (BufferedReader br = new BufferedReader(new FileReader(posizioneFile))) {

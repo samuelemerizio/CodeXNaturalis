@@ -1,7 +1,6 @@
 package console;
 import java.awt.Point;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -32,12 +31,23 @@ public class Funzioni {
     	Scanner sc=new Scanner(System.in);
 		return Integer.decode(sc.nextLine());
     }
+    
+    /**
+     * Questo metodo inizializza l'array che contiene le carte obiettivo
+     * @return l'array
+     */
     public Carta_Obiettivo[] initArray() {
     	for(int i=0; i<16; i++) {
     		mazzoCarteObiettivo[i] = new Carta_Obiettivo(null);
     	}
 		return mazzoCarteObiettivo;
     }
+    
+    /**
+     * questo metodo inizializza le carte iniziali lette da file
+     * @return lista contenente le carte iniziali
+     * @throws IOException in caso di errori nella lettura dal file o se non viene trovato il file
+     */
     public List<Carta_Gioco> initCarteIniziali() throws IOException{
     	
     	LetturaFile lettura=new LetturaFile("");
@@ -50,6 +60,11 @@ public class Funzioni {
     	return mazzoCarteIniziali;
     }
     
+    /**
+     * questo metodo inizializza le carte oro leggendole da file
+     * @return la lista contenente le carte oro
+     * @throws IOException in caso di errori nella lettura da file
+     */
     public List<Carta_Gioco> initCarteOro() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	while(CONTATORE1 != 40) {
@@ -69,6 +84,12 @@ public class Funzioni {
    	 	//System.out.println("Carte ORO inizializzate con successo");
     	return mazzoCarteOro;
     }
+    
+    /**
+     * questo metodo inizializza le carte risorsa leggendole da file
+     * @return la lista contenente tutte le carte risorsa
+     * @throws IOException in caso di errori durante la lettura da file
+     */
     public List<Carta_Gioco> initCarteRisorsa() throws IOException{
     	LetturaFile lettura=new LetturaFile("");
     	 while(CONTATORE2 != 40) {

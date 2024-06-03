@@ -15,7 +15,7 @@ public class Console {
 	private Scanner sc=new Scanner(System.in);
 	private Carta_Gioco cartaIniziale;
 	private Carta_Obiettivo cartaObiettivo;
-	private Variabili variabili;
+	//private Variabili variabili;
 	private int[] sceltaObiettivi=new int[2];
 	
 	
